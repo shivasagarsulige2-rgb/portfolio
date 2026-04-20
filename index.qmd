@@ -1,7 +1,7 @@
 ---
 title: "Shiva Sagar"
 subtitle: "MSc Business Analytics · Dublin City University"
-image: images/profile.jpg
+image: images/profile-photo.jpg
 about:
   template: jolla
   image-width: 12em
