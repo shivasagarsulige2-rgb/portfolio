@@ -245,6 +245,11 @@ a {
   border-image: $gradient-aurora 1;
 }
 
+.theme-violet {
+  border-top: 3px solid transparent;
+  border-image: $gradient-violet 1;
+}
+
 .hero-quote {
   text-align: center;
   font-size: 1.05rem;

@@ -4,7 +4,10 @@
       "Bash(quarto --version)",
       "Bash(quarto render *)",
       "mcp__Claude_in_Chrome__tabs_context_mcp",
-      "WebFetch(domain:ahampton060.wixsite.com)"
+      "WebFetch(domain:ahampton060.wixsite.com)",
+      "WebFetch(domain:business.dcu.ie)",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('C:/Users/shiva/Downloads/eportfolio/.claude/worktrees/great-morse-d9a8f2/images/profile.jpg'\\); print\\(img.size, img.mode\\)\")",
+      "Bash(python -c ' *)"
     ]
   }
 }

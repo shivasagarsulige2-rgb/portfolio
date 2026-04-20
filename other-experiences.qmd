@@ -1,6 +1,6 @@
 ---
 title: "Other Experiences"
-subtitle: "Organizations, Activities, and Community Involvement"
+subtitle: "Entrepreneurship, Internships & Learning Experiences"
 format:
   html:
     toc: true
@@ -9,80 +9,88 @@ format:
 
 ## Overview
 
-This page focuses on experiences beyond coursework, including student organizations, activity-based learning, leadership roles, and service.
+Beyond formal coursework, my professional development has been shaped by founding and running a startup, holding internship roles across accounting and HR, and engaging in immersive, practice-based learning at DCU. These experiences ground my analytics work in real business reality.
 
 ---
 
-## Organizations and Activities
+## Entrepreneurship
+
+::: {.experience-card .theme-violet}
+### Co-Founder — Wrench Mate PVT LTD
+- **Role:** Co-Founder (all core functions)
+- **Duration:** April 2024 – July 2025
+- **Focus:** Mobile app platform — product management, marketing, finance, and client relations
+
+**Key outcomes:**
+- 100+ active user accounts acquired
+- ₹50,000 recurring monthly revenue secured
+- Burn rate held 30% below projections
+- 99.9% platform uptime maintained
+:::
+
+---
+
+## Professional Internships
 
 ::: {.experience-card .theme-ocean}
-### Science Club, Keuka College
-- **Role:** President (2024-Present) | VP (2023-2024) | Social Media Manager (2023-Present)
-- **Duration:** 2021 - Present
-- **Focus:** Student-led science initiatives and engagement on campus.
+### Assistant Accounts Intern — Samisthi PVT LTD
+- **Role:** Accounts Intern
+- **Duration:** June 2023 – August 2023
+- **Focus:** Bookkeeping, accounts payable/receivable, audit support, and financial tracking
 :::
 
 ::: {.experience-card .theme-sunset}
-### Disability, Accessibility, Community, and Engagement (DACE)
-- **Role:** Treasurer & Establishing Member
-- **Duration:** 2023 - Present
-- **Focus:** Promoting accessibility and engagement at Keuka College.
+### Human Resources Intern — ITS Planners and Engineers
+- **Role:** HR Intern
+- **Duration:** June 2022 – August 2022
+- **Focus:** Onboarding (10+ full-time, 25+ part-time employees), personnel records management, attendance tracking, and recruitment streamlining
 :::
 
+---
+
+## DCU Learning Experiences
+
 ::: {.experience-card .theme-aurora}
-### Campus Activities Board, Keuka College
-- **Role:** President (2022) | Interfaith and Intercultural Community Coordinator (2022)
-- **Duration:** 2021 - Present
-- **Focus:** Event planning and managing campus-wide engagement.
+### VR Lab — Presentation Skills Training
+- **Programme:** MSc Business Analytics, Dublin City University
+- **Duration:** 2025 – Present
+- **Focus:** Using Virtual Reality technology to practise data presentations and pitches in realistic business settings, developing stakeholder communication skills alongside technical analytics
+:::
+
+::: {.experience-card .theme-ocean}
+### Challenge-Based Learning with Industry Partners
+- **Programme:** MSc Business Analytics, Dublin City University
+- **Focus:** Applying analytics to real-world business problems through team-based challenge projects, feasibility studies, and client communication exercises — all grounded in SDG-aligned thinking
 :::
 
 ---
 
 ## Timeline Highlights
 
-- **2023 - Present** Field Period and ePortfolio Demonstrator/Instructor
-- **2021 - 2022** Cheerleading, Keuka College
-- **2021 - 2022** Nursing Club (Student Senate Representative)
-
----
-
-## Leadership Roles
-
-| Year | Position | Organization |
+| Period | Role | Organisation |
 |---|---|---|
-| 2024-Present | President | Science Club, Keuka College |
-| 2023-Present | Treasurer & Establishing Member | DACE @ Keuka College |
-| 2022 | President | Campus Activities Board, Keuka College |
-| 2023-2024 | Vice President | Science Club, Keuka College |
-| 2023-Present | Social Media Manager | Science Club, Keuka College |
-| 2022 | Interfaith Community Coord. | Campus Activities Board, Keuka College |
-| 2021-2022 | Student Senate Rep. | Nursing Club, Keuka College |
+| 2025–Present | MSc Business Analytics Student | Dublin City University |
+| Apr 2024–Jul 2025 | Co-Founder | Wrench Mate PVT LTD |
+| Jun–Aug 2023 | Assistant Accounts Intern | Samisthi PVT LTD |
+| Jun–Aug 2022 | HR Intern | ITS Planners and Engineers |
+| 2024 | BA Business Administration | ICFAI Business School |
 
 ---
 
-## Clubs and Sports Gallery
+## Key Skills Developed
 
-![Activity image placeholder](images/club-1.svg)
-*Caption: [Add event name, place, and date.]*
-
-![Activity image placeholder](images/club-2.svg)
-*Caption: [Add event name, place, and date.]*
-
----
-
-## Recent Volunteer and Service Work
-
-- **Everybunny Counts Rabbit Rescue** - Volunteer
-- **H.O.R.S.E. of Connecticut** - Volunteer
-- **American Red Cross** - Blood Drive Volunteer
-- **Jim Casey Foundation** - Youth Leadership Institute Participant
-- **CT DCF** - Youth Advisory Board Member
-- **Faith Living Church** - Nursery/Childcare Volunteer
+| Experience | Skills Gained |
+|---|---|
+| Co-Founder (Wrench Mate) | P&L management, growth marketing, product lifecycle, decision-making under uncertainty |
+| Accounts Intern | Financial reconciliation, audit support, stakeholder communication |
+| HR Intern | Talent acquisition, confidentiality, workforce analytics |
+| VR Lab (DCU) | Data storytelling, executive presentation, audience awareness |
+| Challenge-Based Learning | CRISP-DM, client communication, SDG-aligned analytics |
 
 ---
 
 ## Reflection
 
-:::: {.callout-note title="Growth Through Participation"}
-Participating in student organisations and community service has shaped me as much as any course or project. Leading the Science Club taught me that **vision without communication is just an idea** — real change happens when you listen, delegate, and bring people along. Founding DACE reminded me that inclusion is not a feature to add later but a design principle from day one. And volunteering with animal rescues and youth programmes has reinforced a simple truth: showing up consistently, even when it's unglamorous, is how trust is built. These experiences inform how I approach data science — with curiosity, care for the humans behind the numbers, and a commitment to making my work accessible to everyone.
+:::: {.callout-note title="Growth Through Real Experience"}
+Starting and running Wrench Mate taught me something no course could fully replicate: **decision-making under uncertainty with real consequences**. When every rupee spent matters and every user lost is a signal, you develop an instinct for prioritisation that sharpens every subsequent analysis. My internship experiences reinforced that data only becomes value when it is communicated clearly and acted upon. These experiences now inform how I approach analytics — not as an academic exercise, but as a practical tool for solving genuine business problems.
 ::::

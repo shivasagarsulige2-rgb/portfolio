@@ -9,7 +9,7 @@ format:
 
 ## Let's Connect
 
-I am open to opportunities, collaborations, and professional networking. Whether you're a recruiter, a fellow student, or a community organisation looking for a data-savvy volunteer — I'd love to hear from you.
+I am open to opportunities, collaborations, and professional networking. Whether you are a recruiter, a fellow analyst, or an organisation looking for data-driven insights — I'd love to hear from you.
 
 ---
 
@@ -22,10 +22,13 @@ I am open to opportunities, collaborations, and professional networking. Whether
 ### Direct Contact
 
 {{< fa envelope >}} **Email**
-[shiva.sagar@keuka.edu](mailto:shiva.sagar@keuka.edu)
+[shiva.sagar7130@gmail.com](mailto:shiva.sagar7130@gmail.com)
+
+{{< fa phone >}} **Phone**
+[+353 089 463 1708](tel:+353894631708)
 
 {{< fa brands linkedin >}} **LinkedIn**
-[linkedin.com/in/shiva-sagar](https://www.linkedin.com/in/shiva-sagar){target="_blank"}
+[linkedin.com/in/shiva-sagar-](https://www.linkedin.com/in/shiva-sagar-){target="_blank"}
 
 {{< fa brands github >}} **GitHub**
 [github.com/shivasagarsulige2-rgb](https://github.com/shivasagarsulige2-rgb){target="_blank"}
@@ -36,9 +39,10 @@ I am open to opportunities, collaborations, and professional networking. Whether
 
 ### Location & Availability
 
-{{< fa location-dot >}} **Based in:** Penn Yan, New York
-{{< fa clock >}} **Time Zone:** ET (UTC−5 / UTC−4)
-{{< fa calendar-check >}} **Availability:** Open to opportunities from May 2025
+{{< fa location-dot >}} **Based in:** Dublin, Ireland
+{{< fa clock >}} **Time Zone:** IST / GMT (flexible)
+{{< fa calendar-check >}} **Full-time availability:** October 2026
+{{< fa id-card >}} **Visa:** Stamp 2 · Eligible for Stamp 1G from Sept 2026
 
 :::
 
@@ -49,49 +53,37 @@ I am open to opportunities, collaborations, and professional networking. Whether
 ## Professional References
 
 ::: {.callout-note title="Reference Availability"}
-Full references — including phone numbers and institutional emails — are available upon request. Please reach out via email to ask for a complete reference sheet.
+Full references — including institutional emails and phone numbers — are available upon request. Please reach out via email to request a complete reference sheet.
 :::
 
 ### Reference 1 — Academic Supervisor
 
-**Dr. [Faculty Supervisor Name]**
-*Assistant Professor of Data Science*
-Keuka College, Penn Yan, NY
+**[Programme Director / Supervisor Name]**
+*MSc Business Analytics Programme*
+Dublin City University, Dublin, Ireland
 
 - {{< fa envelope >}} Available upon request
-- *Relationship: Academic supervisor for Field Period Demonstrator role (2023–present) and data science coursework*
+- *Relationship: Academic supervisor for MSc Business Analytics coursework and capstone project*
 
 ---
 
-### Reference 2 — Community / Leadership Reference
+### Reference 2 — Professional Reference
 
-**[Campus Activities Board Advisor Name]**
-*Director of Student Engagement*
-Keuka College, Penn Yan, NY
-
-- {{< fa envelope >}} Available upon request
-- {{< fa brands linkedin >}} [LinkedIn Profile](https://www.linkedin.com){target="_blank"}
-- *Relationship: Faculty advisor for Campus Activities Board during presidency (2022) and ongoing student leadership*
-
----
-
-### Reference 3 — Volunteer Reference
-
-**[Volunteer Coordinator Name]**
-*Volunteer Coordinator*
-Everybunny Counts Rabbit Rescue, Connecticut
+**[Senior Manager Name]**
+*Management Team*
+Samisthi PVT LTD
 
 - {{< fa envelope >}} Available upon request
-- *Relationship: Volunteer supervisor for animal rescue and care activities*
+- *Relationship: Direct supervisor during Assistant Accounts Internship (Jun–Aug 2023)*
 
 ---
 
 ## Response Time
 
-I aim to respond within **2 business days**.
+I aim to respond within **1–2 business days**.
 
 ::: {.callout-tip title="Best Way to Reach Me"}
-Email is the most reliable channel. For professional enquiries, please include a brief subject line describing your purpose — e.g., *"Internship Opportunity — Data Analyst"* or *"Collaboration Enquiry"*.
+Email is the fastest and most reliable channel. For professional enquiries please include a brief subject line — e.g., *"Graduate Analyst Role — 2026"* or *"Analytics Collaboration"*.
 :::
 
 ---
@@ -100,12 +92,12 @@ Email is the most reliable channel. For professional enquiries, please include a
 
 I am currently open to:
 
-- [x] Data science internships (summer 2025)
-- [x] Part-time research assistant roles
-- [x] Volunteer data projects for nonprofits
-- [ ] Full-time entry-level positions (from graduation, May 2025)
-- [ ] Speaking or panel opportunities on student leadership and data science
+- [x] Graduate programme applications (2026 intake)
+- [x] Part-time analytics or data roles during studies
+- [x] Collaborative analytics projects and case competitions
+- [ ] Full-time analyst / data roles from October 2026
+- [ ] Speaking or networking opportunities in the Dublin analytics community
 
 ---
 
-*Thank you for visiting my portfolio. I look forward to hearing from you!*
+*Thank you for visiting my portfolio. I look forward to connecting with you!*

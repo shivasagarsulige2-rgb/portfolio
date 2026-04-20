@@ -9,27 +9,33 @@ format:
 
 ## Who Am I?
 
-I am **Shiva Sagar**, a data science student at **Keuka College** in Penn Yan, New York, where I have been enrolled since 2021. My academic path combines rigorous quantitative training with hands-on community engagement — I believe that the best data scientists are not just technically skilled but also empathetic communicators who understand the real-world contexts their models inhabit.
+I am **Shiva Sagar**, a Business Analytics graduate student at **Dublin City University**, combining a strong quantitative foundation with real-world entrepreneurial and professional experience. My academic journey began with a BA in Business Administration at ICFAI Business School (2024) and has progressed into advanced analytics, machine learning, and AI at DCU.
 
-My interest in data science grew from a simple question: *why do some decisions made with "the numbers" still go wrong?* That curiosity has driven me to study everything from ensemble methods to ethical AI frameworks, and to build projects that prioritise reproducibility and transparency.
+Before returning to full-time study, I co-founded **Wrench Mate PVT LTD**, where I oversaw product development, financial operations, and multi-channel marketing — an experience that taught me that data alone does not drive decisions; clear communication and strategic thinking do. That insight now shapes every analysis I build.
 
-Beyond my studies, I serve as **President of the Science Club**, **Treasurer of DACE** (Disability, Accessibility, Community, and Engagement), and have previously led the **Campus Activities Board**. I also work as a **Field Period and ePortfolio Demonstrator**, helping fellow students document and present their learning.
+My core belief: **a great analyst is not just technically skilled — they understand the business context behind every number**.
 
 ---
 
 ## Education
 
-{{< fa graduation-cap >}} **Bachelor of Science — Data Science**
-[Keuka College]{style="font-weight:600; color:#2563eb;"} &nbsp;·&nbsp; Penn Yan, New York &nbsp;·&nbsp; 2021 – 2025
+{{< fa graduation-cap >}} **MSc Business Analytics**
+[Dublin City University]{style="font-weight:600; color:#2563eb;"} &nbsp;·&nbsp; Dublin, Ireland &nbsp;·&nbsp; 2025 – Present
 
-Relevant coursework:
+Relevant modules:
 
-- Machine Learning & Deep Learning
-- Natural Language Processing
-- Data Visualisation & Communication
-- Statistical Methods & Probability
-- Database Systems & SQL
-- Research Methods & Ethics
+- Research Methods & Academic Writing
+- Analytical Tools and Programming (Python, SQL)
+- Statistical Models and Methods of Business Analytics
+- Strategic Thinking Tools and Techniques
+- Advanced Analytics & AI (NLP, BERT, Deep Learning, LLMs, Generative AI)
+- Analytics, Visualisation & Communication (Power BI, A/B Testing, Regression)
+- Corporate Strategy and Leadership
+- New Venture Strategy & Planning
+- AI-Powered Portfolio & Analytics Challenges
+
+{{< fa graduation-cap >}} **BA Business Administration**
+[ICFAI Business School]{style="font-weight:600; color:#2563eb;"} &nbsp;·&nbsp; 2024
 
 ---
 
@@ -39,33 +45,42 @@ Relevant coursework:
 
 ::: {.column width="50%"}
 
-### Languages & Frameworks
-- {{< fa brands python >}} **Python** — Advanced
-- {{< fa database >}} **SQL** — Intermediate
-- **R** — Intermediate
-- **Bash / Shell** — Beginner
+### Languages & Tools
+- {{< fa brands python >}} **Python** — Data analysis, ML, Plotly visualisations
+- {{< fa database >}} **SQL** — Data extraction, management, querying
+- **Power BI** — Interactive dashboards, KPI tracking
+- **Excel** — VLookups, Pivot Tables, advanced formulae
+- **Word / Office Suite** — Professional reporting
 
-### Machine Learning
-- Scikit-learn (classification, clustering, regression)
-- Transformers / Hugging Face (BERT, T5)
-- XGBoost, Random Forests, Logistic Regression
-- K-Means Clustering, Dimensionality Reduction
+### Machine Learning & AI
+- Classical ML (Scikit-learn: Logistic Regression, Random Forest, XGBoost)
+- NLP & Transformers (BERT, T5, Hugging Face)
+- Unsupervised Learning (K-Means, PCA, LDA, t-SNE)
+- Deep Learning & Generative AI / LLMs
+- CRISP-DM methodology
 
 :::
 
 ::: {.column width="50%"}
 
-### Data & Visualisation
-- Plotly (interactive charts)
-- Matplotlib & Seaborn (static plots)
-- Pandas & NumPy (data wrangling)
-- Jupyter Notebooks & Quarto
+### Analytics & Statistics
+- Descriptive & inferential statistics
+- A/B testing and hypothesis testing
+- Linear & logistic regression
+- Time series analysis
+- Dimensionality reduction
 
-### DevOps & Tools
-- {{< fa brands git-alt >}} **Git & GitHub** — Version control and Pages deployment
+### Business & Strategy
+- P&L tracking and financial budgeting
+- Vendor negotiation and client relations
+- PRINCE2 & Data Lifecycle Management
+- UN SDG-aligned analytical thinking
+- VR-enhanced presentation skills (DCU Lab)
+
+### DevOps & Publishing
+- {{< fa brands git-alt >}} **Git & GitHub** — Version control, GitHub Pages
 - **Quarto** — Scientific publishing & ePortfolio
 - **VS Code** — Primary IDE
-- **GitHub Actions** — CI/CD awareness
 
 :::
 
@@ -80,64 +95,65 @@ Relevant coursework:
 | Python for Everybody Specialisation | Coursera / University of Michigan | 2023 |
 | Introduction to Machine Learning | Kaggle | 2024 |
 | Git & GitHub Foundations | GitHub Education | 2024 |
+| Kubicle Data Analytics Training | Kubicle (DCU Partnership) | 2025 |
 
 ---
 
 ## Professional Goals
 
-> *"I want to build data systems that are not just accurate, but fair, transparent, and genuinely useful to the communities they serve."*
+> *"My goal is to become a long-term strategic analytics partner to organisations — bringing not just technical capability but genuine business understanding to every data challenge."*
 
 My near-term goals include:
 
-- [x] Complete a fully reproducible data science ePortfolio with live Python code
-- [x] Contribute to open-source data science projects
-- [ ] Secure a data science internship in a healthcare or nonprofit setting
-- [ ] Obtain an AWS or Google Cloud data engineering certification
-- [ ] Publish a reproducible research paper or technical blog post
+- [x] Build a fully reproducible analytics portfolio with live Python code
+- [x] Complete MSc Business Analytics coursework at DCU
+- [ ] Secure a graduate analytics or data role from October 2026
+- [ ] Obtain professional qualifications in data analytics or business intelligence
+- [ ] Lead a client-facing data consultancy project
 
 ---
 
 ## Values & Approach
 
 ::: {.callout-tip title="Reproducibility First"}
-I believe every data science project should be fully reproducible. All my work is version-controlled with Git, documented with clear code comments, and published openly where possible. A result you cannot reproduce is not a result you can trust.
+Every analysis I build is version-controlled, documented, and fully reproducible. A result you cannot reproduce is a result you cannot trust — especially when business decisions depend on it.
 :::
 
-::: {.callout-note title="Ethical AI"}
-I prioritise fairness audits, bias assessments, and transparent model documentation in all projects — especially those targeting sensitive domains like healthcare and education. Powerful models carry real responsibility.
+::: {.callout-note title="Business Context Matters"}
+Having co-founded a startup, I know that technical accuracy means nothing if the insight does not reach the right person in the right format. I always design analyses with the end audience in mind.
 :::
 
-::: {.callout-warning title="Accessibility Matters"}
-As Treasurer of DACE, I am personally committed to ensuring that digital products — including data dashboards and publications — meet accessibility standards (WCAG 2.1). Data should be readable by everyone.
+::: {.callout-warning title="Ethical Analytics"}
+I take algorithmic bias, GDPR compliance, and data privacy seriously — principles reinforced throughout the DCU programme. Responsible analytics is not optional; it is foundational.
 :::
 
 ---
 
 ## Outside of Work
 
-When I'm not training models or debugging pipelines, you'll find me:
+When I'm not building models or dashboards, you'll find me:
 
-- {{< fa rabbit >}} Volunteering at **Everybunny Counts Rabbit Rescue** and **H.O.R.S.E. of Connecticut**
-- {{< fa heart >}} Giving blood and staffing **American Red Cross** blood drives
-- {{< fa seedling >}} Mentoring youth through the **Jim Casey Foundation** Youth Leadership Institute
-- {{< fa music >}} Cheering on my college — formerly on the Keuka College cheerleading squad
+- {{< fa rocket >}} Thinking about startup ideas and business models
+- {{< fa book >}} Reading about strategy, behavioural economics, and AI ethics
+- {{< fa users >}} Networking with peers and professionals in the Dublin analytics community
+- {{< fa plane >}} Exploring new places and cultures
 
 ---
 
 ## Multimedia Highlights
 
-![My data science workflow — from raw data to published insight.](images/workflow-diagram.svg){fig-alt="A diagram showing the data science workflow from raw data ingestion through analysis to Quarto publication" fig-align="center" width="80%"}
+![My analytics workflow — from raw data through modelling to published insight.](images/workflow-diagram.svg){fig-alt="Diagram of data science workflow from raw data through analysis to Quarto publication" fig-align="center" width="80%"}
 
 <div class="ratio ratio-16x9" style="margin: 1.5rem 0;">
   <iframe src="https://www.youtube.com/embed/IsF0yzR4A4s" title="Introduction to Quarto for scientific publishing" allowfullscreen></iframe>
 </div>
 
-*Video: "Getting Started with Quarto" — J.J. Allaire & Hadley Wickham, rstudio::conf(2022). [Source: YouTube](https://www.youtube.com/watch?v=IsF0yzR4A4s){target="_blank"}.*
+*Video: "Getting Started with Quarto" — J.J. Allaire & Mine Çetinkaya-Rundel, rstudio::conf(2022). [Source: YouTube](https://www.youtube.com/watch?v=IsF0yzR4A4s){target="_blank"}.*
 
 ---
 
 ## Attributions
 
 - Icons provided through the `quarto-ext/fontawesome` extension and Font Awesome Free (SIL OFL 1.1 licence).
-- Workflow diagram (SVG): original illustration created for this portfolio.
-- Video embed: "Hello, Quarto!" keynote, rstudio::conf 2022 — J.J. Allaire & Mine Çetinkaya-Rundel. Used under YouTube's standard embedding terms.
+- Workflow diagram: original illustration created for this portfolio.
+- Video embed: "Hello, Quarto!" keynote, rstudio::conf 2022. Used under YouTube's standard embedding terms.

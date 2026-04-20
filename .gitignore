@@ -58,3 +58,4 @@ models/
 logs/
 
 **/*.quarto_ipynb
+*.quarto_ipynb_*

@@ -1,7 +1,7 @@
 ---
 title: "Shiva Sagar"
-subtitle: "Data Science Student · Community Leader · Science Advocate"
-image: images/profile.svg
+subtitle: "MSc Business Analytics · Dublin City University"
+image: images/profile.jpg
 about:
   template: jolla
   image-width: 12em
@@ -9,7 +9,7 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: "https://www.linkedin.com/in/shiva-sagar"
+      href: "https://www.linkedin.com/in/shiva-sagar-"
       target: _blank
     - icon: github
       text: GitHub
@@ -17,9 +17,9 @@ about:
       target: _blank
     - icon: envelope
       text: Email
-      href: "mailto:shiva.sagar@keuka.edu"
+      href: "mailto:shiva.sagar7130@gmail.com"
     - text: "{{< fa file-pdf >}} CV"
-      href: CV/cv.html
+      href: CV/cv.pdf
       target: _blank
 format:
   html:
@@ -32,9 +32,9 @@ format:
 "Data is not just numbers — it is the language through which the world tells its story."
 ::::
 
-Hi, I'm **Shiva Sagar** — a data science student at [Keuka College](https://www.keuka.edu){target="_blank"}, passionate about turning complex data into clear, actionable insights. Beyond the classroom, I lead student organisations, advocate for accessibility, and volunteer across my community.
+Hi, I'm **Shiva Sagar** — a Business Analytics graduate student at **Dublin City University**, passionate about transforming complex data into clear, strategic insights. With hands-on experience as a co-founder, accounting intern, and HR professional, I bring both technical rigour and real-world business perspective to every analysis.
 
-This portfolio showcases my technical projects, academic journey, leadership experience, and the skills I've developed throughout my studies.
+This portfolio showcases my technical projects, academic journey, and the skills I've built across analytics, machine learning, and business strategy.
 
 ---
 
@@ -44,22 +44,22 @@ This portfolio showcases my technical projects, academic journey, leadership exp
 
 ::::: {.column width="33%"}
 :::: {.experience-card .theme-ocean}
-{{< fa user-graduate >}} **Academic Journey**
-Data Science student at Keuka College since 2021. Specialising in machine learning, NLP, and reproducible research with Python and Quarto.
+{{< fa graduation-cap >}} **Academic Journey**
+MSc Business Analytics at DCU (2025–). BA Business Administration at ICFAI Business School (2024). Specialising in ML, NLP, SQL, Power BI, and statistical modelling.
 ::::
 :::::
 
 ::::: {.column width="33%"}
 :::: {.experience-card .theme-sunset}
-{{< fa flask >}} **Research & Projects**
-Built interactive data dashboards, compared BERT vs T5 for sentiment analysis, and benchmarked classification models — all with live, executable Python code.
+{{< fa briefcase >}} **Business & Entrepreneurship**
+Co-Founder of Wrench Mate PVT LTD — grew user base to 100+ active accounts and secured first 50,000 rupees in recurring monthly revenue. Also held accounting and HR internship roles.
 ::::
 :::::
 
 ::::: {.column width="33%"}
 :::: {.experience-card .theme-aurora}
-{{< fa hands-helping >}} **Leadership & Service**
-President of the Science Club, Treasurer of DACE, and President of the Campus Activities Board. Volunteer with animal rescues, the Red Cross, and youth leadership programmes.
+{{< fa chart-line >}} **Analytics Projects**
+Built interactive data dashboards, benchmarked NLP models (BERT vs T5), and produced ML classification pipelines — all with live, executable Python code and Plotly visualisations.
 ::::
 :::::
 
@@ -72,14 +72,14 @@ President of the Science Club, Treasurer of DACE, and President of the Campus Ac
 | Section | What You'll Find |
 |---|---|
 | [About](about.qmd) | Background, technical skills, certifications, and professional goals |
-| [Other Experiences](other-experiences.qmd) | Student organisations, leadership roles, volunteer and service work |
-| [Projects](projects/index.qmd) | Data science and ML projects with live Python code and Plotly visualisations |
-| [CV](CV/cv.html) | Full academic and professional curriculum vitae |
+| [Other Experiences](other-experiences.qmd) | Entrepreneurship, internships, and DCU learning experiences |
+| [Projects](projects/index.qmd) | Analytics and ML projects with live Python code and Plotly visualisations |
+| [CV](CV/cv.pdf){target="_blank"} | Full curriculum vitae (PDF) |
 | [Reflection](reflection.qmd) | Lessons learned building this portfolio — Git, Quarto, Python |
 | [Contact](contact.qmd) | Contact details and professional references |
 
 ---
 
 ::: {.callout-tip title="Open to Opportunities"}
-I am actively seeking internships and entry-level roles in **data science**, **machine learning**, and **data analytics**. Feel free to [get in touch](contact.qmd)!
+Available for graduate roles and internships from **October 2026**. Currently on Stamp 2 visa; eligible for Stamp 1G from September 2026. Feel free to [get in touch](contact.qmd)!
 :::

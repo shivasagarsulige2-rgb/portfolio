@@ -1,6 +1,6 @@
 ---
 title: "Curriculum Vitae"
-subtitle: "Shiva Sagar — Data Science Student"
+subtitle: "Shiva Sagar — MSc Business Analytics"
 date: "April 2025"
 format:
   html:
@@ -22,11 +22,26 @@ format:
 :::: {.cv-header}
 # Shiva Sagar
 
-**Data Science Student | Community Leader | Science Advocate**
-{{< fa envelope >}} shiva.sagar@keuka.edu &nbsp;|&nbsp;
-{{< fa brands github >}} [GitHub](https://github.com/shivasagarsulige2-rgb){target="_blank"} &nbsp;|&nbsp;
-{{< fa brands linkedin >}} [LinkedIn](https://www.linkedin.com/in/shiva-sagar){target="_blank"} &nbsp;|&nbsp;
-{{< fa location-dot >}} Penn Yan, New York
+**MSc Business Analytics Student | Data Analyst | Business Strategist**
+
+{{< fa location-dot >}} Dublin, Ireland &nbsp;|&nbsp;
+{{< fa phone >}} +353 089 463 1708 &nbsp;|&nbsp;
+{{< fa envelope >}} [shiva.sagar7130@gmail.com](mailto:shiva.sagar7130@gmail.com) &nbsp;|&nbsp;
+{{< fa brands linkedin >}} [LinkedIn](https://www.linkedin.com/in/shiva-sagar-){target="_blank"} &nbsp;|&nbsp;
+{{< fa brands github >}} [GitHub](https://github.com/shivasagarsulige2-rgb){target="_blank"}
+::::
+
+---
+
+:::: {.cv-section}
+## {{< fa user >}} Profile
+
+Driven and highly motivated Business Analytics graduate student (Dublin City University) with a strong analytical mindset and proven ability to rapidly master new concepts. Possessing exceptional communication and quantitative skills with real-world experience across entrepreneurship, accounting, and HR. Fully committed to pursuing professional qualifications and becoming a long-term strategic analytics partner.
+
+**IT Skills:** Word · Excel (VLookups, Pivot Tables, Formulae) · SQL · Power BI · Python
+
+**Availability:** Full-time from **October 2026**
+**Visa:** Stamp 2 · Eligible for Stamp 1G from September 2026
 ::::
 
 ---
@@ -35,10 +50,17 @@ format:
 ## {{< fa graduation-cap >}} Education
 
 :::: {.cv-item}
-#### Bachelor of Science — Data Science
-[Keuka College]{.org} [2021 – 2025 (Expected)]{.period}
+#### MSc Business Analytics
+[Dublin City University]{.org} [2025 – Present]{.period}
 
-Relevant modules: Machine Learning, Natural Language Processing, Data Visualisation, Statistical Methods, Database Systems, Research Methods & Ethics.
+**Modules:** Research Methods, Analytical Tools and Programming (Python/SQL), Strategic Thinking Tools and Techniques, Statistical Models and Methods of Business Analytics, Advanced Analytics & AI (NLP, BERT, Deep Learning, LLMs), Analytics Visualisation & Communication (Power BI), Corporate Strategy and Leadership, New Venture Strategy & Planning, AI-Powered Portfolio & Analytics Challenges.
+
+**Practical:** VR Lab presentation skills training · Challenge-Based Learning with industry partners · GitHub ePortfolio development · Power BI KPI dashboard projects
+::::
+
+:::: {.cv-item}
+#### BA Business Administration
+[ICFAI Business School]{.org} [2024]{.period}
 ::::
 ::::
 
@@ -48,64 +70,34 @@ Relevant modules: Machine Learning, Natural Language Processing, Data Visualisat
 ## {{< fa briefcase >}} Work Experience
 
 :::: {.cv-item}
-#### Field Period and ePortfolio Demonstrator / Instructor
-[Keuka College]{.org} [2023 – Present]{.period}
+#### Co-Founder
+[Wrench Mate PVT LTD]{.org} [Apr 2024 – Jul 2025]{.period}
 
-- Guide students through building professional ePortfolios using Quarto and GitHub Pages
-- Demonstrate reproducible research practices, version control with Git, and Python-based data analysis
-- Provide one-on-one support for Quarto configuration, SCSS styling, and project page development
+- Administered the entire product lifecycle from concept and development to maintenance, ensuring **99.9% uptime** and consistent user experience across the platform
+- Developed and executed a low-cost, multi-channel marketing strategy securing the first **₹50,000 in recurring monthly revenue** and growing the user base to **100+ active accounts**
+- Analysed all financial operations including P&L tracking, vendor negotiations, and budget allocation, maintaining a burn rate **30% below projections**
+- Spearheaded all core business functions — sales, financial planning, and client relations — as central decision-maker in a lean, fast-paced environment
 ::::
 
 :::: {.cv-item}
-#### Social Media Manager — Science Club
-[Keuka College Science Club]{.org} [2023 – Present]{.period}
+#### Assistant Accounts Intern
+[Samisthi PVT LTD]{.org} [Jun 2023 – Aug 2023]{.period}
 
-- Manage club social media presence and digital communications
-- Create engaging content to promote science events and increase student participation
-::::
-::::
-
----
-
-:::: {.cv-section}
-## {{< fa users >}} Leadership & Student Organisations
-
-:::: {.cv-item}
-#### President — Science Club
-[Keuka College]{.org} [2024 – Present]{.period}
-
-- Lead executive board and direct student-driven science initiatives on campus
-- Coordinate events, guest speakers, and outreach activities
+- Posted daily receipts and payments in accordance with corporate protocols
+- Communicated with a team of 6 regarding bookkeeping issues and resolutions
+- Provided audit support by supplying requested documentation promptly and accurately
+- Assessed accounts payable and receivable activities, upholding vendor relationships and positive cashflow
+- Tracked expenses and income while organising and monitoring bank statements
 ::::
 
 :::: {.cv-item}
-#### Vice President — Science Club
-[Keuka College]{.org} [2023 – 2024]{.period}
+#### Human Resources Intern
+[ITS Planners and Engineers]{.org} [Jun 2022 – Aug 2022]{.period}
 
-- Assisted the President in managing club operations and membership engagement
-::::
-
-:::: {.cv-item}
-#### Treasurer & Establishing Member — DACE
-[Disability, Accessibility, Community, and Engagement, Keuka College]{.org} [2023 – Present]{.period}
-
-- Founding member; manage club budget and financial reporting
-- Advocate for accessibility policies and inclusive campus initiatives
-::::
-
-:::: {.cv-item}
-#### President — Campus Activities Board
-[Keuka College]{.org} [2022]{.period}
-
-- Oversaw campus-wide event planning and student engagement programming
-- Served concurrently as Interfaith and Intercultural Community Coordinator
-::::
-
-:::: {.cv-item}
-#### Student Senate Representative — Nursing Club
-[Keuka College]{.org} [2021 – 2022]{.period}
-
-- Represented Nursing Club interests in student governance
+- Co-ordinated HR team with onboarding of **10+ full-time** IT employees and **25+ part-time** roles, improving employee retention rates
+- Managed confidential personnel files, maintaining accuracy and strict privacy standards
+- Tracked employee attendance, identifying trends and providing management insights
+- Streamlined recruitment processes for increased efficiency in talent acquisition
 ::::
 ::::
 
@@ -114,29 +106,17 @@ Relevant modules: Machine Learning, Natural Language Processing, Data Visualisat
 :::: {.cv-section}
 ## {{< fa code >}} Technical Skills
 
-**Languages:**
-[Python]{.skill-tag} [SQL]{.skill-tag} [R]{.skill-tag} [Bash]{.skill-tag}
+**Languages & Platforms:**
+[Python]{.skill-tag} [SQL]{.skill-tag} [Power BI]{.skill-tag} [Excel]{.skill-tag} [Word]{.skill-tag}
 
-**Machine Learning:**
-[Scikit-learn]{.skill-tag} [XGBoost]{.skill-tag} [Hugging Face Transformers]{.skill-tag} [BERT]{.skill-tag} [T5]{.skill-tag}
+**Machine Learning & AI:**
+[Scikit-learn]{.skill-tag} [BERT]{.skill-tag} [T5]{.skill-tag} [NLP]{.skill-tag} [Generative AI]{.skill-tag} [LLMs]{.skill-tag} [XGBoost]{.skill-tag}
 
 **Data & Visualisation:**
-[Plotly]{.skill-tag} [Pandas]{.skill-tag} [NumPy]{.skill-tag} [Matplotlib]{.skill-tag} [Seaborn]{.skill-tag}
+[Plotly]{.skill-tag} [Pandas]{.skill-tag} [NumPy]{.skill-tag} [Matplotlib]{.skill-tag} [Power BI Dashboards]{.skill-tag}
 
-**Tools & Platforms:**
-[Git]{.skill-tag} [GitHub]{.skill-tag} [Quarto]{.skill-tag} [VS Code]{.skill-tag} [Jupyter]{.skill-tag}
-::::
-
----
-
-:::: {.cv-section}
-## {{< fa certificate >}} Certifications
-
-| Certification | Issuer | Year |
-|---|---|---|
-| Python for Everybody Specialisation | Coursera / University of Michigan | 2023 |
-| Introduction to Machine Learning | Kaggle | 2024 |
-| Git & GitHub Foundations | GitHub Education | 2024 |
+**Tools:**
+[Git]{.skill-tag} [GitHub]{.skill-tag} [Quarto]{.skill-tag} [VS Code]{.skill-tag} [Jupyter]{.skill-tag} [CRISP-DM]{.skill-tag}
 ::::
 
 ---
@@ -147,23 +127,8 @@ Relevant modules: Machine Learning, Natural Language Processing, Data Visualisat
 | Project | Description | Stack |
 |---|---|---|
 | BERT vs T5 Sentiment Analysis | Compared discriminative vs generative NLP models on Amazon Polarity dataset | Python, Transformers, Plotly |
-| Interactive E-Commerce Dashboard | Built a seasonal sales analytics dashboard with Plotly | Python, Pandas, Plotly |
-| Scikit-Learn Model Showdown | Benchmarked Logistic Regression, Random Forest, and XGBoost on customer-churn data | Python, Scikit-learn, Plotly |
-::::
-
----
-
-:::: {.cv-section}
-## {{< fa heart >}} Volunteer & Community Service
-
-| Organisation | Role | Period |
-|---|---|---|
-| Everybunny Counts Rabbit Rescue | Animal Care Volunteer | 2022 – Present |
-| H.O.R.S.E. of Connecticut | Equine Therapy Volunteer | 2022 – Present |
-| American Red Cross | Blood Drive Volunteer | 2021 – Present |
-| Jim Casey Foundation | Youth Leadership Institute Participant | 2022 |
-| CT Department of Children & Families | Youth Advisory Board Member | 2021 – 2022 |
-| Faith Living Church | Nursery & Childcare Volunteer | 2021 – Present |
+| Interactive E-Commerce Dashboard | Seasonal sales analytics dashboard with interactive Plotly charts | Python, Pandas, Plotly |
+| Scikit-Learn Model Showdown | Benchmarked Logistic Regression, Random Forest & XGBoost on customer-churn data | Python, Scikit-learn, Plotly |
 ::::
 
 ---
@@ -171,7 +136,8 @@ Relevant modules: Machine Learning, Natural Language Processing, Data Visualisat
 :::: {.cv-section}
 ## {{< fa globe >}} Languages
 
-**English** — Native/Fluent
+**English** — Fluent
+**Hindi** — Native
 ::::
 
 ---
