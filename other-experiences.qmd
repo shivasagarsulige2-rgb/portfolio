@@ -84,5 +84,5 @@ This page focuses on experiences beyond coursework, including student organizati
 ## Reflection
 
 :::: {.callout-note title="Growth Through Participation"}
-[Write a short reflection on communication, leadership, teamwork, and service values developed through these experiences.]
+Participating in student organisations and community service has shaped me as much as any course or project. Leading the Science Club taught me that **vision without communication is just an idea** — real change happens when you listen, delegate, and bring people along. Founding DACE reminded me that inclusion is not a feature to add later but a design principle from day one. And volunteering with animal rescues and youth programmes has reinforced a simple truth: showing up consistently, even when it's unglamorous, is how trust is built. These experiences inform how I approach data science — with curiosity, care for the humans behind the numbers, and a commitment to making my work accessible to everyone.
 ::::

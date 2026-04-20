@@ -1,6 +1,6 @@
 ---
-title: "[Your Name]"
-subtitle: "[Your Professional Headline]"
+title: "Shiva Sagar"
+subtitle: "Data Science Student · Community Leader · Science Advocate"
 image: images/profile.svg
 about:
   template: trestles
@@ -9,17 +9,17 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: ""
+      href: "https://www.linkedin.com/in/shiva-sagar"
       target: _blank
     - icon: github
       text: GitHub
-      href: ""
+      href: "https://github.com/shivasagarsulige2-rgb"
       target: _blank
     - icon: envelope
       text: Email
-      href: "mailto:"
+      href: "mailto:shiva.sagar@keuka.edu"
     - text: "{{< fa file-pdf >}} CV"
-      href: CV/cv.pdf
+      href: CV/cv.html
       target: _blank
 format:
   html:
@@ -29,10 +29,12 @@ format:
 ## Welcome
 
 :::: {.hero-quote}
-"[Add a short personal quote or guiding principle.]"
+"Data is not just numbers — it is the language through which the world tells its story."
 ::::
 
-This ePortfolio presents my academic journey, experience highlights, and service contributions in a clean section-based format.
+Hi, I'm **Shiva Sagar** — a data science student at [Keuka College](https://www.keuka.edu){target="_blank"}, passionate about turning complex data into clear, actionable insights. Beyond the classroom, I lead student organisations, advocate for accessibility, and volunteer across my community.
+
+This portfolio showcases my technical projects, academic journey, leadership experience, and the skills I've developed throughout my studies.
 
 ---
 
@@ -42,22 +44,22 @@ This ePortfolio presents my academic journey, experience highlights, and service
 
 ::::: {.column width="33%"}
 :::: {.experience-card .theme-ocean}
-{{< fa user-graduate >}} **Academic Journey**  
-[Add a short summary of your studies, concentrations, and milestones.]
+{{< fa user-graduate >}} **Academic Journey**
+Data Science student at Keuka College since 2021. Specialising in machine learning, NLP, and reproducible research with Python and Quarto.
 ::::
 :::::
 
 ::::: {.column width="33%"}
 :::: {.experience-card .theme-sunset}
-{{< fa flask >}} **Field and Research Experience**  
-[Add a short summary of internships, labs, field periods, or major learning experiences.]
+{{< fa flask >}} **Research & Projects**
+Built interactive data dashboards, compared BERT vs T5 for sentiment analysis, and benchmarked classification models — all with live, executable Python code.
 ::::
 :::::
 
 ::::: {.column width="33%"}
 :::: {.experience-card .theme-aurora}
-{{< fa hands-helping >}} **Clubs and Service**  
-[Add a short summary of leadership roles, clubs, sports, and volunteer service.]
+{{< fa hands-helping >}} **Leadership & Service**
+President of the Science Club, Treasurer of DACE, and President of the Campus Activities Board. Volunteer with animal rescues, the Red Cross, and youth leadership programmes.
 ::::
 :::::
 
@@ -67,15 +69,17 @@ This ePortfolio presents my academic journey, experience highlights, and service
 
 ## Quick Navigation
 
-| Section | What to Add |
+| Section | What You'll Find |
 |---|---|
-| About | Background, skills, and professional goals |
-| Other Experiences | Clubs, sports, leadership roles, and service |
-| Projects | Technical work with executable code and visual output |
-| CV | Downloadable CV and qualifications |
+| [About](about.qmd) | Background, technical skills, certifications, and professional goals |
+| [Other Experiences](other-experiences.qmd) | Student organisations, leadership roles, volunteer and service work |
+| [Projects](projects/index.qmd) | Data science and ML projects with live Python code and Plotly visualisations |
+| [CV](CV/cv.html) | Full academic and professional curriculum vitae |
+| [Reflection](reflection.qmd) | Lessons learned building this portfolio — Git, Quarto, Python |
+| [Contact](contact.qmd) | Contact details and professional references |
 
 ---
 
-:::: {.simple-note}
-This draft keeps all personal details as placeholders so you can replace text, links, and photos with your own content.
-::::
+::: {.callout-tip title="Open to Opportunities"}
+I am actively seeking internships and entry-level roles in **data science**, **machine learning**, and **data analytics**. Feel free to [get in touch](contact.qmd)!
+:::

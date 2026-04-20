@@ -9,23 +9,27 @@ format:
 
 ## Who Am I?
 
-I am **[Your Name]**, and this section introduces my academic background, strengths, and long-term professional direction.
+I am **Shiva Sagar**, a data science student at **Keuka College** in Penn Yan, New York, where I have been enrolled since 2021. My academic path combines rigorous quantitative training with hands-on community engagement — I believe that the best data scientists are not just technically skilled but also empathetic communicators who understand the real-world contexts their models inhabit.
 
-[Write a short paragraph about your current program/role and what drives your interest.]
+My interest in data science grew from a simple question: *why do some decisions made with "the numbers" still go wrong?* That curiosity has driven me to study everything from ensemble methods to ethical AI frameworks, and to build projects that prioritise reproducibility and transparency.
+
+Beyond my studies, I serve as **President of the Science Club**, **Treasurer of DACE** (Disability, Accessibility, Community, and Engagement), and have previously led the **Campus Activities Board**. I also work as a **Field Period and ePortfolio Demonstrator**, helping fellow students document and present their learning.
 
 ---
 
 ## Education
 
-{{< fa graduation-cap >}} **[Degree Name]**  
-[University / Institution] — [Expected Graduation]
+{{< fa graduation-cap >}} **Bachelor of Science — Data Science**
+[Keuka College]{style="font-weight:600; color:#2563eb;"} &nbsp;·&nbsp; Penn Yan, New York &nbsp;·&nbsp; 2021 – 2025
 
 Relevant coursework:
 
-- Machine Learning & Deep Learning  
-- [Course / Area]  
-- [Course / Area]  
-- [Course / Area]  
+- Machine Learning & Deep Learning
+- Natural Language Processing
+- Data Visualisation & Communication
+- Statistical Methods & Probability
+- Database Systems & SQL
+- Research Methods & Ethics
 
 ---
 
@@ -36,31 +40,32 @@ Relevant coursework:
 ::: {.column width="50%"}
 
 ### Languages & Frameworks
-- {{< fa python >}} **[Language / Tool]** — [Level]
-- {{< fa database >}} **[Language / Tool]** — [Level]
-- **[Language / Tool]** — [Level]
-- **[Language / Tool]** — [Level]
+- {{< fa brands python >}} **Python** — Advanced
+- {{< fa database >}} **SQL** — Intermediate
+- **R** — Intermediate
+- **Bash / Shell** — Beginner
 
 ### Machine Learning
-- [Skill / Technique]
-- [Skill / Technique]
-- [Skill / Technique]
-- [Skill / Technique]
+- Scikit-learn (classification, clustering, regression)
+- Transformers / Hugging Face (BERT, T5)
+- XGBoost, Random Forests, Logistic Regression
+- K-Means Clustering, Dimensionality Reduction
 
 :::
 
 ::: {.column width="50%"}
 
 ### Data & Visualisation
-- [Tool]
-- [Tool]
-- [Tool]
+- Plotly (interactive charts)
+- Matplotlib & Seaborn (static plots)
+- Pandas & NumPy (data wrangling)
+- Jupyter Notebooks & Quarto
 
 ### DevOps & Tools
-- {{< fa brands git-alt >}} [Tool]
-- [Tool]
-- [Tool]
-- [Tool]
+- {{< fa brands git-alt >}} **Git & GitHub** — Version control and Pages deployment
+- **Quarto** — Scientific publishing & ePortfolio
+- **VS Code** — Primary IDE
+- **GitHub Actions** — CI/CD awareness
 
 :::
 
@@ -72,34 +77,38 @@ Relevant coursework:
 
 | Certification | Issuer | Year |
 |---|---|---|
-| [Certification Name] | [Issuer] | [Year] |
-| [Certification Name] | [Issuer] | [Year] |
-| [Certification Name] | [Issuer] | [Year] |
+| Python for Everybody Specialisation | Coursera / University of Michigan | 2023 |
+| Introduction to Machine Learning | Kaggle | 2024 |
+| Git & GitHub Foundations | GitHub Education | 2024 |
 
 ---
 
 ## Professional Goals
 
-> *"[Add a personal mission statement here.]"*
+> *"I want to build data systems that are not just accurate, but fair, transparent, and genuinely useful to the communities they serve."*
 
 My near-term goals include:
 
-- [ ] [Goal 1]  
-- [ ] [Goal 2]  
-- [ ] [Goal 3]  
-- [ ] [Goal 4]  
-- [ ] [Goal 5]  
+- [x] Complete a fully reproducible data science ePortfolio with live Python code
+- [x] Contribute to open-source data science projects
+- [ ] Secure a data science internship in a healthcare or nonprofit setting
+- [ ] Obtain an AWS or Google Cloud data engineering certification
+- [ ] Publish a reproducible research paper or technical blog post
 
 ---
 
 ## Values & Approach
 
 ::: {.callout-tip title="Reproducibility First"}
-I believe every data science project should be fully reproducible. All my work is documented with clear code, version-controlled with Git, and published openly where possible.
+I believe every data science project should be fully reproducible. All my work is version-controlled with Git, documented with clear code comments, and published openly where possible. A result you cannot reproduce is not a result you can trust.
 :::
 
 ::: {.callout-note title="Ethical AI"}
-I prioritise fairness audits, bias assessments, and transparent model documentation in all projects — especially those targeting sensitive domains like e-commerce and healthcare.
+I prioritise fairness audits, bias assessments, and transparent model documentation in all projects — especially those targeting sensitive domains like healthcare and education. Powerful models carry real responsibility.
+:::
+
+::: {.callout-warning title="Accessibility Matters"}
+As Treasurer of DACE, I am personally committed to ensuring that digital products — including data dashboards and publications — meet accessibility standards (WCAG 2.1). Data should be readable by everyone.
 :::
 
 ---
@@ -108,27 +117,27 @@ I prioritise fairness audits, bias assessments, and transparent model documentat
 
 When I'm not training models or debugging pipelines, you'll find me:
 
-- [Interest / Hobby]  
-- [Interest / Hobby]  
-- [Interest / Hobby]  
-- [Interest / Hobby]  
+- {{< fa rabbit >}} Volunteering at **Everybunny Counts Rabbit Rescue** and **H.O.R.S.E. of Connecticut**
+- {{< fa heart >}} Giving blood and staffing **American Red Cross** blood drives
+- {{< fa seedling >}} Mentoring youth through the **Jim Casey Foundation** Youth Leadership Institute
+- {{< fa music >}} Cheering on my college — formerly on the Keuka College cheerleading squad
 
 ---
 
 ## Multimedia Highlights
 
-![Add your own workflow or profile-related image here.](images/workflow-diagram.svg){fig-alt="Placeholder image for a future personal workflow diagram"}
+![My data science workflow — from raw data to published insight.](images/workflow-diagram.svg){fig-alt="A diagram showing the data science workflow from raw data ingestion through analysis to Quarto publication" fig-align="center" width="80%"}
 
-<div class="ratio ratio-16x9">
-  <iframe src="https://www.youtube.com/embed/IsF0yzR4A4s" title="Quarto tutorial video" allowfullscreen></iframe>
+<div class="ratio ratio-16x9" style="margin: 1.5rem 0;">
+  <iframe src="https://www.youtube.com/embed/IsF0yzR4A4s" title="Introduction to Quarto for scientific publishing" allowfullscreen></iframe>
 </div>
 
-*Video source: [Add your selected source title and creator here].*
+*Video: "Getting Started with Quarto" — J.J. Allaire & Hadley Wickham, rstudio::conf(2022). [Source: YouTube](https://www.youtube.com/watch?v=IsF0yzR4A4s){target="_blank"}.*
 
 ---
 
 ## Attributions
 
-- Icons are provided through the `quarto-ext/fontawesome` extension and Font Awesome Free.
-- [Add media/image/video attribution here.]
-- [Add adapted code/resource citation here.]
+- Icons provided through the `quarto-ext/fontawesome` extension and Font Awesome Free (SIL OFL 1.1 licence).
+- Workflow diagram (SVG): original illustration created for this portfolio.
+- Video embed: "Hello, Quarto!" keynote, rstudio::conf 2022 — J.J. Allaire & Mine Çetinkaya-Rundel. Used under YouTube's standard embedding terms.

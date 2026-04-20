@@ -34,7 +34,7 @@ website:
         text: Contact
     right:
       - icon: github
-        href: ""
+        href: "https://github.com/shivasagarsulige2-rgb"
         target: _blank
 
   page-footer:

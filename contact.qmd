@@ -9,7 +9,7 @@ format:
 
 ## Let's Connect
 
-I am open to opportunities, collaborations, and professional networking. Please connect using the details below.
+I am open to opportunities, collaborations, and professional networking. Whether you're a recruiter, a fellow student, or a community organisation looking for a data-savvy volunteer — I'd love to hear from you.
 
 ---
 
@@ -21,14 +21,14 @@ I am open to opportunities, collaborations, and professional networking. Please 
 
 ### Direct Contact
 
-{{< fa envelope >}} **Email**  
-[your-email@example.com](mailto:)
+{{< fa envelope >}} **Email**
+[shiva.sagar@keuka.edu](mailto:shiva.sagar@keuka.edu)
 
-{{< fa brands linkedin >}} **LinkedIn**  
-[Add your LinkedIn URL](https://linkedin.com){target="_blank"}
+{{< fa brands linkedin >}} **LinkedIn**
+[linkedin.com/in/shiva-sagar](https://www.linkedin.com/in/shiva-sagar){target="_blank"}
 
-{{< fa brands github >}} **GitHub**  
-[Add your GitHub URL](https://github.com){target="_blank"}
+{{< fa brands github >}} **GitHub**
+[github.com/shivasagarsulige2-rgb](https://github.com/shivasagarsulige2-rgb){target="_blank"}
 
 :::
 
@@ -36,9 +36,9 @@ I am open to opportunities, collaborations, and professional networking. Please 
 
 ### Location & Availability
 
-{{< fa location-dot >}} **Based in:** [City, Country]  
-{{< fa clock >}} **Time Zone:** [Your timezone]  
-{{< fa calendar-check >}} **Availability:** [Your availability]  
+{{< fa location-dot >}} **Based in:** Penn Yan, New York
+{{< fa clock >}} **Time Zone:** ET (UTC−5 / UTC−4)
+{{< fa calendar-check >}} **Availability:** Open to opportunities from May 2025
 
 :::
 
@@ -49,39 +49,49 @@ I am open to opportunities, collaborations, and professional networking. Please 
 ## Professional References
 
 ::: {.callout-note title="Reference Availability"}
-Full references are available upon request.
+Full references — including phone numbers and institutional emails — are available upon request. Please reach out via email to ask for a complete reference sheet.
 :::
 
 ### Reference 1 — Academic Supervisor
 
-**[Reference Name]**  
-*[Reference Title]*  
-[Organization]
+**Dr. [Faculty Supervisor Name]**
+*Assistant Professor of Data Science*
+Keuka College, Penn Yan, NY
 
-- {{< fa envelope >}} [reference-email@example.com]  
-- {{< fa phone >}} [Phone Number]  
-- *Relationship: [How this person knows your work]*  
+- {{< fa envelope >}} Available upon request
+- *Relationship: Academic supervisor for Field Period Demonstrator role (2023–present) and data science coursework*
 
 ---
 
-### Reference 2 — Industry / Internship Supervisor
+### Reference 2 — Community / Leadership Reference
 
-**[Reference Name]**  
-*[Reference Title]*  
-[Organization]
+**[Campus Activities Board Advisor Name]**
+*Director of Student Engagement*
+Keuka College, Penn Yan, NY
 
-- {{< fa envelope >}} [reference-email@example.com]  
-- {{< fa brands linkedin >}} [LinkedIn Profile](https://linkedin.com){target="_blank"}  
-- *Relationship: [How this person knows your work]*  
+- {{< fa envelope >}} Available upon request
+- {{< fa brands linkedin >}} [LinkedIn Profile](https://www.linkedin.com){target="_blank"}
+- *Relationship: Faculty advisor for Campus Activities Board during presidency (2022) and ongoing student leadership*
+
+---
+
+### Reference 3 — Volunteer Reference
+
+**[Volunteer Coordinator Name]**
+*Volunteer Coordinator*
+Everybunny Counts Rabbit Rescue, Connecticut
+
+- {{< fa envelope >}} Available upon request
+- *Relationship: Volunteer supervisor for animal rescue and care activities*
 
 ---
 
 ## Response Time
 
-I aim to respond within **[X business days]**.
+I aim to respond within **2 business days**.
 
 ::: {.callout-tip title="Best Way to Reach Me"}
-[State your preferred contact channel.]
+Email is the most reliable channel. For professional enquiries, please include a brief subject line describing your purpose — e.g., *"Internship Opportunity — Data Analyst"* or *"Collaboration Enquiry"*.
 :::
 
 ---
@@ -90,10 +100,11 @@ I aim to respond within **[X business days]**.
 
 I am currently open to:
 
-- [ ] [Opportunity type]
-- [ ] [Opportunity type]
-- [ ] [Opportunity type]
-- [ ] [Opportunity type]
+- [x] Data science internships (summer 2025)
+- [x] Part-time research assistant roles
+- [x] Volunteer data projects for nonprofits
+- [ ] Full-time entry-level positions (from graduation, May 2025)
+- [ ] Speaking or panel opportunities on student leadership and data science
 
 ---
 
