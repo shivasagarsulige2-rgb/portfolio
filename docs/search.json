@@ -163,191 +163,205 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "[Your Name]",
+    "title": "Shiva Sagar",
     "section": "",
-    "text": "“[Add a short personal quote or guiding principle.]”\n\nThis ePortfolio presents my academic journey, experience highlights, and service contributions in a clean section-based format."
+    "text": "“Data is not just numbers — it is the language through which the world tells its story.”\n\nHi, I’m Shiva Sagar — a data science student at Keuka College, passionate about turning complex data into clear, actionable insights. Beyond the classroom, I lead student organisations, advocate for accessibility, and volunteer across my community.\nThis portfolio showcases my technical projects, academic journey, leadership experience, and the skills I’ve developed throughout my studies."
   },
   {
     "objectID": "index.html#welcome",
     "href": "index.html#welcome",
-    "title": "[Your Name]",
+    "title": "Shiva Sagar",
     "section": "",
-    "text": "“[Add a short personal quote or guiding principle.]”\n\nThis ePortfolio presents my academic journey, experience highlights, and service contributions in a clean section-based format."
+    "text": "“Data is not just numbers — it is the language through which the world tells its story.”\n\nHi, I’m Shiva Sagar — a data science student at Keuka College, passionate about turning complex data into clear, actionable insights. Beyond the classroom, I lead student organisations, advocate for accessibility, and volunteer across my community.\nThis portfolio showcases my technical projects, academic journey, leadership experience, and the skills I’ve developed throughout my studies."
   },
   {
     "objectID": "index.html#portfolio-sections",
     "href": "index.html#portfolio-sections",
-    "title": "[Your Name]",
+    "title": "Shiva Sagar",
     "section": "Portfolio Sections",
-    "text": "Portfolio Sections\n\n\n\n Academic Journey\n[Add a short summary of your studies, concentrations, and milestones.]\n\n\n\n Field and Research Experience\n[Add a short summary of internships, labs, field periods, or major learning experiences.]\n\n\n\n Clubs and Service\n[Add a short summary of leadership roles, clubs, sports, and volunteer service.]"
+    "text": "Portfolio Sections\n\n\n\n Academic Journey Data Science student at Keuka College since 2021. Specialising in machine learning, NLP, and reproducible research with Python and Quarto.\n\n\n\n Research & Projects Built interactive data dashboards, compared BERT vs T5 for sentiment analysis, and benchmarked classification models — all with live, executable Python code.\n\n\n\n Leadership & Service President of the Science Club, Treasurer of DACE, and President of the Campus Activities Board. Volunteer with animal rescues, the Red Cross, and youth leadership programmes."
   },
   {
     "objectID": "index.html#quick-navigation",
     "href": "index.html#quick-navigation",
-    "title": "[Your Name]",
+    "title": "Shiva Sagar",
     "section": "Quick Navigation",
-    "text": "Quick Navigation\n\n\n\nSection\nWhat to Add\n\n\n\n\nAbout\nBackground, skills, and professional goals\n\n\nOther Experiences\nClubs, sports, leadership roles, and service\n\n\nProjects\nTechnical work with executable code and visual output\n\n\nCV\nDownloadable CV and qualifications\n\n\n\n\n\nThis draft keeps all personal details as placeholders so you can replace text, links, and photos with your own content."
+    "text": "Quick Navigation\n\n\n\nSection\nWhat You’ll Find\n\n\n\n\nAbout\nBackground, technical skills, certifications, and professional goals\n\n\nOther Experiences\nStudent organisations, leadership roles, volunteer and service work\n\n\nProjects\nData science and ML projects with live Python code and Plotly visualisations\n\n\nCV\nFull academic and professional curriculum vitae\n\n\nReflection\nLessons learned building this portfolio — Git, Quarto, Python\n\n\nContact\nContact details and professional references\n\n\n\n\n\n\n\n\n\n\nTipOpen to Opportunities\n\n\n\nI am actively seeking internships and entry-level roles in data science, machine learning, and data analytics. Feel free to get in touch!"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About Me",
     "section": "",
-    "text": "I am [Your Name], and this section introduces my academic background, strengths, and long-term professional direction.\n[Write a short paragraph about your current program/role and what drives your interest.]"
+    "text": "I am Shiva Sagar, a data science student at Keuka College in Penn Yan, New York, where I have been enrolled since 2021. My academic path combines rigorous quantitative training with hands-on community engagement — I believe that the best data scientists are not just technically skilled but also empathetic communicators who understand the real-world contexts their models inhabit.\nMy interest in data science grew from a simple question: why do some decisions made with “the numbers” still go wrong? That curiosity has driven me to study everything from ensemble methods to ethical AI frameworks, and to build projects that prioritise reproducibility and transparency.\nBeyond my studies, I serve as President of the Science Club, Treasurer of DACE (Disability, Accessibility, Community, and Engagement), and have previously led the Campus Activities Board. I also work as a Field Period and ePortfolio Demonstrator, helping fellow students document and present their learning."
   },
   {
     "objectID": "about.html#who-am-i",
     "href": "about.html#who-am-i",
     "title": "About Me",
     "section": "",
-    "text": "I am [Your Name], and this section introduces my academic background, strengths, and long-term professional direction.\n[Write a short paragraph about your current program/role and what drives your interest.]"
+    "text": "I am Shiva Sagar, a data science student at Keuka College in Penn Yan, New York, where I have been enrolled since 2021. My academic path combines rigorous quantitative training with hands-on community engagement — I believe that the best data scientists are not just technically skilled but also empathetic communicators who understand the real-world contexts their models inhabit.\nMy interest in data science grew from a simple question: why do some decisions made with “the numbers” still go wrong? That curiosity has driven me to study everything from ensemble methods to ethical AI frameworks, and to build projects that prioritise reproducibility and transparency.\nBeyond my studies, I serve as President of the Science Club, Treasurer of DACE (Disability, Accessibility, Community, and Engagement), and have previously led the Campus Activities Board. I also work as a Field Period and ePortfolio Demonstrator, helping fellow students document and present their learning."
   },
   {
     "objectID": "about.html#education",
     "href": "about.html#education",
     "title": "About Me",
     "section": "Education",
-    "text": "Education\n [Degree Name]\n[University / Institution] — [Expected Graduation]\nRelevant coursework:\n\nMachine Learning & Deep Learning\n\n[Course / Area]\n\n[Course / Area]\n\n[Course / Area]"
+    "text": "Education\n Bachelor of Science — Data Science Keuka College  ·  Penn Yan, New York  ·  2021 – 2025\nRelevant coursework:\n\nMachine Learning & Deep Learning\nNatural Language Processing\nData Visualisation & Communication\nStatistical Methods & Probability\nDatabase Systems & SQL\nResearch Methods & Ethics"
   },
   {
     "objectID": "about.html#technical-skills",
     "href": "about.html#technical-skills",
     "title": "About Me",
     "section": "Technical Skills",
-    "text": "Technical Skills\n\n\n\nLanguages & Frameworks\n\n [Language / Tool] — [Level]\n [Language / Tool] — [Level]\n[Language / Tool] — [Level]\n[Language / Tool] — [Level]\n\n\n\nMachine Learning\n\n[Skill / Technique]\n[Skill / Technique]\n[Skill / Technique]\n[Skill / Technique]\n\n\n\n\nData & Visualisation\n\n[Tool]\n[Tool]\n[Tool]\n\n\n\nDevOps & Tools\n\n [Tool]\n[Tool]\n[Tool]\n[Tool]"
+    "text": "Technical Skills\n\n\n\nLanguages & Frameworks\n\n Python — Advanced\n SQL — Intermediate\nR — Intermediate\nBash / Shell — Beginner\n\n\n\nMachine Learning\n\nScikit-learn (classification, clustering, regression)\nTransformers / Hugging Face (BERT, T5)\nXGBoost, Random Forests, Logistic Regression\nK-Means Clustering, Dimensionality Reduction\n\n\n\n\nData & Visualisation\n\nPlotly (interactive charts)\nMatplotlib & Seaborn (static plots)\nPandas & NumPy (data wrangling)\nJupyter Notebooks & Quarto\n\n\n\nDevOps & Tools\n\n Git & GitHub — Version control and Pages deployment\nQuarto — Scientific publishing & ePortfolio\nVS Code — Primary IDE\nGitHub Actions — CI/CD awareness"
   },
   {
     "objectID": "about.html#certifications",
     "href": "about.html#certifications",
     "title": "About Me",
     "section": "Certifications",
-    "text": "Certifications\n\n\n\nCertification\nIssuer\nYear\n\n\n\n\n[Certification Name]\n[Issuer]\n[Year]\n\n\n[Certification Name]\n[Issuer]\n[Year]\n\n\n[Certification Name]\n[Issuer]\n[Year]"
+    "text": "Certifications\n\n\n\n\n\n\n\n\nCertification\nIssuer\nYear\n\n\n\n\nPython for Everybody Specialisation\nCoursera / University of Michigan\n2023\n\n\nIntroduction to Machine Learning\nKaggle\n2024\n\n\nGit & GitHub Foundations\nGitHub Education\n2024"
   },
   {
     "objectID": "about.html#professional-goals",
     "href": "about.html#professional-goals",
     "title": "About Me",
     "section": "Professional Goals",
-    "text": "Professional Goals\n\n“[Add a personal mission statement here.]”\n\nMy near-term goals include:\n\n[Goal 1]\n\n[Goal 2]\n\n[Goal 3]\n\n[Goal 4]\n\n[Goal 5]"
+    "text": "Professional Goals\n\n“I want to build data systems that are not just accurate, but fair, transparent, and genuinely useful to the communities they serve.”\n\nMy near-term goals include:\n\nComplete a fully reproducible data science ePortfolio with live Python code\nContribute to open-source data science projects\nSecure a data science internship in a healthcare or nonprofit setting\nObtain an AWS or Google Cloud data engineering certification\nPublish a reproducible research paper or technical blog post"
   },
   {
     "objectID": "about.html#values-approach",
     "href": "about.html#values-approach",
     "title": "About Me",
     "section": "Values & Approach",
-    "text": "Values & Approach\n\n\n\n\n\n\nTipReproducibility First\n\n\n\nI believe every data science project should be fully reproducible. All my work is documented with clear code, version-controlled with Git, and published openly where possible.\n\n\n\n\n\n\n\n\nNoteEthical AI\n\n\n\nI prioritise fairness audits, bias assessments, and transparent model documentation in all projects — especially those targeting sensitive domains like e-commerce and healthcare."
+    "text": "Values & Approach\n\n\n\n\n\n\nTipReproducibility First\n\n\n\nI believe every data science project should be fully reproducible. All my work is version-controlled with Git, documented with clear code comments, and published openly where possible. A result you cannot reproduce is not a result you can trust.\n\n\n\n\n\n\n\n\nNoteEthical AI\n\n\n\nI prioritise fairness audits, bias assessments, and transparent model documentation in all projects — especially those targeting sensitive domains like healthcare and education. Powerful models carry real responsibility.\n\n\n\n\n\n\n\n\nWarningAccessibility Matters\n\n\n\nAs Treasurer of DACE, I am personally committed to ensuring that digital products — including data dashboards and publications — meet accessibility standards (WCAG 2.1). Data should be readable by everyone."
   },
   {
     "objectID": "about.html#outside-of-work",
     "href": "about.html#outside-of-work",
     "title": "About Me",
     "section": "Outside of Work",
-    "text": "Outside of Work\nWhen I’m not training models or debugging pipelines, you’ll find me:\n\n[Interest / Hobby]\n\n[Interest / Hobby]\n\n[Interest / Hobby]\n\n[Interest / Hobby]"
+    "text": "Outside of Work\nWhen I’m not training models or debugging pipelines, you’ll find me:\n\n Volunteering at Everybunny Counts Rabbit Rescue and H.O.R.S.E. of Connecticut\n Giving blood and staffing American Red Cross blood drives\n Mentoring youth through the Jim Casey Foundation Youth Leadership Institute\n Cheering on my college — formerly on the Keuka College cheerleading squad"
   },
   {
     "objectID": "about.html#multimedia-highlights",
     "href": "about.html#multimedia-highlights",
     "title": "About Me",
     "section": "Multimedia Highlights",
-    "text": "Multimedia Highlights\n\n\n\nAdd your own workflow or profile-related image here.\n\n\n\n\n\nVideo source: [Add your selected source title and creator here]."
+    "text": "Multimedia Highlights\n\n\n\nMy data science workflow — from raw data to published insight.\n\n\n\n\n\nVideo: “Getting Started with Quarto” — J.J. Allaire & Hadley Wickham, rstudio::conf(2022). Source: YouTube."
   },
   {
     "objectID": "about.html#attributions",
     "href": "about.html#attributions",
     "title": "About Me",
     "section": "Attributions",
-    "text": "Attributions\n\nIcons are provided through the quarto-ext/fontawesome extension and Font Awesome Free.\n[Add media/image/video attribution here.]\n[Add adapted code/resource citation here.]"
+    "text": "Attributions\n\nIcons provided through the quarto-ext/fontawesome extension and Font Awesome Free (SIL OFL 1.1 licence).\nWorkflow diagram (SVG): original illustration created for this portfolio.\nVideo embed: “Hello, Quarto!” keynote, rstudio::conf 2022 — J.J. Allaire & Mine Çetinkaya-Rundel. Used under YouTube’s standard embedding terms."
   },
   {
     "objectID": "CV/cv.html",
     "href": "CV/cv.html",
     "title": "Curriculum Vitae",
     "section": "",
-    "text": "[Your Professional Title]\n [your-email@example.com]  |   GitHub  |   LinkedIn  |   [City, Country]\nReferences available upon request - see Contact page."
+    "text": "Data Science Student | Community Leader | Science Advocate  shiva.sagar@keuka.edu  |   GitHub  |   LinkedIn  |   Penn Yan, New York\nReferences available upon request — see Contact page."
   },
   {
     "objectID": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2066612067726164756174696f6e2d636170203e7d7d-education",
     "href": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2066612067726164756174696f6e2d636170203e7d7d-education",
     "title": "Curriculum Vitae",
     "section": " Education",
-    "text": "Education\n\n[Degree Name]\nInstitution Name Start Year - End Year\nRelevant modules: [Module], [Module], [Module], [Module], [Module].\n\n\n[Degree Name]\nInstitution Name Start Year - End Year\n[Degree result or key achievement]. Dissertation/Capstone: “[Title]”"
+    "text": "Education\n\nBachelor of Science — Data Science\nKeuka College 2021 – 2025 (Expected)\nRelevant modules: Machine Learning, Natural Language Processing, Data Visualisation, Statistical Methods, Database Systems, Research Methods & Ethics."
   },
   {
     "objectID": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120627269656663617365203e7d7d-work-experience",
     "href": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120627269656663617365203e7d7d-work-experience",
     "title": "Curriculum Vitae",
     "section": " Work Experience",
-    "text": "Work Experience\n\n[Role Title]\nOrganization Start - End\n\n[Achievement / contribution]\n[Achievement / contribution]\n[Achievement / contribution]\n\n\n\n[Role Title]\nOrganization Start - End\n\n[Achievement / contribution]\n[Achievement / contribution]\n[Achievement / contribution]"
+    "text": "Work Experience\n\nField Period and ePortfolio Demonstrator / Instructor\nKeuka College 2023 – Present\n\nGuide students through building professional ePortfolios using Quarto and GitHub Pages\nDemonstrate reproducible research practices, version control with Git, and Python-based data analysis\nProvide one-on-one support for Quarto configuration, SCSS styling, and project page development\n\n\n\nSocial Media Manager — Science Club\nKeuka College Science Club 2023 – Present\n\nManage club social media presence and digital communications\nCreate engaging content to promote science events and increase student participation"
+  },
+  {
+    "objectID": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206661207573657273203e7d7d-leadership-student-organisations",
+    "href": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206661207573657273203e7d7d-leadership-student-organisations",
+    "title": "Curriculum Vitae",
+    "section": " Leadership & Student Organisations",
+    "text": "Leadership & Student Organisations\n\nPresident — Science Club\nKeuka College 2024 – Present\n\nLead executive board and direct student-driven science initiatives on campus\nCoordinate events, guest speakers, and outreach activities\n\n\n\nVice President — Science Club\nKeuka College 2023 – 2024\n\nAssisted the President in managing club operations and membership engagement\n\n\n\nTreasurer & Establishing Member — DACE\nDisability, Accessibility, Community, and Engagement, Keuka College 2023 – Present\n\nFounding member; manage club budget and financial reporting\nAdvocate for accessibility policies and inclusive campus initiatives\n\n\n\nPresident — Campus Activities Board\nKeuka College 2022\n\nOversaw campus-wide event planning and student engagement programming\nServed concurrently as Interfaith and Intercultural Community Coordinator\n\n\n\nStudent Senate Representative — Nursing Club\nKeuka College 2021 – 2022\n\nRepresented Nursing Club interests in student governance"
   },
   {
     "objectID": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120636f6465203e7d7d-technical-skills",
     "href": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120636f6465203e7d7d-technical-skills",
     "title": "Curriculum Vitae",
     "section": " Technical Skills",
-    "text": "Technical Skills\nLanguages: Skill Skill Skill Skill\nCore Skills: Skill Skill Skill Skill Skill\nData & Visualisation: Skill Skill Skill Skill Skill\nTools: Skill Skill Skill Skill Skill"
+    "text": "Technical Skills\nLanguages: Python SQL R Bash\nMachine Learning: Scikit-learn XGBoost Hugging Face Transformers BERT T5\nData & Visualisation: Plotly Pandas NumPy Matplotlib Seaborn\nTools & Platforms: Git GitHub Quarto VS Code Jupyter"
   },
   {
     "objectID": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206661206365727469666963617465203e7d7d-certifications",
     "href": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206661206365727469666963617465203e7d7d-certifications",
     "title": "Curriculum Vitae",
     "section": " Certifications",
-    "text": "Certifications\n\n\n\nCertification\nIssuer\nYear\n\n\n\n\n[Certification]\n[Issuer]\n[Year]\n\n\n[Certification]\n[Issuer]\n[Year]\n\n\n[Certification]\n[Issuer]\n[Year]"
+    "text": "Certifications\n\n\n\n\n\n\n\n\nCertification\nIssuer\nYear\n\n\n\n\nPython for Everybody Specialisation\nCoursera / University of Michigan\n2023\n\n\nIntroduction to Machine Learning\nKaggle\n2024\n\n\nGit & GitHub Foundations\nGitHub Education\n2024"
   },
   {
     "objectID": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2066612073746172203e7d7d-selected-projects",
     "href": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2066612073746172203e7d7d-selected-projects",
     "title": "Curriculum Vitae",
     "section": " Selected Projects",
-    "text": "Selected Projects\n\n\n\nProject\nDescription\nStack\n\n\n\n\n[Project Title]\n[Project summary]\n[Stack]\n\n\n[Project Title]\n[Project summary]\n[Stack]\n\n\n[Project Title]\n[Project summary]\n[Stack]"
+    "text": "Selected Projects\n\n\n\n\n\n\n\n\nProject\nDescription\nStack\n\n\n\n\nBERT vs T5 Sentiment Analysis\nCompared discriminative vs generative NLP models on Amazon Polarity dataset\nPython, Transformers, Plotly\n\n\nInteractive E-Commerce Dashboard\nBuilt a seasonal sales analytics dashboard with Plotly\nPython, Pandas, Plotly\n\n\nScikit-Learn Model Showdown\nBenchmarked Logistic Regression, Random Forest, and XGBoost on customer-churn data\nPython, Scikit-learn, Plotly"
+  },
+  {
+    "objectID": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206661206865617274203e7d7d-volunteer-community-service",
+    "href": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c206661206865617274203e7d7d-volunteer-community-service",
+    "title": "Curriculum Vitae",
+    "section": " Volunteer & Community Service",
+    "text": "Volunteer & Community Service\n\n\n\n\n\n\n\n\nOrganisation\nRole\nPeriod\n\n\n\n\nEverybunny Counts Rabbit Rescue\nAnimal Care Volunteer\n2022 – Present\n\n\nH.O.R.S.E. of Connecticut\nEquine Therapy Volunteer\n2022 – Present\n\n\nAmerican Red Cross\nBlood Drive Volunteer\n2021 – Present\n\n\nJim Casey Foundation\nYouth Leadership Institute Participant\n2022\n\n\nCT Department of Children & Families\nYouth Advisory Board Member\n2021 – 2022\n\n\nFaith Living Church\nNursery & Childcare Volunteer\n2021 – Present"
   },
   {
     "objectID": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120676c6f6265203e7d7d-languages",
     "href": "CV/cv.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c20666120676c6f6265203e7d7d-languages",
     "title": "Curriculum Vitae",
     "section": " Languages",
-    "text": "Languages\n[Language] - [Proficiency]\n[Language] - [Proficiency]"
+    "text": "Languages\nEnglish — Native/Fluent"
   },
   {
     "objectID": "contact.html",
     "href": "contact.html",
     "title": "Contact",
     "section": "",
-    "text": "I am open to opportunities, collaborations, and professional networking. Please connect using the details below."
+    "text": "I am open to opportunities, collaborations, and professional networking. Whether you’re a recruiter, a fellow student, or a community organisation looking for a data-savvy volunteer — I’d love to hear from you."
   },
   {
     "objectID": "contact.html#lets-connect",
     "href": "contact.html#lets-connect",
     "title": "Contact",
     "section": "",
-    "text": "I am open to opportunities, collaborations, and professional networking. Please connect using the details below."
+    "text": "I am open to opportunities, collaborations, and professional networking. Whether you’re a recruiter, a fellow student, or a community organisation looking for a data-savvy volunteer — I’d love to hear from you."
   },
   {
     "objectID": "contact.html#contact-details",
     "href": "contact.html#contact-details",
     "title": "Contact",
     "section": "Contact Details",
-    "text": "Contact Details\n\n\n\nDirect Contact\n Email\nyour-email@example.com\n LinkedIn\nAdd your LinkedIn URL\n GitHub\nAdd your GitHub URL\n\n\n\nLocation & Availability\n Based in: [City, Country]\n Time Zone: [Your timezone]\n Availability: [Your availability]"
+    "text": "Contact Details\n\n\n\nDirect Contact\n Email shiva.sagar@keuka.edu\n LinkedIn linkedin.com/in/shiva-sagar\n GitHub github.com/shivasagarsulige2-rgb\n\n\n\nLocation & Availability\n Based in: Penn Yan, New York  Time Zone: ET (UTC−5 / UTC−4)  Availability: Open to opportunities from May 2025"
   },
   {
     "objectID": "contact.html#professional-references",
     "href": "contact.html#professional-references",
     "title": "Contact",
     "section": "Professional References",
-    "text": "Professional References\n\n\n\n\n\n\nNoteReference Availability\n\n\n\nFull references are available upon request.\n\n\n\nReference 1 — Academic Supervisor\n[Reference Name]\n[Reference Title]\n[Organization]\n\n [reference-email@example.com]\n\n [Phone Number]\n\nRelationship: [How this person knows your work]\n\n\n\n\nReference 2 — Industry / Internship Supervisor\n[Reference Name]\n[Reference Title]\n[Organization]\n\n [reference-email@example.com]\n\n LinkedIn Profile\n\nRelationship: [How this person knows your work]"
+    "text": "Professional References\n\n\n\n\n\n\nNoteReference Availability\n\n\n\nFull references — including phone numbers and institutional emails — are available upon request. Please reach out via email to ask for a complete reference sheet.\n\n\n\nReference 1 — Academic Supervisor\nDr. [Faculty Supervisor Name] Assistant Professor of Data Science Keuka College, Penn Yan, NY\n\n Available upon request\nRelationship: Academic supervisor for Field Period Demonstrator role (2023–present) and data science coursework\n\n\n\n\nReference 2 — Community / Leadership Reference\n[Campus Activities Board Advisor Name] Director of Student Engagement Keuka College, Penn Yan, NY\n\n Available upon request\n LinkedIn Profile\nRelationship: Faculty advisor for Campus Activities Board during presidency (2022) and ongoing student leadership\n\n\n\n\nReference 3 — Volunteer Reference\n[Volunteer Coordinator Name] Volunteer Coordinator Everybunny Counts Rabbit Rescue, Connecticut\n\n Available upon request\nRelationship: Volunteer supervisor for animal rescue and care activities"
   },
   {
     "objectID": "contact.html#response-time",
     "href": "contact.html#response-time",
     "title": "Contact",
     "section": "Response Time",
-    "text": "Response Time\nI aim to respond within [X business days].\n\n\n\n\n\n\nTipBest Way to Reach Me\n\n\n\n[State your preferred contact channel.]"
+    "text": "Response Time\nI aim to respond within 2 business days.\n\n\n\n\n\n\nTipBest Way to Reach Me\n\n\n\nEmail is the most reliable channel. For professional enquiries, please include a brief subject line describing your purpose — e.g., “Internship Opportunity — Data Analyst” or “Collaboration Enquiry”."
   },
   {
     "objectID": "contact.html#open-to-opportunities",
     "href": "contact.html#open-to-opportunities",
     "title": "Contact",
     "section": "Open to Opportunities",
-    "text": "Open to Opportunities\nI am currently open to:\n\n[Opportunity type]\n[Opportunity type]\n[Opportunity type]\n[Opportunity type]\n\n\nThank you for visiting my portfolio. I look forward to hearing from you!"
+    "text": "Open to Opportunities\nI am currently open to:\n\nData science internships (summer 2025)\nPart-time research assistant roles\nVolunteer data projects for nonprofits\nFull-time entry-level positions (from graduation, May 2025)\nSpeaking or panel opportunities on student leadership and data science\n\n\nThank you for visiting my portfolio. I look forward to hearing from you!"
   },
   {
     "objectID": "other-experiences.html",
@@ -403,7 +417,7 @@
     "href": "other-experiences.html#reflection",
     "title": "Other Experiences",
     "section": "Reflection",
-    "text": "Reflection\n\n\n\n\n\n\nNoteGrowth Through Participation\n\n\n\n[Write a short reflection on communication, leadership, teamwork, and service values developed through these experiences.]"
+    "text": "Reflection\n\n\n\n\n\n\nNoteGrowth Through Participation\n\n\n\nParticipating in student organisations and community service has shaped me as much as any course or project. Leading the Science Club taught me that vision without communication is just an idea — real change happens when you listen, delegate, and bring people along. Founding DACE reminded me that inclusion is not a feature to add later but a design principle from day one. And volunteering with animal rescues and youth programmes has reinforced a simple truth: showing up consistently, even when it’s unglamorous, is how trust is built. These experiences inform how I approach data science — with curiosity, care for the humans behind the numbers, and a commitment to making my work accessible to everyone."
   },
   {
     "objectID": "projects/index.html",
