@@ -63,8 +63,8 @@ body {
 // ── Navbar Branding ─────────────────────────────────────────────────────────
 .navbar-brand {
   font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #111827 !important;
 }
@@ -82,8 +82,49 @@ body {
 }
 
 .navbar {
-  border-bottom: 1px solid #e5e7eb;
-  background: linear-gradient(90deg, #ffffff 0%, #f8fafc 100%);
+  border-bottom: 2px solid #e5e7eb;
+  background: #ffffff;
+}
+
+// ── Jolla About Layout (centered image + hero) ───────────────────────────────
+.quarto-about-jolla {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.quarto-about-jolla .about-entity img {
+  border: 3px solid #e5e7eb;
+  box-shadow: 0 8px 32px rgba(17, 24, 39, 0.10);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1.2rem;
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 40px rgba(17, 24, 39, 0.16);
+  }
+}
+
+.quarto-about-jolla h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  color: #0f172a;
+  margin-bottom: 0.2rem;
+}
+
+.quarto-about-jolla .about-links {
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.quarto-about-jolla p.subtitle {
+  font-size: 1.05rem;
+  color: #64748b;
+  text-align: center;
+  margin-bottom: 0.8rem;
 }
 
 // ── Headings ────────────────────────────────────────────────────────────────

@@ -3,8 +3,8 @@ title: "Shiva Sagar"
 subtitle: "Data Science Student · Community Leader · Science Advocate"
 image: images/profile.svg
 about:
-  template: trestles
-  image-width: 14em
+  template: jolla
+  image-width: 12em
   image-shape: round
   links:
     - icon: linkedin
