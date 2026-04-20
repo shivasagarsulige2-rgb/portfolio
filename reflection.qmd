@@ -1,0 +1,148 @@
+---
+title: "Reflection"
+subtitle: "Lessons Learned — Git, Quarto & Python"
+date: "2025-04-20"
+format:
+  html:
+    toc: true
+    toc-title: "Sections"
+---
+
+## Overview
+
+This reflection documents the key skills, insights, and lessons I acquired throughout the process of designing, building, and deploying this professional portfolio. The experience spanned three major technical domains: **version control with Git**, **scientific publishing with Quarto**, and **applied Python programming**.
+
+---
+
+## 1. Git & Version Control
+
+### What I Learned
+
+Prior to this project, my Git usage was limited to basic `add`, `commit`, and `push` operations. Through building this portfolio I developed a much deeper appreciation for disciplined version control as a professional practice.
+
+::: {.callout-important title="Key Insight"}
+Commit messages are a form of documentation. A well-written commit history tells the story of a project's evolution and is invaluable during debugging or collaboration.
+:::
+
+**Skills acquired:**
+
+- Initialising repositories and configuring remote origins  
+- Writing descriptive, imperative commit messages (e.g., `feat: add projects listing page`)  
+- Using `.gitignore` to prevent sensitive or system files from being tracked  
+- Understanding the role of the `/docs` output folder for GitHub Pages deployment  
+- Resolving merge conflicts (even on solo projects, branch management matters!)  
+
+**Workflow I adopted:**
+
+```{mermaid}
+gitGraph
+   commit id: "init: scaffold Quarto website project"
+   commit id: "feat: add _quarto.yml config with cosmo theme"
+   commit id: "feat: add landing page (index.qmd)"
+   commit id: "feat: add about and reflection pages"
+   commit id: "feat: add projects listing with Plotly demos"
+   commit id: "style: refine SCSS typography and colour tokens"
+   commit id: "docs: add .nojekyll and .gitignore"
+   commit id: "deploy: push rendered /docs to GitHub Pages"
+```
+
+### Challenges
+
+The biggest challenge was understanding the difference between pushing *source files* (`.qmd`, `.yml`, `.scss`) and pushing *rendered output* (`/docs`). I initially tried to commit only source files, which meant GitHub Pages had nothing to serve. Once I established `quarto render` as a required step before every deployment commit, the workflow became reliable.
+
+---
+
+## 2. Quarto Publishing System
+
+### What I Learned
+
+Quarto is far more than a document renderer — it is a fully featured scientific publishing platform. Learning it fundamentally changed how I think about reproducible research and technical communication.
+
+**Key features I mastered:**
+
+| Feature | Application in This Portfolio |
+|---|---|
+| YAML Frontmatter | Page metadata, layout, execution options |
+| Executable Code Chunks | Live Python with Plotly in project pages |
+| `code-fold` / `code-tools` | User-controlled code visibility |
+| Callout Blocks | Highlighting tips, warnings, and insights |
+| Mermaid Diagrams | Workflow and architecture visualisations |
+| SCSS Theming | Custom fonts, colours, and spacing |
+| `freeze: auto` | Efficient re-rendering only when code changes |
+
+::: {.callout-tip title="Pro Tip — Freeze Wisely"}
+Using `freeze: auto` in `_quarto.yml` dramatically speeds up site rebuilds. Quarto only re-executes code chunks whose source has changed, which is critical when you have heavy ML computation in project files.
+:::
+
+### Reflection on Quarto vs Jupyter
+
+$$
+\text{Reproducibility Score} = \frac{\text{Documented Steps}}{\text{Total Steps}} \times 100\%
+$$
+
+Jupyter Notebooks are excellent for exploration, but they separate documentation from publication. Quarto unifies both — every `.qmd` file is simultaneously a script, a notebook, and a publishable document. For portfolio work, this is a significant advantage.
+
+---
+
+## 3. Python & Data Science Skills
+
+### Growth Areas
+
+This project reinforced several Python skills and introduced new ones:
+
+**Before this project, I could:**
+- Train and evaluate classification models  
+- Produce static Matplotlib plots  
+- Write ad-hoc scripts  
+
+**After this project, I can also:**
+- Produce fully interactive Plotly visualisations embedded in published HTML  
+- Structure projects for reproducibility (`freeze`, YAML metadata, modular `.qmd` files)  
+- Apply ethical considerations to model evaluation (bias checks, hallucination rates)  
+- Write professional-grade technical narratives alongside code  
+
+### Lesson: Generative vs Discriminative Models
+
+One of the most intellectually rewarding parts of my BERT vs T5 project was confronting the **hallucination problem** in generative models:
+
+::: {.callout-warning title="Generative Model Risk"}
+T5, as a seq2seq generative model, occasionally produced label tokens outside the expected vocabulary (e.g., `"neutral"` when the task was binary). This required post-processing guards and highlighted why discriminative models like BERT are often more reliable for constrained classification tasks.
+:::
+
+---
+
+## 4. Overall Lessons
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+### What Went Well
+- Clean separation of content from configuration  
+- Consistent use of Git for every change  
+- Interactive Plotly charts added real value to project pages  
+- SCSS customisation gave the site a unique, professional look  
+
+:::
+
+::: {.column width="50%"}
+
+### What I Would Do Differently
+- Set up GitHub Actions for automatic rendering on push  
+- Add unit tests to project Python scripts  
+- Create a proper `environment.yml` for dependency management  
+- Start with mobile-responsive design from day one  
+
+:::
+
+:::
+
+---
+
+## Conclusion
+
+Building this portfolio was as much an exercise in **professional communication** as it was in software engineering. Every decision — from commit message phrasing to chart colour choices — reflects a commitment to quality and reproducibility. These are habits I intend to carry into every future project.
+
+> *"The goal of reproducible research is not just that others can reproduce your work — it is that your future self can too."*[^1]
+
+[^1]: Adapted from principles in *The Pragmatic Programmer* by Hunt & Thomas, and the broader open science movement.

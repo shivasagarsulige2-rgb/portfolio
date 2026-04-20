@@ -1,0 +1,100 @@
+---
+title: "Contact"
+subtitle: "Get in Touch & Professional References"
+format:
+  html:
+    toc: true
+    toc-title: "Sections"
+---
+
+## Let's Connect
+
+I am open to opportunities, collaborations, and professional networking. Please connect using the details below.
+
+---
+
+## Contact Details
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+### Direct Contact
+
+{{< fa envelope >}} **Email**  
+[your-email@example.com](mailto:)
+
+{{< fa brands linkedin >}} **LinkedIn**  
+[Add your LinkedIn URL](https://linkedin.com){target="_blank"}
+
+{{< fa brands github >}} **GitHub**  
+[Add your GitHub URL](https://github.com){target="_blank"}
+
+:::
+
+::: {.column width="50%"}
+
+### Location & Availability
+
+{{< fa location-dot >}} **Based in:** [City, Country]  
+{{< fa clock >}} **Time Zone:** [Your timezone]  
+{{< fa calendar-check >}} **Availability:** [Your availability]  
+
+:::
+
+:::
+
+---
+
+## Professional References
+
+::: {.callout-note title="Reference Availability"}
+Full references are available upon request.
+:::
+
+### Reference 1 — Academic Supervisor
+
+**[Reference Name]**  
+*[Reference Title]*  
+[Organization]
+
+- {{< fa envelope >}} [reference-email@example.com]  
+- {{< fa phone >}} [Phone Number]  
+- *Relationship: [How this person knows your work]*  
+
+---
+
+### Reference 2 — Industry / Internship Supervisor
+
+**[Reference Name]**  
+*[Reference Title]*  
+[Organization]
+
+- {{< fa envelope >}} [reference-email@example.com]  
+- {{< fa brands linkedin >}} [LinkedIn Profile](https://linkedin.com){target="_blank"}  
+- *Relationship: [How this person knows your work]*  
+
+---
+
+## Response Time
+
+I aim to respond within **[X business days]**.
+
+::: {.callout-tip title="Best Way to Reach Me"}
+[State your preferred contact channel.]
+:::
+
+---
+
+## Open to Opportunities
+
+I am currently open to:
+
+- [ ] [Opportunity type]
+- [ ] [Opportunity type]
+- [ ] [Opportunity type]
+- [ ] [Opportunity type]
+
+---
+
+*Thank you for visiting my portfolio. I look forward to hearing from you!*

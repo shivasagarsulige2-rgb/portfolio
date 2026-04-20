@@ -1,0 +1,130 @@
+---
+title: "Curriculum Vitae"
+subtitle: "[Your Name] — [Your Professional Title]"
+date: "[Month Year]"
+format:
+  html:
+    toc: false
+    page-layout: article
+    css: cv-styles.css
+---
+
+<style>
+.cv-header { text-align: center; margin-bottom: 2rem; border-bottom: 3px solid #2563eb; padding-bottom: 1rem; }
+.cv-section { margin-top: 2rem; }
+.cv-item { margin-bottom: 1.2rem; }
+.cv-item h4 { margin: 0; color: #0f172a; }
+.cv-item .org { font-weight: 600; color: #2563eb; }
+.cv-item .period { float: right; color: #64748b; font-size: 0.9rem; }
+.skill-tag { background: #eff6ff; color: #1e40af; border-radius: 0.4rem; padding: 0.25rem 0.7rem; font-size: 0.85rem; display: inline-block; margin: 0.15rem; }
+@media print { .skill-tag { border: 1px solid #2563eb; } }
+</style>
+
+:::: {.cv-header}
+# [Your Name]
+
+**[Your Professional Title]**  
+{{< fa envelope >}} [your-email@example.com] &nbsp;|&nbsp;
+{{< fa brands github >}} [GitHub](https://github.com){target="_blank"} &nbsp;|&nbsp;
+{{< fa brands linkedin >}} [LinkedIn](https://linkedin.com){target="_blank"} &nbsp;|&nbsp;
+{{< fa location-dot >}} [City, Country]
+::::
+
+---
+
+:::: {.cv-section}
+## {{< fa graduation-cap >}}  Education
+
+:::: {.cv-item}
+#### [Degree Name]
+[Institution Name]{.org} [Start Year - End Year]{.period}
+
+Relevant modules: [Module], [Module], [Module], [Module], [Module].
+::::
+
+:::: {.cv-item}
+#### [Degree Name]
+[Institution Name]{.org} [Start Year - End Year]{.period}
+
+[Degree result or key achievement]. Dissertation/Capstone: *"[Title]"*
+::::
+::::
+
+---
+
+:::: {.cv-section}
+## {{< fa briefcase >}}  Work Experience
+
+:::: {.cv-item}
+#### [Role Title]
+[Organization]{.org} [Start - End]{.period}
+
+- [Achievement / contribution]
+- [Achievement / contribution]
+- [Achievement / contribution]
+::::
+
+:::: {.cv-item}
+#### [Role Title]
+[Organization]{.org} [Start - End]{.period}
+
+- [Achievement / contribution]
+- [Achievement / contribution]
+- [Achievement / contribution]
+::::
+::::
+
+---
+
+:::: {.cv-section}
+## {{< fa code >}}  Technical Skills
+
+**Languages:**
+[Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag}
+
+**Core Skills:**
+[Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag}
+
+**Data & Visualisation:**
+[Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag}
+
+**Tools:**
+[Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag} [Skill]{.skill-tag}
+::::
+
+---
+
+:::: {.cv-section}
+## {{< fa certificate >}}  Certifications
+
+| Certification | Issuer | Year |
+|---|---|---|
+| [Certification] | [Issuer] | [Year] |
+| [Certification] | [Issuer] | [Year] |
+| [Certification] | [Issuer] | [Year] |
+::::
+
+---
+
+:::: {.cv-section}
+## {{< fa star >}}  Selected Projects
+
+| Project | Description | Stack |
+|---|---|---|
+| [Project Title] | [Project summary] | [Stack] |
+| [Project Title] | [Project summary] | [Stack] |
+| [Project Title] | [Project summary] | [Stack] |
+::::
+
+---
+
+:::: {.cv-section}
+## {{< fa globe >}}  Languages
+
+**[Language]** - [Proficiency]  
+**[Language]** - [Proficiency]
+::::
+
+---
+
+*References available upon request - see [Contact](../contact.qmd) page.*

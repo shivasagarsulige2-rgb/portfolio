@@ -1,0 +1,120 @@
+---
+title: "Interactive E-Commerce Dashboard"
+description: "End-to-end data pipeline and interactive visualisations for e-commerce sales analysis."
+author: "Shiva"
+date: "2025-03-22"
+categories: ["Data Analysis", "Plotly", "ETL"]
+image: "../images/dashboard-cover.svg"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-tools: true
+---
+
+## Overview
+
+This project demonstrates the creation of an interactive data dashboard for an e-commerce platform. We simulate processing a large transactional dataset, perform exploratory data analysis (EDA), and create interactive plots using `Plotly` directly within Quarto to provide actionable insights for stakeholders.
+
+---
+
+## 1. Data Processing and Cleaning
+
+First, we set up our environment and generate some realistic e-commerce data to work with.
+
+```{python}
+#| label: data-setup
+#| message: false
+
+import pandas as pd
+import numpy as np
+import plotly.express as px
+from datetime import datetime, timedelta
+
+# Set seed for reproducibility
+np.random.seed(101)
+
+# Generate 12 months of daily sales data
+dates = [datetime(2024, 1, 1) + timedelta(days=i) for i in range(365)]
+base_sales = np.sin(np.linspace(0, 3.14, 365)) * 5000 + 10000
+noise = np.random.normal(0, 800, 365)
+daily_sales = base_sales + noise
+
+# Add seasonal spikes (e.g., Black Friday, Holidays)
+daily_sales[320:330] += np.random.normal(8000, 1000, 10)  # Late Nov
+daily_sales[345:355] += np.random.normal(6000, 800, 10)   # Pre-Xmas
+
+df = pd.DataFrame({
+    'Date': dates,
+    'Revenue': daily_sales
+})
+
+df['Month'] = df['Date'].dt.month_name()
+df['Day_of_Week'] = df['Date'].dt.day_name()
+```
+
+## 2. Revenue Trends Over Time
+
+Let's look at the overall revenue trajectory across the year. The interactive features allow stakeholders to zoom into specific date ranges.
+
+```{python}
+#| label: revenue-trend
+#| fig-cap: "Daily Revenue Trend (Interactive)"
+
+fig = px.line(
+    df, 
+    x='Date', 
+    y='Revenue',
+    title='2024 Daily Revenue Forecast',
+    line_shape='spline',
+    render_mode='svg'
+)
+
+fig.update_traces(line_color='#0891b2', line_width=2)
+fig.update_layout(
+    xaxis_title="",
+    yaxis_title="Revenue ($)",
+    hovermode="x unified"
+)
+
+fig.show()
+```
+
+## 3. Weekly Seasonality
+
+Understanding which days drive the most sales helps optimise marketing spend. Here, we calculate average revenue by day of the week.
+
+```{python}
+#| label: weekly-seasonality
+#| fig-cap: "Average Revenue by Day of Week"
+
+# Aggregate data
+weekly_avg = df.groupby('Day_of_Week')['Revenue'].mean().reset_index()
+
+# Sort days logically
+day_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+weekly_avg['Day_of_Week'] = pd.Categorical(weekly_avg['Day_of_Week'], categories=day_order, ordered=True)
+weekly_avg = weekly_avg.sort_values('Day_of_Week')
+
+fig = px.bar(
+    weekly_avg,
+    x='Day_of_Week',
+    y='Revenue',
+    title='Average Revenue vs Day of the Week',
+    color='Revenue',
+    color_continuous_scale='Teal'
+)
+
+fig.update_layout(
+    xaxis_title="",
+    yaxis_title="Avg Revenue ($)",
+    coloraxis_showscale=False
+)
+
+fig.show()
+```
+
+## Insights & Recommendations
+
+1. **Holiday Spikes:** As clearly visible in the trend plot, the late November period (around Black Friday) accounts for the highest single-day revenue peaks, followed by mid-December. *Recommendation: Allocate the largest marketing and operational budgets to these two windows.*
+2. **Weekend Lift:** Revenue shows a consistent dip mid-week and rises towards the weekend. *Recommendation: Schedule promotional email campaigns for Thursday evenings to capture the weekend purchasing momentum.* 

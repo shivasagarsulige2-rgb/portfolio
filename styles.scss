@@ -1,0 +1,343 @@
+/*-- scss:defaults --*/
+
+// ── Google Font Import ──────────────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+// ── Colour Palette ──────────────────────────────────────────────────────────
+$primary:          #111827;   // Deep slate
+$secondary:        #64748b;   // Slate grey
+$success:          #16a34a;   // Green
+$warning:          #d97706;   // Amber
+$danger:           #dc2626;   // Red
+$info:             #0891b2;   // Cyan
+
+$body-bg:          #ffffff;
+$body-color:       #111827;
+$link-color:       $primary;
+$link-hover-color: darken($primary, 12%);
+
+// ── Typography ──────────────────────────────────────────────────────────────
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+$font-family-monospace:  'JetBrains Mono', 'Fira Code', monospace;
+$font-size-root:         16px;
+$line-height-base:       1.7;
+
+$headings-font-weight:   600;
+$headings-line-height:   1.25;
+$headings-color:         #0f172a;
+
+// ── Navbar ──────────────────────────────────────────────────────────────────
+$navbar-bg:              #ffffff;
+$navbar-fg:              #111827;
+$navbar-hl:              $primary;
+
+// ── Code ────────────────────────────────────────────────────────────────────
+$code-bg:                #f1f5f9;
+$code-color:             #be185d;
+
+// ── Cards & Borders ─────────────────────────────────────────────────────────
+$border-radius:          0.5rem;
+$card-border-color:      #e2e8f0;
+$card-bg:                #ffffff;
+
+// ── Spacing ─────────────────────────────────────────────────────────────────
+$spacer:                 1rem;
+
+// ── Theme Gradients ─────────────────────────────────────────────────────────
+$gradient-ocean: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+$gradient-sunset: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+$gradient-aurora: linear-gradient(135deg, #22c55e 0%, #06b6d4 100%);
+$gradient-violet: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+
+
+/*-- scss:rules --*/
+
+// ── Body ────────────────────────────────────────────────────────────────────
+body {
+  font-family: $font-family-sans-serif;
+  background-color: $body-bg;
+  color: $body-color;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ── Navbar Branding ─────────────────────────────────────────────────────────
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #111827 !important;
+}
+
+.navbar .nav-link {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #000 !important;
+  }
+}
+
+.navbar {
+  border-bottom: 1px solid #e5e7eb;
+  background: linear-gradient(90deg, #ffffff 0%, #f8fafc 100%);
+}
+
+// ── Headings ────────────────────────────────────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-sans-serif;
+  font-weight: $headings-font-weight;
+  color: $headings-color;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2rem;
+  border-bottom: 0;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.35rem;
+  margin-top: 2.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h3 { font-size: 1.25rem; }
+
+// ── Links ───────────────────────────────────────────────────────────────────
+a {
+  color: $link-color;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: $link-hover-color;
+    border-bottom-color: $link-hover-color;
+  }
+}
+
+// ── About Page Profile Image ─────────────────────────────────────────────────
+.quarto-about-trestles .about-entity img {
+  border: 2px solid #111827;
+  box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.01);
+    box-shadow: none;
+  }
+}
+
+// ── Social Links on Landing ──────────────────────────────────────────────────
+.about-links .about-link {
+  background: #fff;
+  color: #111827 !important;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.42rem 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: #111827;
+    color: #fff !important;
+    border-color: #111827;
+  }
+}
+
+// ── Cards / Panels ───────────────────────────────────────────────────────────
+.card {
+  background: $card-bg;
+  border: 1px solid $card-border-color;
+  border-radius: $border-radius;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+    transform: translateY(-3px);
+  }
+}
+
+// ── Experience Page Cards ───────────────────────────────────────────────────
+.experience-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-left: 0;
+  border-radius: 0.35rem;
+  padding: 1rem 1.1rem;
+  margin: 0.85rem 0;
+  box-shadow: none;
+}
+
+.experience-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
+.experience-card ul {
+  margin-bottom: 0;
+}
+
+.theme-ocean {
+  border-top: 3px solid transparent;
+  border-image: $gradient-ocean 1;
+}
+
+.theme-sunset {
+  border-top: 3px solid transparent;
+  border-image: $gradient-sunset 1;
+}
+
+.theme-aurora {
+  border-top: 3px solid transparent;
+  border-image: $gradient-aurora 1;
+}
+
+.hero-quote {
+  text-align: center;
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #ffffff;
+  margin: 0.5rem auto 1.2rem auto;
+  max-width: 44rem;
+  background: $gradient-violet;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.18);
+}
+
+.simple-note {
+  background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+  border: 1px solid #dbeafe;
+  border-radius: 0.35rem;
+  padding: 0.8rem 1rem;
+  color: #374151;
+}
+
+// ── Code Blocks ──────────────────────────────────────────────────────────────
+pre.sourceCode {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: $border-radius;
+  border: 1px solid #1e293b;
+  font-family: $font-family-monospace;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+code {
+  font-family: $font-family-monospace;
+  font-size: 0.875em;
+  background: #f1f5f9;
+  color: #be185d;
+  border-radius: 0.25rem;
+  padding: 0.1rem 0.35rem;
+}
+
+// ── Tables ───────────────────────────────────────────────────────────────────
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1.5rem 0;
+
+  th {
+    background: linear-gradient(135deg, #1d4ed8 0%, #0ea5e9 100%);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.7rem 1rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  tbody tr:hover {
+    background: #f0f7ff;
+  }
+}
+
+// ── Gallery Images ───────────────────────────────────────────────────────────
+img[src*="club-"] {
+  border-radius: 0.6rem;
+  border: 1px solid #dbeafe;
+  box-shadow: 0 8px 22px rgba(14, 165, 233, 0.16);
+}
+
+// ── Callout Blocks ───────────────────────────────────────────────────────────
+.callout {
+  border-radius: $border-radius;
+  border-left-width: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  font-size: 0.925rem;
+}
+
+// ── Project Listing Cards ─────────────────────────────────────────────────────
+.quarto-grid-item {
+  border-radius: $border-radius;
+  overflow: hidden;
+  border: 1px solid $card-border-color;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+}
+
+// ── Footer ───────────────────────────────────────────────────────────────────
+.nav-footer {
+  background: linear-gradient(90deg, #ffffff 0%, #f8fafc 100%);
+  color: #6b7280;
+  font-size: 0.85rem;
+  border-top: 1px solid #e5e7eb;
+
+  a {
+    color: lighten($primary, 15%);
+    border-bottom: none;
+
+    &:hover {
+      color: #111827;
+    }
+  }
+}
+
+// ── Smooth Scrollbar & Selection ─────────────────────────────────────────────
+::selection {
+  background: lighten($primary, 35%);
+  color: darken($primary, 20%);
+}
+
+// ── TOC Sidebar ──────────────────────────────────────────────────────────────
+#quarto-sidebar-toc-left .nav-link.active,
+#TOC .nav-link.active {
+  color: $primary;
+  font-weight: 600;
+  border-left: 3px solid $primary;
+  padding-left: 0.6rem;
+}
+
+// ── Responsive tweaks ────────────────────────────────────────────────────────
+@media (max-width: 768px) {
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.35rem; }
+
+  .about-links .about-link {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.85rem;
+  }
+}

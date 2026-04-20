@@ -1,0 +1,21 @@
+---
+title: "Curriculum Vitae"
+---
+
+My CV is available as a PDF. You can view and download it using the button below, or via the **CV** link in the top navigation bar.
+
+[{{< fa file-pdf >}} Download My CV](cv.pdf){.btn .btn-primary target="_blank"}
+
+---
+
+## Summary
+
+**Your Name** | Dublin, Ireland | your@email.com
+
+Final-year BSc Data Science & Analytics student with hands-on experience in Python, machine learning, and data visualisation. Internship-tested in a production data environment. Seeking graduate roles from Summer 2025.
+
+---
+
+::: {.callout-note}
+The full CV (PDF) includes complete work history, education details, and references. Please use the download button above to access it.
+:::

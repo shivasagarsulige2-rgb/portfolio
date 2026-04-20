@@ -1,0 +1,60 @@
+# ── Quarto ──────────────────────────────────────────────────────
+/.quarto/
+*_cache/
+*_files/
+
+# ── Python ──────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.env
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Jupyter ──────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── OS Files ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editors ──────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Secrets & Sensitive Data ─────────────────────────────────────
+.env
+*.pem
+*.key
+secrets.yml
+credentials.json
+
+# ── Large Data & Model Files ──────────────────────────────────────
+*.csv
+*.parquet
+*.h5
+*.pkl
+*.pt
+*.bin
+*.onnx
+data/raw/
+models/
+
+# ── Logs ─────────────────────────────────────────────────────────
+*.log
+logs/
+
+**/*.quarto_ipynb

@@ -1,0 +1,81 @@
+---
+title: "[Your Name]"
+subtitle: "[Your Professional Headline]"
+image: images/profile.svg
+about:
+  template: trestles
+  image-width: 14em
+  image-shape: round
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: ""
+      target: _blank
+    - icon: github
+      text: GitHub
+      href: ""
+      target: _blank
+    - icon: envelope
+      text: Email
+      href: "mailto:"
+    - text: "{{< fa file-pdf >}} CV"
+      href: CV/cv.pdf
+      target: _blank
+format:
+  html:
+    toc: false
+---
+
+## Welcome
+
+:::: {.hero-quote}
+"[Add a short personal quote or guiding principle.]"
+::::
+
+This ePortfolio presents my academic journey, experience highlights, and service contributions in a clean section-based format.
+
+---
+
+## Portfolio Sections
+
+::::: {.columns}
+
+::::: {.column width="33%"}
+:::: {.experience-card .theme-ocean}
+{{< fa user-graduate >}} **Academic Journey**  
+[Add a short summary of your studies, concentrations, and milestones.]
+::::
+:::::
+
+::::: {.column width="33%"}
+:::: {.experience-card .theme-sunset}
+{{< fa flask >}} **Field and Research Experience**  
+[Add a short summary of internships, labs, field periods, or major learning experiences.]
+::::
+:::::
+
+::::: {.column width="33%"}
+:::: {.experience-card .theme-aurora}
+{{< fa hands-helping >}} **Clubs and Service**  
+[Add a short summary of leadership roles, clubs, sports, and volunteer service.]
+::::
+:::::
+
+:::::
+
+---
+
+## Quick Navigation
+
+| Section | What to Add |
+|---|---|
+| About | Background, skills, and professional goals |
+| Other Experiences | Clubs, sports, leadership roles, and service |
+| Projects | Technical work with executable code and visual output |
+| CV | Downloadable CV and qualifications |
+
+---
+
+:::: {.simple-note}
+This draft keeps all personal details as placeholders so you can replace text, links, and photos with your own content.
+::::

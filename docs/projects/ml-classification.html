@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shiva">
+<meta name="dcterms.date" content="2025-02-10">
+<meta name="description" content="A hands-on comparison of classical machine learning classifiers — Logistic Regression, Random Forest, and XGBoost — with interactive performance visualisations.">
+
+<title>Scikit-Learn Model Showdown – Shiva | Portfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon.svg" rel="icon" type="image/svg+xml">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1eb2a280a64a1f5f4b84ce19fa1dd180.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-63927d7a50b0bfb916538db020b16e3c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+<script>
+
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+
+</script>
+
+<script type="module">import "https://cdn.plot.ly/plotly-3.5.0.min"</script>
+
+
+
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/logo.svg" alt="" class="navbar-logo light-content">
+    <img src="../images/logo.svg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Shiva | Portfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../other-experiences.html"> 
+<span class="menu-text">Other Experiences</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../CV/cv.pdf" target="_blank"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../reflection.html"> 
+<span class="menu-text">Reflection</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a></li>
+  <li><a href="#data-generation-exploration" id="toc-data-generation-exploration" class="nav-link" data-scroll-target="#data-generation-exploration">1. Data Generation &amp; Exploration</a>
+  <ul class="collapse">
+  <li><a href="#feature-distributions" id="toc-feature-distributions" class="nav-link" data-scroll-target="#feature-distributions">Feature Distributions</a></li>
+  </ul></li>
+  <li><a href="#model-training-cross-validation" id="toc-model-training-cross-validation" class="nav-link" data-scroll-target="#model-training-cross-validation">2. Model Training &amp; Cross-Validation</a></li>
+  <li><a href="#interactive-performance-comparison" id="toc-interactive-performance-comparison" class="nav-link" data-scroll-target="#interactive-performance-comparison">3. Interactive Performance Comparison</a></li>
+  <li><a href="#confusion-matrix" id="toc-confusion-matrix" class="nav-link" data-scroll-target="#confusion-matrix">4. Confusion Matrix</a></li>
+  <li><a href="#feature-importance-random-forest" id="toc-feature-importance-random-forest" class="nav-link" data-scroll-target="#feature-importance-random-forest">5. Feature Importance (Random Forest)</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Scikit-Learn Model Showdown</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+  <div class="quarto-categories">
+    <div class="quarto-category">Machine Learning</div>
+    <div class="quarto-category">Scikit-Learn</div>
+    <div class="quarto-category">Classification</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A hands-on comparison of classical machine learning classifiers — Logistic Regression, Random Forest, and XGBoost — with interactive performance visualisations.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shiva </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 10, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>Classical machine learning algorithms remain highly competitive — and often preferable — over deep learning when data is tabular and limited in size. In this project, we benchmark three popular classifiers:</p>
+<ul>
+<li><strong>Logistic Regression</strong> — the linear baseline</li>
+<li><strong>Random Forest</strong> — an ensemble of decision trees</li>
+<li><strong>XGBoost</strong> — gradient-boosted trees, often the Kaggle champion</li>
+</ul>
+<p>We evaluate on a synthetic dataset representative of binary customer-churn classification, simulating a real business use-case.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Reproducibility">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Reproducibility
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All results are generated from a fixed random seed (<code>42</code>) and are fully reproducible within this Quarto document.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="data-generation-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="data-generation-exploration">1. Data Generation &amp; Exploration</h2>
+<p>We generate a realistic synthetic dataset with class imbalance to reflect real-world conditions.</p>
+<div id="cell-data-setup" class="cell" data-message="false" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotly.subplots <span class="im">import</span> make_subplots</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate features</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>age          <span class="op">=</span> np.random.normal(<span class="dv">40</span>, <span class="dv">12</span>, n_samples).clip(<span class="dv">18</span>, <span class="dv">75</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>tenure       <span class="op">=</span> np.random.exponential(scale<span class="op">=</span><span class="dv">24</span>, size<span class="op">=</span>n_samples).clip(<span class="dv">0</span>, <span class="dv">72</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>monthly_spend<span class="op">=</span> np.random.normal(<span class="dv">65</span>, <span class="dv">25</span>, n_samples).clip(<span class="dv">10</span>, <span class="dv">200</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>support_calls<span class="op">=</span> np.random.poisson(lam<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span>n_samples)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Churn probability (logistic)</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>log_odds <span class="op">=</span> <span class="op">-</span><span class="dv">3</span> <span class="op">+</span> <span class="fl">0.03</span><span class="op">*</span>age <span class="op">-</span> <span class="fl">0.05</span><span class="op">*</span>tenure <span class="op">+</span> <span class="fl">0.01</span><span class="op">*</span>monthly_spend <span class="op">+</span> <span class="fl">0.4</span><span class="op">*</span>support_calls</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>prob_churn <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>log_odds))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>churn <span class="op">=</span> (np.random.rand(n_samples) <span class="op">&lt;</span> prob_churn).astype(<span class="bu">int</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Age'</span>: age,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Tenure_Months'</span>: tenure,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Monthly_Spend'</span>: monthly_spend,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Support_Calls'</span>: support_calls,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Churn'</span>: churn</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dataset shape: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Churn rate: </span><span class="sc">{</span>df[<span class="st">'Churn'</span>]<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>df.describe().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dataset shape: (1000, 5)
+Churn rate: 24.3%</code></pre>
+</div>
+<div id="data-setup" class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">Tenure_Months</th>
+<th data-quarto-table-cell-role="th">Monthly_Spend</th>
+<th data-quarto-table-cell-role="th">Support_Calls</th>
+<th data-quarto-table-cell-role="th">Churn</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>1000.00</td>
+<td>1000.00</td>
+<td>1000.00</td>
+<td>1000.00</td>
+<td>1000.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>40.32</td>
+<td>22.88</td>
+<td>65.46</td>
+<td>1.97</td>
+<td>0.24</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>11.47</td>
+<td>19.83</td>
+<td>23.98</td>
+<td>1.35</td>
+<td>0.43</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>18.00</td>
+<td>0.08</td>
+<td>10.00</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>32.23</td>
+<td>6.81</td>
+<td>48.93</td>
+<td>1.00</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>40.30</td>
+<td>17.42</td>
+<td>65.17</td>
+<td>2.00</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>47.78</td>
+<td>32.92</td>
+<td>81.65</td>
+<td>3.00</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>75.00</td>
+<td>72.00</td>
+<td>143.44</td>
+<td>8.00</td>
+<td>1.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<p>Feature correlation heatmap</p>
+</div>
+</div>
+<section id="feature-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="feature-distributions">Feature Distributions</h3>
+<div id="cell-feature-dist" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> make_subplots(rows<span class="op">=</span><span class="dv">2</span>, cols<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    subplot_titles<span class="op">=</span>[<span class="st">'Age'</span>, <span class="st">'Tenure (Months)'</span>, <span class="st">'Monthly Spend ($)'</span>, <span class="st">'Support Calls'</span>])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'Age'</span>, <span class="st">'Tenure_Months'</span>, <span class="st">'Monthly_Spend'</span>, <span class="st">'Support_Calls'</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> [(<span class="dv">1</span>,<span class="dv">1</span>),(<span class="dv">1</span>,<span class="dv">2</span>),(<span class="dv">2</span>,<span class="dv">1</span>),(<span class="dv">2</span>,<span class="dv">2</span>)]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>colors    <span class="op">=</span> {<span class="st">'0'</span>: <span class="st">'#2563eb'</span>, <span class="st">'1'</span>: <span class="st">'#dc2626'</span>}</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> feat, (r, c) <span class="kw">in</span> <span class="bu">zip</span>(features, positions):</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> label, color <span class="kw">in</span> colors.items():</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        subset <span class="op">=</span> df[df[<span class="st">'Churn'</span>] <span class="op">==</span> <span class="bu">int</span>(label)][feat]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            go.Histogram(x<span class="op">=</span>subset, name<span class="op">=</span><span class="ss">f'Churn=</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                         marker_color<span class="op">=</span>color, opacity<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>                         legendgroup<span class="op">=</span>label, showlegend<span class="op">=</span>(r<span class="op">==</span><span class="dv">1</span> <span class="kw">and</span> c<span class="op">==</span><span class="dv">1</span>)),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            row<span class="op">=</span>r, col<span class="op">=</span>c</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>fig.update_layout(barmode<span class="op">=</span><span class="st">'overlay'</span>, height<span class="op">=</span><span class="dv">500</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                  title_text<span class="op">=</span><span class="st">'Feature Distributions by Churn Label'</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                  legend_title<span class="op">=</span><span class="st">'Churn'</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="feature-dist" class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="98c0dc87-cb2a-4c76-a041-2710d4a4b159" class="plotly-graph-div" style="height:500px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("98c0dc87-cb2a-4c76-a041-2710d4a4b159")) {                    Plotly.newPlot(                        "98c0dc87-cb2a-4c76-a041-2710d4a4b159",                        [{"legendgroup":"0","marker":{"color":"#2563eb"},"name":"Churn=0","opacity":0.7,"showlegend":true,"x":{"dtype":"f8","bdata":"wpe5Q6ArQ0C00QZ\u002f2eJHQNCfQLVfI01ANeSHJVeYQkC5tTKaXZhCQH4oTZ3HmkhAI5nsKOMuQUCI6ENKX0FHQG7lnb8wOEFAgtn1m6M0QUCxc8Nvp3NFQAAAAAAAADJA8tRMaw1NM0CuxAGMU6BAQOWCRTKV2DtAkxxCFK\u002fiRUCC3mvPjBo9QCvx8CxnDTdA1jBvJTWlQkB2IjZvLOc2QBjxqQDUu0BAJSZ7iWCqREAwyKTRJTA6QM7M03gSQUZAyYTEQWtlQEBgXClrGR1PQJ373qxE60NAzCZaR7ZOO0Cq2PXRbe9IQGsklnyRWTlAAAAAAAAAMkDBuzv9zw84QLty2\u002fxgLkVA2NK3Pl1OQ0D8dXv++kE2QLLBwHqjXD9AnL8Md3U8QUDl6JBfvVdKQCUGmDXMD0ZARUCKAMvxRUCSDmx8g7BBQIPqoOB+4D9A0N4bgp0vSkBGHUo+cpZJQAFYGnzs7T1AFTQVvwwlQkCAk+Tzb9pJQGg23AX9H0FA1x5669PiQkBcrRLGVrk6QInHC9VApTlAEQheJwrgSEAo\u002fdB3ZJFDQP\u002fNL5cYIUBADCQmlmw6TUC0ENKg+MhDQAAAAAAAADJApMAUN3HuSEAVxstMtIVEQLbpkoa5NEJAPac1zvGMREAAAAAAAAAyQOdSu3+VrkJA7Mx9YIYkRkA0ta6VC95MQMKZMxpN\u002fUBAO1FVwg5+SUDylszPSdJAQEDxi\u002fdgFEdAA8EVchyVREDT5DT7SpM\u002fQIbQ6sy4pUFA9MgmAxVwNkCDDBo718ZFQBrEIhz7kEVAUoz0layXQkB9IxYo+wM3QHJtjHtnXz5Ak36q4EMIQ0Clov9Cn2xGQMpAr3kuUU9A21EMyiYMRUAAAAAAAAAyQBdV6FFG10NARcPxGsVjUUCtbUOXiNhCQIscYT0tz0VApXKKMdL5OUDCyUA3YNtKQOAHcRn4gkhAt9gHawa\u002fSECU6fIqsWpMQOxUCXeDLTdAXslXmWmFR0CtUdyCEJlEQKtuM1Gp+kBAHJ0VqFxkNUDXDAcPUGlEQD+GpV2aQDtAfEQHH3DXRkAq+coBs0xNQKwt+4vYmT5AJZRDQlARQkCzO\u002fXpyDo5QHSmueJgXUVADxT9ccXXS0B2S7C+z7U0QIHIwPyYG0VAW4qkEi6PRUBESilD4bBIQB4t6GAWKDlAfDE0qo4nOEBWfFDGsyFHQEW08MvBgEVAmkip+iQURkDAL1TM9tY\u002fQO8Wqt69ZEVA0LSEL4NtP0B0duJj1DFPQHWBkq\u002fO10ZAsdnezlC0OUAi6z5id\u002fBHQCFbDCXHTTxAwI1xQva4SECOSbsp3SY+QMwbdei+x0lAnq92WXlhT0DKpHF3FYdCQGhCWWNpUz1A\u002fP6br9Q1PkC4ms1fkolDQN\u002fROGoCDEZA81vVP\u002f+oRUDWcz6wjfZIQBJpSo34E0RA9nrbsnxpQkAcRf4EFylSQF70bGkGwUdAooz33jcmO0AX6n7bwqhCQDyuFJvk1kZAZ0GdUqbWPUBEdNqqY9I1QM0uNi0nUkFACLhTtW0jSUCO5+8V2UhFQFrgKCkXDTlAVO7MggEKRUDYRo46ymQ9QDyp1ysf7ERA5md0mWhZRECWNy6Vy0g6QFG19baPJUZAYiDFcl1dR0DR+t8TkX9KQIOv49OjUkpAZBQ\u002fucx3N0D6VdJgAL88QInfQdssFUdAwGOz\u002fRwXR0AAAAAAAMBSQLIkdkjjbEdAzDgqlDrQSkCzjVd2iehHQLQCtRa\u002fG0JAmyJM18aNSEB\u002fcViF4bk+QLprhEl7FkFAAAAAAAAAMkDqAMqhvKU0QPn25tYcK0FAaptFzKCISkC\u002fzpbuu2JEQGFO0AQrETtAV0D4RZZqP0BtqFy13BNIQD8oE\u002ft6TEVAVgick\u002f9FREBIAi8as81HQAAAAAAAADJAUE41+X4HQEDs0RltVh1JQAZxocvDT0NA2rPwE6kHR0AIRfp+sJg5QJyMFcM0\u002fkFACA2P53smQUBmcxN+fBRAQBCNw9q8l05AEw\u002fdANaBSUDchLXi0F1QQJTwIdzdMUpAPm\u002fE1n7ENUBblTBqNxhBQHoqBLz5mUtAeHk5FgqCP0AU4CI3eOA8QESXdq2RpENAAAAAAAAAMkADg0jHFLU7QP2HaikOfEJAvYtrYM8GOUBRCEwOm9Y2QKwblXcXXEFA7NK2t8ulTEDycIUOCMU2QKNjFJme+kpAqoCmzbcPRECAGEQwzjg8QHyjDnXBMUVACpPUHhFmQEA1WfFLN2tEQA9MINZcrkRAV3oUYAj5R0CCgDkwH4RNQFyuGEhuJTlAikb8bCtmUEAAAAAAAAAyQL\u002fPDKzbFkNA6iYZvaeHR0D8Lo5\u002fmq9FQFrQ6pWIQ0BAnN9OAFPAQkAQdfwkwApBQMgOBVm8dkBA8OhfI\u002f0YSUAwQJ+4Ya8\u002fQHFsE2SO4EhA5BR8IhzHR0CsgqrLUw0+QKoWI9qPo0BAChZfzdd7SEDp7LJah6lHQDprHQE3tERAgvOXR36qS0Bf1C2dbslCQCSfSQGN4UhA9heWJzfVS0Aba+0LQyBEQDy7ztF6F0hA5V6kJW4jQkCnaH5l6\u002fFFQK4iMqsZOENAFu2IXfyUREDHatFDKZJHQCLo1hP0RlBAwwMXvYPtO0De8qi52\u002fJKQFQ0GHD+v0hApiXi5aW+R0BzRf2BI8VHQITYel8w7UNAyE07c6I7PUCM+q2Qb3REQNVsY1zC3z9ApeBGrx4eQ0CwCaqWEhg+QL835PFZEkJABJ81QUN6RkCEQeORIyI+QL4mdcZEeEVAiBoV1VX1QEB+PJ0zfCxBQMb58HJFHDdArqVkefBgP0Dw1i8qJbhCQNx9kqsl2kxAnoOEfF0lSUDfnmqcVQpDQLrI1YXK4kNAIDaj0zr4O0Dix\u002fzNnkRCQCnJ9hmy70VAT3FWHb8SPkCevuNbtx1HQD+e+8TxWENArJTrqA8kSEB\u002fluCwuZdBQGnu0780WEVAaTUFzgeWRECgO6JeULk+QCQr7cqlJURAtS1m5ez8RkDYQRyjcMFJQMf\u002fh+WkdVBALMRIUrXKPkAZDHZu4jtJQI3GlwKdGUVAeJBsxsSRUEALKUnfX+w9QEghtjhVZ0BASAqhtnDYQEAcnz4+AedEQIUN8+rvDEZAvdiIZMxBT0BZFibc2bNJQD3si0DgiUBAIL8D9BE4PUAJYCt9lvNGQKkJyVs+KDhA8Mh0oFgvQUA44J4vQHEzQCWvQxHr3TRAQMwY6A0IREDtmGqFKUhEQIGgOQ6zTEFAa30aj7K8R0CUH2chRTA7QPlFwRtOJUNA0G4cWwpFSED4UkSGM5c1QMd3HfiCqktAubrAL2\u002f+RUBm6288pgQ\u002fQF34c8aRTk1AKDHhWLVnREAGASyHpy5QQHNvOlCXgUJAMo44PlXUSUAWjz4mTN9HQPg\u002fl9M3NkxA0vsjUMFrPEDO02lxvVlKQIqkMKQHzTlAAAAAAAAAMkBPcxTsMGJCQLDZfBglTkhAJAGi1J4DTUBQPtBAz3FEQFbqu7CNxU1AXanNDFRwN0C5qpyKNY8zQM45i8GtqkNAq074rexNRkAGHOXmx81DQAAAAAAAADJAKG0YcatYOECiisJLGDNGQGihunWwuDxAYkFlTrPqQEDeaXqTuZ9DQGB4IT4Zu0lA3hRyftkrPEAT35YnNwZHQCjQZziG0UBAWo7Kbkt8PkB65THzmVtDQM9IVU+8kztAAnwYPJitQEACwUB+HqA5QOcHnVvRyU9AmMFeMSo2REA08CN4cZo\u002fQHygF1OsSEVAMu1I0HZTQ0BKkcs3l6xCQOa51iaIi0hA7\u002fH\u002fDYuLQEB4JZhFhVlCQAAAAAAAADJAFP03Q1XRNUBYgvrUhDNMQJHI2p+r3k1AMqI7bJd1R0Ar1m+KFN5FQAAAAAAAwFJAnjO0xKq3SkDICqDBhDtDQI5jk2uUiDxA+ZEcNf+4NECQ2TMohThFQK\u002f1ryvW7jZADzBeMt0eQECkEFkKfAU7QCq10dsySklAwLGlB8HzQ0Ajo+q2MeFMQHGP2nTWdkRAtM0AiyKqPUBUqz4NxDtHQFzNTsmj20JAki4nyRl+PUBCFr8KCmg3QJigndSbjklAn2iutJk3N0ACa3nunBhAQDkTToHGE0FA4CbSAtKhPUDr4vA8Ugc+QOw5gvNrn0VAJWtRktWyQ0CzodNIFIpAQFCkj+pHiEhAJxshp2gBR0DyrhJG80Q8QGOHQw2TmERApxppcCGCSECtxBVElvczQA9S4euZQkdAGX6shnBsR0ACVDOTRNc+QMZGpYsweDRAEgs4xdtJREAMkxEL745FQKNex3fwJT1AGuJSdM8PNEASTatdgJpDQKjT75zHFkBALhF76s1IRED8xHRlz6w9QHo5bJtSsUFA7KfqbqoJSkAua\u002fri5IlAQNgRcYKfA0lAXiT+YIpxOkDzlMh6xy1HQAAAAAAAADJAOAAJEvBvPkCbClr+YXZHQMcMNE4fyEJA\u002fwzpfhQ6RkD7uF5cR2BAQKMuaH0AhURAIRtWl7YBS0COZahYyoZFQObus8SOBkZAeSsLY1uHQUAQslVuCRNBQKwvGjOXZ0FAjRzE5OBdRkBFhZgqXnlBQMXSdGboOVBAI62tVDoLQkCnau87Mo1BQAAAAAAAADJAB8aUqijnO0AAAAAAAAAyQCqjG0YT5EFAM5bBZkocREDO5\u002f4SKfZFQLNgnSp2r0JAWNGFi\u002ff5SEAAAAAAAAAyQAk6AWrnaUVAIDcwhwygSEDSuCh2yEE2QP5yzWPO3EpAEgMQNO4HRkDwkUr088tHQIyXomHkz1BAWVWquFgXRUCTH1pORH1FQPuBXTFHzT1AqocUVGX7SEBjIVL97G1EQMC3DHNRIkFAriX6h7bfRkBRu0RHgQBGQJX4RmSd8EBA2tYMyJBVQUCZWjaXiENGQM2dLwm8ikhAa7gMf0IiTEBtOQo4CXtGQLg5nmnrtj5AHZRdtmsQOUB\u002frSp6xacyQF3\u002fwQsb7UdAHa\u002fRN5+qQ0CzsrMkCK5FQJ2+u2dWVlFAVDQX1nvGREB7FZfIB6hEQLNMrIbU4kZAI0HOx+JXRUC8d9KXqYM+QNr8yeYs1EZAbQv7eCKPTUA8JwvRxe5AQCROHBrvHzxA1nEHkso+Q0BOHVftl1VEQHLbBKi\u002fsDNApASOqGMtTUC0jyLETA1DQBzEf4hPcEFAyG1hu9DaO0C23ybYY\u002fBIQNjrPXg9hThASOpynIR1OEBrT2wVPPxBQLyg1PedA05Aymn1hkRxQkA2MTPliYZCQCWDkroYXUJAAAAAAAAAMkBsawfZSJ1CQBTYYHtfLUhAb1kIZWfCSkAC0Saq\u002fGJCQIpV1Z3AuDpAsnnAovVaREDTVW84ZRVEQKgYN6Hx2kNA5wDoGEIwRUCOsh8tQyJDQDDzmOvajkBA7ILd47DNQ0B83WivTL1AQH6480Mjcj9Azbbj4Fp4QkB1QWQbIgZNQAAAAAAAADJAijNS9Y2MSkAAAAAAAAAyQHIUSMGh8UFApOYognfFQUByKxYRjKo+QOKCUcZ8g05AYtoMtzOdSUBdX+jOG6FLQNKStY6NczpAWm8tPVbaQEA+z0\u002fore9GQNBSP5WfVTlAcyMGZCpHSEBnE0813I5CQPdIGnZGwEFANhEBVI7VQUCHXSgHu\u002fRKQOqaUbwTskdA3iR95wCPR0CpUSdjiSRCQFAfdj+U\u002fDhAHK9YNU6LSUC+BtzxGN1AQLA9Pfc0GTdAepV8AQlSNUD+ehzP1KJHQLRHKmKFojhAAAAAAAAAMkBAYY3JwS1OQJ2IZNtya0NAmcTStBJlRkDwV89uMcZDQNxB7fOrnkpAjNCbI3SvREBLD7QO3eZEQGHO0hGIqENACkGSlMjYRUCUpMLZXHozQBZYlddf0jdAN7aAVad1SEBHqCwGcwZFQD0j9M5m5UJAN0wXsOIVRkDO5RhCDKk+QPJT4nzRLEVAPCn6VnBCPEDwxf2DE3NGQK4cXcWpkTNAl9iMdsgsSkDU0ELk6NVGQAoX7vxCiUVAY7hk0WnlSUD9wxuKEhZKQAAAAAAAADJA1i6RVkdAQEAyPhxrEyhEQJxdNM8fG0dAQ8du14NKP0Dlcxiu3x5FQOIHk7B27z5A611jarVUQEDaxkWzvB43QEt05PifxzdA+ktDVXKbPEAgKX1fq+VRQFdVboXoG0VAHkFm+R+zPUA0zxv\u002f0YtAQIFa4bVzbENAaF8HqUjlSkCGMcGO148\u002fQJB5OfdBykNAQL6KJPOfTkAOy3qF+jxAQJbFkmIbP0hAdK9yEA2gQECUTEigGbtHQJFleAhFKDVAQ4R5DjxGP0A571K2z4NCQI23sZWrjUNAih4TM1q5R0DkTR130vk3QAZ70OD7R0ZACGOcFdypR0Cv3I6P1ltHQO5sFkYUfEpANS+viOcASUCgkDv0TMFGQNphzyuHETRAeOIgHwI\u002fRUAxPeAkJaFFQHalYxDUrThA2NX1iv4GO0AAhmiNpFFKQOx\u002fbPrIFkhAx+8Tl7QtREDzMsb0WudAQNmQODqkk0RAypPH9fE5QUAuqKUhnWRBQAkGm40yVUVApLPJYaQgQUAMdKowxEM9QM2pXhT34EJAyw9StpJcQUBW8KV76C1FQJ5xTcjpMEpAKt\u002fiyFssNkCATRwQeVZJQL+IkWFjfkRA7Jxg7pNkSkCKGpcSrtJBQPPJ0Ue1U0FAU2jSB2a4TEAHhHUKOXpNQD3yURLj3EBAgi0O0pd6QUBckYLILU9CQCA1gBjZ3TdAUaKKkUfzO0DtJt9sU8k+QMwM6li5ykNA+mgOmpFNTUCKXl5vDgU8QDEQ9VDr50lAPA6iKVC3QkBJOfQTBrRDQHVaSdKFDEhA6LCief+GOkBlMXmhYUtGQHu756ur\u002f0RAsbtat2f0RkAurcu8KbxFQPi7MW9uLEBAHfNXgGPQQEC2LlWCyapAQHT27y75LEBA0w8FU1QiS0BeMuRsVZNAQO58IvEAAz5AEAixIxjURkBESzwQya9AQIEl6+ouzEdAnfgclLA3RUADyvtSos81QHWdJM73SE1A\u002fl7J1XfGTkC8EKquwVJAQPPMHIt9rEFAk1Rx2Ba3RUA4hNnCuQFGQBTRQEvWB1BAIzSLOLtyN0ACbRE6lTo\u002fQHFZufEdzUNA2irRAL1XRUCExSZBxuZDQLZ52T9fIUtAyvxgIa+UUUCVCZPnldBAQGOlcMPUQ0pAwzHcpGIXSEA4IMPn6YBHQI1JDu4+i0dAwV61\u002fPemSkAaKau4QuxIQMiJA45pZkpAU+0hvAkES0BuRaIH\u002f0pMQHK8bhtr5EdA7KM+K1rhRECLFnqlXzI+QMrWtOLUo0FAKpue7CYsRECpc0S6s6tLQD6mDDaHJUVAywT+l1NHREDAt4adha43QH6EMLV230dAH4tEL2F9UEDQvG6sQCdCQIdYTWqdUEVAhymSpw1\u002fRUCnqJ1FoG1DQLxhcLqTrEVA\u002f4xmsaEeRUDABeooR1JBQOffZ0ofKkVA4ZGhLhlxSkDtOiKFi647QHXsqs09zERAQJCKdJcrS0BCGXsTxbg1QMVjor5lQ0ZAuFHnDnVJT0C7tEKIs582QBLcSdXFvjtABK7TQZOdQEAbZ7Gm56I4QGm2SC4YPElAM+uigbXmR0AKF6t2qmdDQIOmiTZvFE9AXNdTMJaxNUBGQlBadbI\u002fQNyWV9n6uUNAcwEE98R1RUC6WE0fdo1CQI90ltDBHEZAU175WEX7OEDQxAOZKrRKQA83\u002fRZtDkZAO6Z\u002frJK9RkCwkWGcKWtHQOEnbN8420dAcQmtRNstRUCsgB2fB0FIQNqDPn0qdkNA4av4ch\u002fiP0BX2VNAUcJDQL+pxayo1DZAIBejtMTEREADG9Muz9M\u002fQOr\u002fZn46C0lAAPT9iKlSQUAAAAAAAAAyQAAAAAAAADJAhQp9IkD+NECqO501\u002f49IQOWU9zH9tkhAxTZ6uICNRkBK+Y4Ec2U8QJZVoiG3tkNAaoqKbHf6Q0AB7NTwgBk6QNKY9OOgQ0lAAD4r8UspRECvGUd0E0BFQDGMjcPx0D9AJMnt+AX7O0Ds8wLeOlBCQNCr9xo\u002fyU5A6hmiqlXYR0A="},"type":"histogram","xaxis":"x","yaxis":"y"},{"legendgroup":"1","marker":{"color":"#dc2626"},"name":"Churn=1","opacity":0.7,"showlegend":true,"x":{"dtype":"f8","bdata":"jNzP8\u002fP6RkCDKxi\u002fq3lNQPik24s8y0xAQyeoK7lnREBBJLlZ9T9CQHEgMFXHY0BA9DjjgdBARUCUne3fSG5IQCmyA8A4B0VAg2+QNYExQkAGMPbN8NcyQG\u002fcUeeIq0dALW\u002fZFNL8RUA\u002fbXFHLyNMQChwJTFtBUpAZs87EnkrRkDldc+IGitGQLKwdetKY01AtySc2+\u002fjQEAklUbCTkw+QIQSQzL2+EVAUKNmtdbPSUBCWlkAtghCQBZLZrHaB0RAZQtdh+N5QUAf6y0rl\u002fFBQJdbN++Yi0VAAMi+rKaNQ0BKkXN7g1xEQGr62cauykNAwirrmlwWPUBIlIQZRZJQQJjDaIkSHTxAnlcFrCqaQECqylFch\u002fc8QJEDdPyP4UhA3bIRICvIRUDUDSHJKMJFQAzDtlGa80pAA6GhEAh6RkALIDc1r+5IQOVDw8KF9D5AxBIO26C4TEDRElzez7Y9QFEmjN8T5UZAY7gUa7RISEDqnJuBIpBDQDgYc\u002fXYT0ZA2K+NGxgXR0CDLefBWLlJQOTNfSI\u002flEJAfVC6OMJ9RECPzjdkqPFQQEs7rXwYHkhAADkgT1A8P0Ag01VRJBdAQHhQPI+MblBA9Mvg0WQeRUB8W6RUYH0+QBrRX8vMMUlAJFXYSQ1uRkA49ZCCkN44QApOd+a0qUZA3hQDgdalSEDkCkg+YstNQDo5bknRyERA7PjPesrFRkDOpViHKLBBQANQijNgJEZANNSKEMllSUD0cqEWA9hFQDPwqCjl30NAcjQuqlhzQECIHZ9xV0hHQGgcm0SksUJAJlJ9o7iXSkCC7ELq1vNIQLA3VxJtLj5AINCKOANuOUDoR1yuyNlJQDqHenwenkBAAN7mtU12RUB78Ie\u002fbWRFQBUImSJ8nzZAN+9N1I3dRUCdMrZWkONDQHzq43ZJMk1APgL9eQdpRkAyN5GIVxNEQMish+L0tExAS9fjXOhMPkAAAAAAAAAyQP+dX8jx4z5A3ubb4x79TkCCh\u002fy5nhNLQG39i0eMH0xAf06nGRFQQ0DCSc4tSW1LQOs+piZcZ0BAWlPIKsa4REC8cqCULRZHQEQ3bngZgTpAaJbzHa2xREAG6oKFZhNLQIrCzRo0iE5A6mUwacYdSEDyi\u002fv8JuUyQP8+FZMcd0NAHIYB9p0ESEBZEnCXGEo7QF3fUSxcr0dARyLzdSbRQEDeem8Le4FCQGFiGJJ97D5AyiPOFXMfTkB5vdXBhCNNQHYxr26UjTtAXot3LN10T0DFcOmCuGBHQA1FDjsVckBAwAf\u002feodKREAcmAfO+ZBCQIvr5eT2Gz1AZ6ZqvDUGQEAQH7b1ZlcyQLuGs8Xg1EdA6CClG8J3OUA6\u002fsPYP6ZMQFOOXzjhEENAZXAxHBi9RUBk3N8rDDpJQAkqm4gQNUtAUBlk+QEPTkBiO8wlHoJBQCd7zPFrPkFA1ArdSBy6PUC9SYVOqTlKQNttgdt4YUJAT3G65DxBPECE0gWuG+88QCCSI\u002fa2N0lAZj1pJMJCT0D7RluP7PlMQNUqxmV\u002ffjpADgp9DMdaSEBtyfckykpPQOy1WbCQEkxAHly0nK2QSkC6OgHCRyQ0QEyzO8ydcERADL31R1j2NUC4ysdjmqxDQEcurR7\u002fF09AvmXLH1e4UUCAFYdQBrhAQId0gxF6o0RA1NeSovx5S0CgZE3DHxw3QOn1351PrDpA3AOZAH1USED3MbnVCERIQAjfOXFjqkZAYKSENPkGO0CgDfS48PRFQNsZgoX940JAwgc1NkdLSkDosi+VQYw\u002fQOYAKSZdh05AuB7DcR9ERUDiIqsYAbtAQBGxQNx90UFAROp1hFAcREA0O4jb7cJAQEO++zIr\u002fk1AB90VuiOlOEAmfPDU0+s8QP4NwQseSjxAsMYM0GRSSkCE4+B9vPVGQJHDrgytM0hANygWNmi7REBGlNQZJa5RQM6srcXr305AdOJt12DLR0BEW3D419VJQEfZdODyEEVAQOg3uDmUQ0AtpPXB5JNGQNbI1kc+w0NADyMUPX8rREAuM340NKFJQDQ0BZMcJUJAJoqSZteIS0DgARTbjq5MQInH9W8wmkVAflKh53HlQEBQyon2wXRMQGJXJcON5VBA0lJhtub5PEAa6vL6wGdFQDRYYKarXVFAFSm9LNtCQEBKrJX\u002f5IVMQGWWDCWG80dAaMXchDXwQkAmpVqAoWs+QPuHZ91wxE5A8JiX9PLkQEASEoaUOBBBQFfrJ96KFE9AESbqmSDYQUCrS\u002fJDLAtHQBfQNn9O\u002f0JAqOc4oTI9S0ByGms+SDZGQGipm9c+ekhA909t3vd2TUCwgkuiuqVHQHAMV5Y6mT9AFbGl\u002fH6lQEBa+78YpWRNQKftAfIBm0NAlJa0qTarQEAAAAAAAAAyQJt61Ljco0ZAdoUBP9j8QEBrXroWCUBIQCFVald6dkVALS3YGLMoO0DFs7FXn6lMQDjbnNfQgUNAUntMK66vRkD+4pEKlPlLQIuSiCEFpExAUGDglz7OTkB33THPkRVAQHZOGutBSUFAC7ZBRDgFTUA04vZZmaxCQAAAAAAAADJANJT65VWEQkDMUkhIq5JAQIQQAbZ8b0dA"},"type":"histogram","xaxis":"x","yaxis":"y"},{"legendgroup":"0","marker":{"color":"#2563eb"},"name":"Churn=0","opacity":0.7,"showlegend":false,"x":{"dtype":"f8","bdata":"IkmXv8c0BUC0ZU7PZkg4QJJPU7tIaz1AQkO300em6D9Ln8C8XoNQQIeAi\u002fRUtDJAxKG60KChPUDIWqSZi5JIQLTliNqzDD5AG0wXGtpqQ0DaXZYin+cjQBp4AtfJPERATIsJT4IIAEDqi7FvTAZLQPzgkS8\u002fCTNAZL6A4BVmREDEoZ8OIOYsQBn7x9hjwjhAO4n5PdKQP0AQBAlVbef3P9+nwRJWPxtAIirYUZevEEDgwYlK\u002f6VIQOfjvfJuwRdAAAAAAAAAUkBx8yMT57VCQCqv7knmzDlAjwOKrZCMMEAX98OYs3MzQI38I1ucez5AAAAAAAAAUkAAAAAAAABSQG73VrXTNzlANivqtaTG\u002fD9159w2IJscQHCVeg2Hzy1Ammt0VQFTSECoyyC8dSw\u002fQJK+3z9bSkBAnl\u002fmNNpgJEBXziLvxEEmQAAAAAAAAFJASiJnAzM2SEB3aMC8k740QAUjhCt3titAoK6g7JABP0BOrqtJic1IQHmOlr4tt0tAIBvyIx9KKkCrWP2iRh0fQJeAzftMiTVA229WsvQ2TUCURa9L\u002fWg3QMY2n2eoFQtA4OsuolzETEAQiyR4ogMTQAAAAAAAAFJAnIGkfm0qE0ArY3EhGR9HQCt5syiIRDBAXLzbcIJDG0BV94qXVI1IQOhrLO3GSSxAQLaOOYZbMUCOcHXyQ10lQOPA3yO4zydAAAAAAAAAUkDKLWRyhKk5QLqhe\u002fYq4SJA5kWUV5bRQUAAAAAAAABSQOfcXtIs2RlAXEm+sE1Q\u002fT+fL7aDEdwRQMT2PiSdmjFA6hN001YvRUAWzCcfdw4rQF025RyZcT1AHfK5qs2LEUBIsK+s15wRQOzO3QJrsew\u002foIl18vr\u002fP0BVkLMu005GQONpBZWLqENA1wljBfpSSECeD3+BEyAWQM\u002fc2df\u002fyQZAQrSK\u002fGqS9j+tlEWRKi4yQHKdwp\u002ffjFBAbuRfpYjT7j+rNWUoc+MsQLcOubMYTFBAnU2WNME9IkAAAAAAAABSQAAAAAAAAFJAfoIpWSxtvj8AAAAAAABSQJwXERwGdjhAz+pve8FKSEBub\u002fCOZGUxQJAMHTkmGzBANO2SWIRhOkAgTGnAK1\u002fnP8CUIhfSqiFA0Scon9NFPUDaGvni+qQVQJxgyg7d2zpAAAAAAAAAUkBSnyiTs+4CQEZsUgtDzDpALO5tgWAnLEC4y8cZ+E9IQPJr27wDUDxAYZ0JHbfZRUCx6d3oT1xRQCJVdXJdlztA5F5jtCAWN0B\u002fDyhrymFIQNH0oxESSjRA9xpu\u002fP2y5z+x40I2lQlQQAyCEDtgEjxAYmZ\u002fchoWO0BWnwJrGdA5QOAbXKUBCChAmofYjmS9OUAAAAAAAABSQAAAAAAAAFJAJpTCLlITKUAgA9Mvao1IQMxlD3DkTEJAYbSV190WNEA4UjwF8RdAQJYiI1uuS0lAsU\u002fUl8YCI0DBjvSd+m46QC1MLG4iy0NAVEt2C8suQ0Ddt69gHm9EQBIKcgA\u002f3zJAoqR0fivWIkDeTtz7quglQPgt4hPkNihARng+VhKJPEDSNyHI5pwnQBlRrJ4RlSxARo783EUJGkCTRr9BT8AYQDzxLwBkMP0\u002fXDCY6+MyNkCbzrhBcHo6QDLcdvqZMDdAJI6VaHbjLUCrV5Xk2+0mQBF0p\u002fju4UdAYIKjwsORMUAwFK55IVAvQNoY9KgbCSRAUmRLSPv1JkDXCwp\u002f8GwoQMaYqw1y1DRA4haPRiJOMkB2QFl5QF9BQC\u002fYLZ1sHkRAOk\u002f0rw1kPkAAAAAAAABSQKazHN+d6hRAh9tXwKBlS0CQ5eBwyWlPQBSP7CaR3vc\u002fPoEYAi9ZUEBZd7rTLMwkQK0fOWpWiARANOEl8f3uL0CQ9DVxI30cQA3KxX12nyFAhmp9twZ\u002fQ0DAXs7kgJ42QKn9kxM2OT5A5d0fIbGdKUAjATzPufQIQHDSb0IvbjtAzJ7BxUY4E0CotNy8U6E9QPdpHqmxswVAOG9mUBEbNECs2S0AEnYcQAAAAAAAAFJAfJvcByAtM0BSDbsBCAvxP2BwOG49EThAAAAAAAAAUkDVXb9xfxY2QFFaLWQMhkRAKjxzVxHfSUCqs7R4t6g2QJpuVWn9aClA4hrgRgf7RUAusH54QKJLQI+KG6hP7iRAhBn7SpLzGUAZy44\u002fqtgeQP5Trj\u002fOwERAaoVL3SxuOkA3B8uTc0cDQMgs5vGNdzdAdEptH8fZLECWX4VOXTM1QLYNMR5+BUBAqrq4XuXVR0CwN3LXrXMXQCxQI9VYX+I\u002f1PbDwcOmOEA\u002fLvTpoWs2QHh2Xcga\u002fTJAKjZSPoZVGUBsLlJpLcwnQB4GWF9tqTVA+u\u002f\u002fZxh7MEAAAAAAAABSQN\u002fSFacvKgxA7o7WxJCCPED383giy90oQK0PPeCQ1CpANqESM51YPkAAAAAAAABSQJgrcnEN7T5A6kRRIF+6NEC9ysDOzcIeQBsK0ju5xv8\u002fVi3pupoxAUAswld5E\u002fRKQKiGxSQZwCJAoAIcc9CsGEA\u002f2TDUe5ExQCDt8OomozJAvPaJknlzSUDkR7Iuh0E5QLyCjGilRTJArhegq5XRIkBpn8B+P3AjQD8vgyAUkjpAAAAAAAAAUkBU3FwyiAU6QOT66U9dez9Avol2\u002frkKLkAgX4OqQtQzQAAAAAAAAFJAMuuO9sGAEkDzrzFd2Bs8QIGAD\u002fOsiBVAnZObN4RrMkCBJsEUgYUDQMKxYuGCuixATEOa+aJ\u002fJEB0LcmVnD06QD9x\u002f3kWC0NAkVWgMdNvT0BQcoTwBXcoQAAAAAAAAFJAD9W9oF9oT0CQBAeaa6IyQPiiRSAWczdArW6w\u002fknsAUALj9XPJuRAQAgxHFoz\u002fURAQSYn6dlHQkDOujVc9po9QGjb1x4lSew\u002fBE5IYNxVIUCAZ1FgmG4lQO50ZX9mnAFAn2ju322VUEAshHhEKl4zQEJ6QJlcRyhARlYeddMGNkBVxBxhc2YxQKrSS0jHN05AAAAAAAAAUkB4B1p1RuFGQPR7XMrRchZA6hfFbr0BUEDLlwwppGhEQEa1DKJ2\u002fiZAg49zZwY+SUAezpvw+U1IQHNHDDiVrENAvVTQUcG6QkBdkPvWgjMAQOrDwB42wihAQvYM7ap+PEAAAAAAAABSQNYmakijlThAUIO9eX2+REBAMGMP2ksLQOV7dl1sxEdAwkRwNMi6TkCcCDs6vAUwQOxZ7HZ+XjZANx7nNU\u002fCMEAqhFKurGkoQBraruJ4FeQ\u002fAAAAAAAAUkDGeRN6nCMzQAAAAAAAAFJANSeK20gxK0BSmUogBPAhQAxxuoWi7jBAqKhn1ySTOECWpeSALTI3QOBN0V+jNTlANz4u6VupD0CD8FHo10\u002f4P\u002ftxr6gNNkJAAAAAAAAAUkDPKmhlxNr2PwAAAAAAAFJASW73tQ8+GkBGcOBv+XUNQFyExpWu2AhADWXdEnNYIUAK2OMSvEY8QFOYWIaUFzFAAAAAAAAAUkCtuneyoy5EQP7fITcG7DZAkpm8xReNIUAhgvSgJng3QMwZYxNO+DFAuNIsCiynKkDEXRLMKOUKQO4Esg9ZH0pA7N2sIWmtLEAE30IMVccUQFraz63dASZANFXNYkcXRUBVr28Kk5lBQMrgIKfFCdE\u002f0rJt8WTUKUAV+XTaEcTdP4rxwYzB4RxA9GRwPNAjQUCQpV9PVVAMQFhYpXKrZDJAuCPWtHhDF0CBtpfOM7vSPyxmVSdxfxpAAAAAAAAAUkDM0Aj+5GdDQAAAAAAAAFJAyacbEDsPMEBRBUGoTVEGQCfhDgc8DjNANIM58WgULUCOZNSjgVJGQCiI0VLgEzBAd2eaJc\u002fXIkDiKuIHJAtAQDhEr1K2BS9AvKxtpOGgJkDu0d7AahQoQHb+idUchy1AqcH95oa3SkAAAAAAAABSQJhMGXJXjUJAP0TUrUwwIkDCtT7d4\u002fY7QH1Bft1ToCtA7Yu0n5k3HEA1R1dneA5GQI3WZQAn2EtAGnylpFy1LUAG7AnQclU4QMpVVM4aD0tAkmwV+nJMOEDlBovOhtc2QJq3Shi8fPo\u002fkKwFuymJMUCixoazCQxAQJiXtiQPXTtABGA3eGtY8D\u002fcBUaDDwMBQGsslmjzPD5ADpL9Xeti\u002fD8AAAAAAABSQKKuNyXpDEBAmu0mBCjiIEACDC0Qo+FBQJhIvTwG\u002fTlAErBxNFepE0CyuN3nrek5QFLqnnGWWEFAKXuT+SCQHUA8p\u002fgNr0HgP9Wb\u002fp+IdgBAAAAAAAAAUkB\u002fyaP5Hc8gQM7M32t8mEFAR0hGSZsYJ0DbtiYGUBsWQIeelHS66DZAyimiI17hQUDn9YKVBcg4QDr+BkPPIjJAAAAAAAAAUkC3vM+ngTxDQAAAAAAAAFJALfGm36gaNkBbfPBTd\u002fU0QBNZbjsci0BAGwQv2oMKREAwTwhz5qQ5QPVk9v2KUQpAdjzK4KPRI0CwQxPRRpZPQBD\u002fl\u002fXUVyZA4FMYGSwoK0DOXe2nwscrQCsSxF66xzZAqBYv+DoyUUCNSChi+G4aQF4XKzky3whAxM7jQAwoSkDG4P5rAek4QEz9GAriKSBA9G3jr3RPRECjAfq+G7ZHQMl1gg9ifUZAjy3KZRcmTkDqwVxInucbQOyaxVz6ny1Aul3ESEtKP0DYKpG9PJ85QFYj5G0wwBJALsU+LYHmMkAAAAAAAABSQMic86byn1BAzCqaiX7y8D8E35uqxh4LQCFnMie9ET9AaPWWW0tuREBQAIsUlw4XQHNsSNQJ6zBAH0\u002fL1zcLRkA69yyvoKw\u002fQHTZ9HLywDJAJGOd+jBrNUA0APOY3PMgQMZxBxCi+jNAhuMt\u002fbEFPECZs2w5GstIQISk2KJ9LkFAeDdXOAG\u002fEECV72LOI83MP\u002fnqSuZ8MRtAgGL5II0cP0AAAAAAAABSQKQ5QcKqoyhAVpEjYNpvM0CgJKFg1bI\u002fQJC7go5E+DZA2KxeIM9gQkC1vg+PAmQzQGTkOzbPLEFA+4ULkgic6z99QiYct25AQAAAAAAAAFJAa23XXmQFJkAN1M\u002f26wAjQJPWdXuYgSFArq3BQOIcSUAAAAAAAABSQG+R4xs4kyxA6m0XWba6PkB01AWKTRRKQLeiRv\u002fEkzVAmlNLHB6MPEANA3nBDc6zP0RjSjgzMjdAaEiYt74VJUBKuPwvVfhCQLxKlxkZSzVAgLUzyXV6L0A16vPN16w4QGRPvlJ\u002fv\u002fk\u002fjgQMs6\u002fRNEAPEgopVL0zQK4KV3s9FTtARucM2cudQ0BMtc3hSzAeQCyxgelE60RAugqhpUyNMEB+irGlLCv3P+VC7xkMhyNACvDOcY1wQkB4BG2FHaZCQNVVI0ymejFAwuNTdAqhDkDEEZOv9xcjQDaBH\u002fZFUitAhJiFo3ntF0CLdJO2feI1QILdEyrI7j9AAAAAAAAAUkAWiQMugTpQQI+pvx32sDhAmm\u002ftKiFEOEB61hxRWXtCQNpPDx1sLghAMdv\u002ff+X5RUA8TdpsTj4nQEyb34cpXDRAskoie6RENUA1mC22+JYlQPLboiYWjCNAvdl2rCVj5D9WZJenRWJFQMxdZsL2hDFAwMaIbHgIIUAaB4f\u002f4vJQQLbvD83r8ypAdD\u002f4cMO8SEAu8ll3CiNGQBb3uo2txBNA6lLFsBB5Q0C0rrCIgWotQIfyWmPOqS9AWN0OatQ9P0C14Y80XXcwQMZbsRJdYT9AZ\u002fq7WH1nQUC6NDRW\u002fJwQQJydPlFu7AtAX51t1aOzQEAAAAAAAABSQICYCesU1B9Abhtj2asgHUChTeRWRjsbQGQB6S70Z0xAelEg3g54HkABK\u002fCpaBhBQOdK\u002fszO\u002fUFAE7JlotYLMEC6ATrMU0LqP6yblux12Pg\u002fy80OzvNtTEAezE7LIsoMQBlV3\u002f1jailAv8E45VZ7JEDsAWIRbZxLQJjTF0wq8uA\u002fpiqpqxIpOkAAAAAAAABSQJ9T6RJ0tjNA0v++M0Gc9D8uhYseM+0cQAnlCP9Afz9AAAAAAAAAUkCsYxIZ\u002fXQcQCYFHG\u002fUezlArC4fxZoxFUBrzNUe\u002ff4zQMitWDWC7S1AAAAAAAAAUkDYfs\u002fVIaQkQN5T4wmXQgdAPEpCvUiCGEA4eCtGxb0bQONApm6Y0EZAviwl7jPFM0B4hNp2EMkxQLPabdfyZwdACLbDKveaR0A+UjXbKss+QHYZvefNhz1AiIUwDhZtLUCOLnLy7dIvQF7um6SrelFAE+cLwHLDRkARmM4bC8gtQKpc0bv56zJAKraRKJuw+D9sZgBDSD4xQD\u002fP7HIptENA\u002f4ZYEmmCLUCqVHLfAX30P7m7wjTolRVAVowevTK6HEAr0DGzzPZAQBLKNZCmlTFARlg2VGMCFkANJ91WZTpJQE6YVIDDZklAD9Vj7EGJSEAWdOMG8c0sQAAAAAAAAFJAG+pxsde9QUAC+uiaOiflP8T\u002fy85m5Pk\u002fYQEKsnvtLUBxYrnitMpMQMEgTwDghzBAm8KegUuqOUAZ0XdP97dEQIGXXldu+iZAzYh1nbruQUAAAAAAAABSQFx76D5GyDFA4GrLMlrkQkBPDvwFQSk4QLaKsxdSMENA0Iuww8YyKED92zx0DphNQLAqOEElgRBAff\u002fYrMqRPEAbMKscpEgiQLsa\u002f2qeWkdAjBzW0k5kTEAAAAAAAABSQITYkwjuHQ1A1oIks\u002fmpFUBNv\u002fW5Pe5KQKklq\u002fvsfTlAVjx\u002fnPatD0C66h6e8K9JQA+SaFwMiENAstEpOAPjMEAAAAAAAABSQG5YUDND9ilAAAAAAAAAUkDI8fbTBHU6QIiD4Ye\u002fKjhAlJW8bTOjSUCpp6+sUcUqQCJNicRW\u002fhBABDhXpLGwM0CZbtec9fwxQHKzRCDvfj5AOD0ltvaDSkCNPW3AW8X\u002fP8vsCy6xjj9AoBxNHkjsE0Awbfn9J3BHQIhV1GTrg0RA86illZqtMkDWjghspbo9QNyyGuF9lC5AH7YeyuyvREA3C9twxkElQHqxI778WzBAWSDE5vkjRUDGc5dH3lISQIWagH9R4D1AV272J5\u002f7RECt+rfZgV0EQBxIU019VBpAhe0mChVmDUDLlubqmoYkQOZqxagQuixAp1eX3E6UQEDMQREHSUY5QJgE2TveRzdAQoiHrXDaJEDAa30ZnBlGQAAAAAAAAFJA4uDOcboPO0Do6ufbmd8iQPRxCyxi0ztA1Gw\u002f+sE7R0Biogb2cb0YQDyayhVmxUVAS5bpbJ5wH0BiGd1kaLY4QLC6sRYzQDFAtpHe+2Z8IUCouP3yCOzpP8wCTUrhaTlAGm5lnJq2UEBu8lhmJ5hIQLFiSSeuo0JAlFOwHfQ+OkC7t+jEfPEcQIK6BnrthkxAsI\u002fwqUK6M0B0paqtnHAsQCxkqa+0\u002fUdAioKyGnD8MkBU+E2MC\u002fomQAAAAAAAAFJATcdWtK6HBkBG+3zQt1sqQHb58d0TKUBALQ2pSw0GTkB0dAwVl4ofQOL3UmO5c0dAXlxr1viWIEC6EQQhxdNAQIM7P1WAnENAAAAAAAAAUkDO+UDyQCE\u002fQJZXNRSCciFAA4vCNog4RUAFryhhS70fQKF2uzdVvUhApq\u002fnUSoxPUAhQOBFVKwyQPJiRnTglRpAUVGkS4PkNUABoczGbe4gQEReDdPJ+0tAcpqXJ3KWNUBS+QbKu71KQDb1cq9mrRNAcIJ0+6iW\u002fz+6RQC4uUgaQGS\u002fYD8G\u002fkJAFALmDB\u002f7NEAAAAAAAABSQOU2U5rhOkdAM6QhEwqwMUByq+fDGUD5P7FrXVhfXEVAMIgMKAXuNUCoFkNSf9hMQHO3JGTAjDpAJkLeJZc2RUBhzVyGa1dJQJZiARTofDFAgMY5lfdLIkAy2eNQzF4rQNKePfUa10FAfEmEtwnESkBA+wcSkGs2QFih3dZv8jdA39OQ13Z\u002fNUCoTTMCYxs9QMqVWMq0BRpAyFyMMfQhBUBQ8PGn10snQIEFfupGWTlAAAAAAAAAUkBsvKjjsgc2QIyBd0\u002f4VEBAdTqsHi7wMECsi5hBNyE4QLxgPLqTQPw\u002fOJsAoWYuHEDIFdJem48lQIwrnvka8fE\u002f8HNCSNEcH0AAAAAAAABSQOYKu5pj9BRAiiPvVoulNkDwuOm+paAfQIIIDXS7QxZAkZ2iycpxMUA="},"type":"histogram","xaxis":"x2","yaxis":"y2"},{"legendgroup":"1","marker":{"color":"#dc2626"},"name":"Churn=1","opacity":0.7,"showlegend":false,"x":{"dtype":"f8","bdata":"eZXFBs+YEUDHLtg\u002fiH70P71QgR0D8DFAooGWnIhZAEBAUCXOMbgjQIGvExiwTBNACzW7rwfmGEDkfxON7F0VQISK\u002f2sRXTtAqv34utLo5z\u002fVfuuLi5oqQLzQ8ltLcO8\u002f722LqwcBMEDBQrB8uLUWQE3c8Rmm9jdAU5duRMuzP0DNN6hKKjI+QOonfzY\u002fCRpAibN6u1uSNUAsEaZhOSQRQDL5zO0LqhxAeAdbi2TuCkCfUqzoLQctQPKK60UvuiNAJnEt3\u002fpzG0AGmLYF2Qo3QH5yghpYKTpAgNiY8TjlLkCtTJ31wCA1QDSusTfnLR5Ant2Ec0EBCUAdMIg\u002fP\u002fwwQK5D238oTvA\u002fkrBd9WrUDkDuS3G2kxwtQFjS7pZR4QxANFJsAdu3EkARGYLWE4AwQKhg\u002fflLUhdAHoynFMpHOUD0qjCgEqQFQHBZX9V++fI\u002f\u002fEhe6xzaKECVfm3GfT1BQNgn4nBGdCtA\u002fowfp\u002fGWCEC59cyT4r3BP9hgwtYUbSZA3mLuxDLz4z+2BW8OVHg2QFh3NaqBQ9w\u002f\u002fCzLr0pSxz+Yso\u002fL7wU5QPeLnNdsyRpAzkyx2BoYIEAMwtb3zJcyQLXQTefw5iFAycQEUtSOHkDxIILtmS8TQJoCNrr03zFA1tQzkYW3L0AvWPFepa1DQKbUdMsW2hhAqD5Bo87gFkCfLYZNvzJCQMHmGDMQdSpAeE2i4YGoEUBQVkNvMVEDQFCens44TDxAE4HIKWBiCkBJECe+ohsFQN312cdmcxRA8OwnUkcMJUBGGd5HG6H7Pyzjh\u002fnz4fo\u002fFQW0kqxVQ0A1iwumEI4ZQN5cfgw7lTNAPw9aoHzR9z\u002fSbIBlYe9AQPZr\u002fd3oqxlAsOGJlgnAD0AMuM7M+iRGQMWg3u3HqTFADGKqkP87CkAvHbg4jE8dQKuAXYUugCFArMeaD+FzLEDAtQcUf30wQMjAkQS7wAdARxeZhTxxIUCq2exJ0UsSQInIW5jyYyRAMKMJzEpeQUA0VPTJ7HISQBT7WTfmYg5Ag0iXvX79JUBkpoF2\u002fBz7P0wBu7jB4QtANF\u002fBcRnKK0DigeZpBnEFQCw5rLGsXRdAd1pKlyePLUDev8pSwgL3P7BG+dFcgDxALqujGNRzBEB0hevOkLL4P60bJUrdqSlAoM1TvFi\u002fP0CUq4m9QIMvQCSeHCYT0gNAlvoh0PE2D0C82ei1QnJCQBatzyvpF+4\u002foE\u002fy6YrYOUAfbJJt5z0PQL5mv8e+OjFAMQ3TxI66\u002fD8YimCGTrbSP5w3N9MU6yRA4HYK99mnJED3di2\u002fNl0SQDp5aZ8j4wNAZ5pwj7SEN0CaWzTDw9gIQH6+XVX5dPA\u002feoHFl3WhIEBcHkyuC2wYQEpOSldkHhVAIRf55kjhQEBx6RXcTSRGQMxy3Kkw+kFA+r61ji5KEUAmUUWeTAoxQIb+9gkORjhAhAgmDDC3LUBmcANX0A0EQFI5DpZIUUNAXJiDrUPoFUBBrPtu0v4TQH0z4XmtEyVACAsp74YbwD+AlXoPTLgVQD6zJnvf8w5AEkhdTZAMJkBsOl6Or9gnQO7U\u002fjhHiilA\u002ftcWyFu9AkBxoNqr3sgzQJ3m\u002fOd+MzZAYtN4+urK\u002fj8U6IExkIQ9QJiBzFEt2StAV5xXdgXQAUD8GHHZE0AqQLKHGAeSUSlAH9gghKeTE0D3VdZaxc7iP\u002f6d6zHunR5Az\u002fI1WZ3QHECih6eEAoILQEpuzRaFIgBADq6OD+aPK0CQbwV2ypw2QDrkJ+ptrTlACiuH9uhv+z8dxGxWEY\u002f2PyuZHYA1jxtA\u002faLU+GisLECEPoS+ZPX5P6m4gKKVPjJAKwR3fCKSUECOyFewEQwqQL62x98VgjZAmS1+Rkh8D0DQX6cO1uf6P0q3mBBv0jJA+B6eSqNeAEBreVZTcGYRQPYRTaFyiTpAYi23nWB4KUCQzqkuOEM5QHJZFpNXhEJAPNQwkP1GEUByZUxpAz0jQI5TfPupMRpApfDyhq2RMkAwMD+ih2YFQM5MHmz03xVAiHvqRRY\u002fIECoA29\u002f0a40QJ0kVM6URjJA3jLzo2TqQkBDInnc4R8fQAM4l0AUjBNAQzG1j+jbK0A73KN8R+02QFhhZG7LuwBAKl\u002fwpsBrEUDiQKyX\u002fnzTP1El5XhYHSJAcN9wXfyCLUCzqFlq9ZgjQHwzzGtDly5AMBjZEtshOECAHrV\u002fbuoJQFrOzp0QuPs\u002fyo3FMzN0EkAL+ZzKkG48QNw94nqD8xZAOv94QktkIUCR8cVvum5BQPwUM8tFqTpA9wlPwYuWBkAkdwPE2ZstQAkXgtKCfPA\u002fdsxEN5z\u002fTEAKe5Mo\u002fejbP3t46JGV7gZA1k3zhcd9A0A72DXZ9yvTPxdYPk7aXC5A\u002fCtmdA01IUBi5d3fZh0hQL5wJjcsUEBAD9DCIlny8j88RrqQq\u002fJGQMuX873icjpAmoUAjmsZ6z+0RSf6D3EHQJSTvHdY7AJA\u002fhYSfbpaNEDr5fLniAQrQEiF2S9OGzZANb9ZmjMfLEDVsktFiDwxQLhZevH8DDBAQD1qLVSzLkAD2H+7n\u002fYMQMrPOjfMUSNARKynbcaTL0BE8omE5vXAP6x9sqh0osc\u002f"},"type":"histogram","xaxis":"x2","yaxis":"y2"},{"legendgroup":"0","marker":{"color":"#2563eb"},"name":"Churn=0","opacity":0.7,"showlegend":false,"x":{"dtype":"f8","bdata":"6GT4eBkZR0CCyyThrT5SQNRcsIC4oFhAosz8bOUeMkBsyJiuCvhQQDlOM+UkclRAWt3DVh2VUUDAVTO5shlHQLglEgQHg0xAojs8nreMRkCi5SKGnPlWQLzvVEAZYlBAXk5ztOchXEDed0yp4r1PQEwuMi0ZpUdAyBXSVjooO0BoBFX05+szQCJVxauHZTlADe\u002f+xPVtU0A6poWxD9hVQHAa72I0dkpA1f7uat4qUUDL1b+RjVNaQChPP2Lx2lVAbuJ3sbMkTUCqDNOZtYJHQNP6vBti3E1Avw8HiAYpREB9FOVK+ttOQEmmAIj2ulBAdhjD4v1fSECGlyH02E1RQMY12+MaA1NAMtEemoRET0DdQ7WgJK1UQDY6zlMltVFAD3vnwwQ1VkAFdd0OZgtSQOdjfU0z2EhA2r6vfRM0QkCuVTQOsu1QQAzZ7v7UClBA0MEUEq7kTkB6eBuGKvQxQEBmOo4UpElAToKBRY3UUECeIkmGcKdDQHaHfu4hKVhADsN4kD2sRUB6llmrIU9WQCn3hM+C61JALnx4lhJsSECQzxm1XJRBQDa9uuwDHkhA4Hsu5dlfTUDbABrp6A1SQKa2a0c20k5AAGyVEUtRVUCfOt36lDVVQKpKDTdlSTVAYZ1zw\u002fFmWEBwHnYgDXA3QCpa4OwStFZAey+ObLpKV0Dy5eRM6NxCQDgXJrFA0E1AgjF8UEqmTEBgimB2fnBYQDgfwhYY+VhA3l3f8w95SUBoV6nd\u002fuk2QDxJmjrDR1ZAZH56ue5YWkD4w3ZnFRJBQD4eZkcdGElAeh+6AkIAUkAlIObLRGFGQManj1ngKFBAWdkpBw6qU0CBhsyPRkpQQCrosK2QC0tARTgMpj8hT0DvY\u002fVD2kNNQBzBi+HVPVpA2SkChnbOTEDTmiqGIJtUQLIh8RLHU0xAGPQhcW2PUkCy42gVoihPQEjhUdpYDFNAoPwvg2S6OUBLfn+icJNBQKR+2n21JFFArlzPJAYUW0AyJyQCO\u002fkzQDzUjZ9xt0lAmGzpjBenRkAxZMOlSb1IQBLsdJXwZU5AfoMUZk+ZSkB4zHgKqOxUQGzxzuk4F0NAtmz6g8u+UUD8n38k+AFFQAAAAAAAACRAZFZoV8nsTEDw1wURiSFXQLIDBB5bfVxAyLXj+HAhQUAkb3gAuFpTQB6JfqwBr0pA5fuvG\u002fcsT0Ct2niEeWNgQLDb7cP71VFAExiHH08sU0CkXSUUQglXQFA6UObF3FBAGnpafrmaS0BmgCdlmu5RQCk8TuPINUxAcgeZ2IMiVEDfXHQ2P+FLQMZ9Q1Jcm1JAhnaW8y0RUEDsmPpCittPQNKhpZqXrDRAgniJnfJTSECEYJZE4g1JQMSMUrxeNydATlFS5jLuYUDlWnbesNlWQN4ew6gupVFAoZSu1VbQT0ATtfXy4ghSQC1iJb\u002fLgVNAK7ralve4U0CDJz4\u002fVM9QQFiyt12ECE5ACRIBI0sQTkCcu1zVsPVTQCDaQ\u002fVwWVRAqzmz5BAiUEBSIuiuvaRLQA588pGURldAnDPB1gosVkBQHFGdytZGQAID551Iy1JAepaVzbJaREDi0+Y\u002fgapIQIYMxV3Uo1VAGA7CBAA1VkCsE7\u002fJ73RTQEKf+jsnyFRAeeZboOJ5U0DWJPZGQntIQHqfa3kT81JApx\u002fVvadAVUALiYu63fZUQEj\u002ffEFJrVRARS6RL1FyUkAPGaGJPfBWQHv6Z+SQFVBAv5EkSQB6RUCsJ93ATzBHQBQxB\u002fVtD0hAdzERToqxTkAKlMiZQZhGQGAwy7rdqDFA4FtR\u002flBJRkCpk3a6HBxWQJZTEOudzzhAqJ2E3Ef3RkDgL0mWvuJGQAabK2FPwERAm3Iv5ShvVUC5woqgwRNOQFBj582Pzi1AyvukOas4VEAWeAKYzftRQEJtx8INwVhAAAAAAAAAJECTIgbGKGZRQF8VGW1Q\u002fldAzWQaf3SPUUDCn2NqZUtVQIMNBfSmVERAwqBvJCw6U0BTB8OTwGhTQJmEZfpV4FZAqihx\u002f1AjSkBOfADDFBdQQKL9lAnqxTRAWmLFAOvQR0CjdqLTS2JLQEA5z8jq8klAw9E6jsQzUUDkklTQVEBQQMRrpZYeMVBApZLypbxmTEAb3aYaTjhRQCYWzD8oaFVAbNpi7S6pRUDeQCGjE7RMQG4hOBRtWj9ACqpC3BeMSkDWm\u002fTOBbdVQBrczx4Z5FFAoH59bb51UUAuZyjOb5FVQGhDDGe+sFJAPX1wvbA1T0DPoRZrlOhRQAAAAAAAACRAvnGlgk7STkC4tvSiZSRZQJl+KdTxCVZAlr9Hz6JIVkC6XcYkz\u002flXQG7CNSbazVBAn1aFg7R7UUCT9jeRg8dIQJ6hyB2RjExAywvq3DsZVEB+RcIQN8ZXQIsDaJzFwU5ATKlI9GTfSkAN6MtI7gFUQHpigDZInklALPl0Ybg9QUDWhdKM8yVKQNIU4lwap05AzoZA55rVSkDEFb6z8lNZQBXYNUzCIFJAW8bTC4gjVEBeEX\u002fljY1PQJj2mpqfXFVAtRKGV0GaUkBJG95dbzlFQB1V+gAUoUVAmENzFrJIV0BkRAHH4aFBQPacdtdGhFpAUFmCfgM+RUCNvS1VbT1UQBGbX5IZBVRAYUw5z9WySUBCpoZ+eIFQQND2RQkA+UNAFODhplHhVEBDw0NytxVKQAHUCPN6pE1A1roI\u002fhQSREAAAAAAAAAkQIONjw62HE5AaSWU6l0nVUCTU87yLiFQQPGmLNW\u002fNk1AFyWaB\u002fJjUECiYkYkZr1BQF5v0i+cuFRAXk+N3xi9VECMO6Gpj\u002f1SQKrPtRHn8lNASDJ\u002f2RETTECdAHpteVRJQOD6b6du7llAwc3Oe9sCQUAyfcaa1k88QKnTYgqeR1FAUEBJmmuRUECZUtg6U8ZRQCdgh7bAtU1ARuN\u002fEMiPWUBMLfLrNvo4QEELU7OVNU9AblVnEkRNTkB2wgwuWqJaQBz\u002fCBtrYVBAMic9Bnm\u002fQECWbAq8pMtIQJCjDyBfz0tAzNTwyk+HTECJSStCTrxTQLb0RKRVm0JAGXV0W2jKUUBor9CgJ11TQH5X0gs9YFdAro0Yd90gWkAQct2GQV1GQKtZzTfAx0BAXmTiYywqU0B0+OLr9IxPQE7ssOh8gExA8BfZEtAyUUAFKFvvig9GQITHdg9DT11ArtpULPjOOED+wbm9lWdRQJxVfhvF5VxA1Y2qtSwITEAPgGEivz5OQJQI95msZj1AqVWM+GoiS0CSHldrr+1TQOTz1g8BDDlAUQuN7HkjU0AuOME45eZcQMTp+7Wv6z5APOZPZmvpUkA0iJLsPXtIQLLp5XyYTFNAkVVb\u002fPSGW0BYHCOdGx1OQFIEZdqcv1RAGAKGnNkzU0Ayst\u002fslYZZQDlphNw2lkxAfit5wt0+UEC0Lv37sd5AQE\u002frSHo5B1RAt91Qn7vDVUBLZPl43Z9KQD9ZNjF\u002fCktA\u002fUl\u002fKWCsT0AQznoLjl9dQEdOw4uEaU1AldBZv08FTEBzDbnA3WdIQMocEgi15lRAjMtEKBU8TkAG0WSbAWJIQNPIsSEWglhAD48BZF0fWUCUjtMDpf5IQNS3lfEkVjJAvC4qPy\u002fxR0BkJWTPq34vQH4Tqd4n1FVAoNKd9D9cQUC4UaM\u002f1lZQQMiT39Nkk0RALjA62ntpS0BYcDsKHIpUQGH8NF5u6VBAiIuKjg\u002fnU0DQITwQTppcQLR3Gova5DlATRBNRYpbWkD9iCcx+OZQQC6SjBvkQ0VARrLUJ\u002f69P0DikmyT0CJOQHiwxuKjAlZAwc+1wtfnTkBuwjYP2bFZQAk98V2oLFBAcNt+ns+FUkBSJDITBctVQHIrSfCPPUtAAAAAAAAAJEA0kTIpUX5RQIa8XBzI+lJAkNjBYkD5V0AAllzToBxDQHiDTIRYgFRAi4u9EwO0V0BKgjQaCok0QOgtTWNxP1JAlX3n4Z8ySkD8Uk6gIHtPQNAwO1zeaEpARnkJ8bsNSECmMIjUpHZQQA9K7g1c7UJA8Hb0S\u002f9+VEDWayjt2yNCQKgBspkZalRAVOO\u002fZCUkU0DOKGwJywdIQFBoZzJFPERAKbo\u002fB+ixSkDo+1EkTCNTQNqIqsBsJVVA+6gEpvcHSUCY+WJNPR5bQJcW8kEsXlZABm6IuIxlRkA1WAvHBYRTQF5iSelv3VJAQKeeyI4CWUASKIW+HdNWQO497rs0BkRAnIPou0qzS0CSpSUBUtBRQBF0YGcRuVxAQjX9Ue\u002fXYUBeftjDwQpUQBc6d1TFNU5AIIiVqT\u002fMVUDX0sUU3X1MQL6Uo\u002fscsFFAFhy9kWNcU0B6K9qSemlUQOtgLuCJ4lJAXl2IMMrISECNxwI0b4VJQABpPbQz\u002f1JAMYhPZEweVUCo\u002fRbEbxxTQGprxxkwt1pAUGLl3gs3UEBhhAaV\u002fG1UQLeWa6SO2kJAk8N57EepS0AbvfdD3JhUQKn3xkZO00xA6qST5OGaT0AwuUenmw07QII7v62BCUxAZ2qb8ZzQVUCSNH\u002f5U9hTQN9A8q0QYVNAKrfcEU1LUEAWzSvs+D5IQF9I9B4gnlRANhWdhI7hUkB4J47rOlNTQPVTw0Gw7ElALP6P6zVVJkC+HzDAcRtXQNSqFhget0VA4xvRPo+ZS0Dy7g6jNRtUQNkXqv61hVRAbDurKeLZPkCWXaRBHNNXQEMztDcA4lFAyDbjKlDiS0AkeMUxGJg0QLKMCzHYzVJALoxJ3AKiQ0C0xvAA6S4\u002fQH65lLXm8DpAyKGMKE00V0Bm\u002foltW6JIQIsgt9721VlAkgQEcW\u002fNSUCKcsUtH4tCQIiqhnBM+VdARzNvNiCNTkD2gfULe6VJQDSbbzXaYlNAUBAUjtY7V0Dwnn6GvQBMQICHm3hL2T9AgsAKV+lUS0CyPz\u002flcuBRQMzdc\u002fgdiURAud85pnl0UEDPLi+f0ARHQMzjI7y3nk1A1wakIGa4VkB+YXfOZdgyQJAF7Xc2ljtAZVCXZOxfSEByUnqd\u002f3RPQFkg63AM+kRA9CXsHlbzQ0BcHLiyoItRQJ2Ep5hwekdAQk5I1OlaUUAuirmsn6pJQBZY5\u002fmFtVpAF8LI2LygWEBfQvsMV0FAQEwj+2WSb1VA6GSoUgteVUBUmu3psNxZQOARc0vbd0JAMPNjsP0HRUCSkwYjQpxWQNa1ra5cslNApFDRV\u002fFgUkAsK5kMHbFSQKY1ohCU1j9AWWEnVbXLVkCwyDoa86FNQMySwnfpuDpAfy6Bv852U0AUeWa6StNTQImJbh79uE9AcjLeIvdGV0BNwVWWXsdTQKs\u002fR\u002fkSwUNAgQf8CVEaUEDmWPcffqhRQBneNoqD4UtAUlfi66xpVUBOfqK8WgpLQDSfARTo1ThAUqIzl1PiWEDBgXFmwlhAQHrGKFGIj1RAaBxmEXs2SkCewQddlOVRQETLBzTCFlJABDywKvOzRkD48xrFRN5HQBjbNJUvDEVA0HV3iwepT0DRTLtqkY1HQOqHr4ZIg1RARS91BpiLWUB091oVDL9RQM4ObAV\u002fX1NAoLlSITQzU0C3jvO3SuRUQJKzkfF6B0FAMvPvUqauVUDJobJTqstVQJLNX1azfFBAdlMyjlOFVECN0nYeMuJNQIQB8c7D9FZAjOZ9LDIGX0Dh\u002f\u002fc92KxGQFRuroVQeT5A8mE8RDqdTUBgi1SRN1VZQDJwznerlFRAEmnN0D7tSEB46LwwAf9aQDiYXOyy6kZAgt1Uy2qhSUBgb1qSLqlLQJYMOoAXAjFA17cnD9wpUEDKpOoB3+BHQKQFrcgBVkpAnGZdjS3LQEA3oDDYIFVVQDfWT3jEAE1AWxmgAhVgUkCu0GoV+9BTQAA83G8YTVZAYLYoLNBbTEACfsaq19hIQFqUn7GvLkZAgz3OiUZXYUCW5ZrBfAdYQMbQJsIfOT9A2kg44kTwP0Au1cBW\u002fEJTQLKwN6mfq1NApoPDNiRQTUD5E\u002f5zm0xSQPYnf8ZtyVBAAAAAAAAAJEBRlYMkpKBNQIiZW9l\u002f20VAgRzhmFZYUUD7GDILNXRhQM1SfH34i1JAG44oe7SUTEBA3mb1TERTQLXACrQm4FJAa+OAPngaXUDcoZsxKF1CQNCC27LPNVNA27gMlJTrRED+dt360bhTQN6igQI0BEVAZCE2G21IS0D+G55Xts9MQKd9s\u002fCG\u002fVVA\u002fmXYLlihR0Dr7PTGyMRAQMeKUubapExA4XyjEr9qX0AYlZx8P48+QDeG5iiCTV1Awmf08LRZOUBQ3yvjewAyQLwa+VWL8VtAkKmQ92GvUkDUdBOYdqVFQAAAAAAAACRAlUOFm2ZFUECu9ZVviNNDQDN3GHYZyVBAVgN2JaTuREBb8bIvndhRQDS270rkTkVAbjXlyhNmS0C6NJdn0VFUQBhYz5OFnVVA5Ew\u002f1DaRTUCyXGFILn1QQFYQhtMDyTxAB\u002fPT4wjBTEACOLJgWN9PQKbey5y0mUJAHEqGWvl6VkB289irBAFSQA6WSPPKPVtAj+7NZl6TUkBFkkabp65SQArycdC15VdAF2yEKtWtSEAjTghDdvZNQJ6qdWjgf0ZAKS8hq7i0T0CYkvOo5vtXQHoIBhb39k9Adqq3HNacUEAAAAAAAAAkQF7eVx6P6khAij3kzA2SUUAtO9eD6VlKQAg\u002f4gsQFjJASKLqzokfVEAE0acSEaFBQKYqukEYskhAWtG204QxTkAF3iDRzDdYQMLsW2hvUlRAQPgW5mdHQkCE7qgiOvtNQB1Eid6QNVBAtDqVLhL+U0DnOqFDWG1UQBZU9NKkUkdAk0bBDaYbU0BsC7rSUFlZQH5I8+A1p1RA6FAFYx\u002fGUEAQNd0QvBBZQLOFWteez1JAS0uzyIS8RUDoufpWZAVZQGbKMC6lnFRAeQ+AVkL2SkBrenFcn4FKQLbU4VeFGlJA+f38fRglU0Ck\u002f3jpqntRQFJ\u002fZoru31pAiGI9E3jyVkAsmFrQGCJWQBIjEWvsl0NAfLhu6668UkCySHDNQMZNQE4DIkmS50VABJlPyFBZSECMqqWdLOFCQN0PfAvDsEZAlagAxF\u002feS0DISev+Xtw9QHySA0X9WFBAiGH6uqTjVUCyFiEjLidFQO+f87HavllAfYKAcERxU0CRrNDO7bBWQPEcc4g9l1VAHp\u002fBZPFSUUDM6h+zM7VTQC+XKeYYzkFAmuCfUEmlREBzKxhMISVTQKAz+2pR0j5AOXZSKBSNVUCR5Ynm7BdBQNUYMG4CKVRArmG+hlTKR0Am9qsmteBRQD3QtwCg5ENAPNguImTeL0BCu8yocG9SQPRl7fuM2FBACbesOPc0TUDBYn3hoH5UQI5WqlN0uUxA8t2PPf7SVED5WOV62TlSQKpnIqJWnDpAW8uwpNz6VEBfrtA38xNUQL6cWi6dykNAxralRvFyTUDGJyi8GwFQQNGY1AotVlJAH2l21S8yWUAu2dKm0wJXQI\u002fbZwnmGEBAByw33k8jVEDTliPF5KpSQNgvCJWREVdA\u002fBMabu+lVkCplP\u002fM5M5RQOUgLj0kyFZAIJ9yDtInUUADZsCvPmZQQDBCRnV5G0xAoOCiPAdFRkCBXe3RydNZQLxeYcNwBD5ArSvA0F7IVUCIC0oAdhhJQAJSmed+Q0NANMVHv+lFUEDZsmFCV5JWQN7a9YhcolhAWCat6gw4R0CMtqx1BW9KQDe\u002fWTNm8VdAIHUVAJzEU0BXd+QUmIBFQAHkOTtMq1xAiZ\u002f4o+TcSUDArjEhj09MQDe6tpO9Y1JAFyy7G6j2WUCvLmD7QiVTQPH\u002ft5ufhVBAryP18QW9U0AAAAAAAAAkQAY47HYdwlFAlQTuBx6qUkCLJP8ssfFNQHhsldjCOFtACEnpE2ytSkAMKn0nXpNPQPkSoI6w2kpA9uXDOwp4UUCpTkRUfwVHQCoX6eoHXkJAc5tUUT8vVEBmiZmHMHJGQHZpNobzmkhAf5tDexDVUUDbP1bojGBVQJekIks4ClBAAz+r4JUXU0BzOfLVbAtKQEy+KZNOC05Ac\u002fJH9D\u002ftTUBYWb0E8ypHQIzTdcfXSDpAR9Hu\u002fmXwTEDmL\u002fiLOUxNQMhG7T4bP1NAeHSNMTq3VUDAm39TwGBIQBTO+NvBdUFAQnStN3V5Q0A="},"type":"histogram","xaxis":"x3","yaxis":"y3"},{"legendgroup":"1","marker":{"color":"#dc2626"},"name":"Churn=1","opacity":0.7,"showlegend":false,"x":{"dtype":"f8","bdata":"YI6Q7IeiTECGTcA2k39OQOxmhRNn61FAUtFeJ2F4OUAEZjVUL1xFQHgT\u002fUrDaCZA3M3N+nWwTUAY7mQTud5CQEs8Gud9EVlAFRA5ziheUEBFbgvYZ4JSQA5ap6sG5k1AoAicLcU\u002fUUCt8HNXf1hbQPu6rIyl\u002flVAvvB4hO6AVkDKsXLJ8fNYQCq7PdOD4FFAtFFw72RdS0DUuk68vq1CQAd+OvR0H1VAHj7ncH3iTUBHq9Q9N21GQHT4sjPAFVBAY0FgZ3\u002fmUkDAp4\u002fOtpNKQPhwVhA9ZU9AWLbd9vbfS0DLvBqbeMFTQF2K\u002f9n\u002flFdANXLnFlhqQkDMmzWKFDJeQLunLLvhPFRA+q2d5VlhU0B42aBh9ggvQGia80KINl1AZhz5af1sO0BxSECA4SxSQH9+xi6uSVdAVgn0CxMjWECAzWAZqC1FQGtozNcZ11hA9EfTTVhIVEDWXhDt7JtOQN8qTzsIVldAAAAAAAAAJEBn5wLyk3dRQKKZS5lxgj5AG6G96kKuV0BGCwuLL3ZOQGYtOOqFpkxA\u002fA5AGkWVUUAF20DD7UFQQPIqmgbLXlRAwM0mcY0xTUDSIt+FXwJBQGx7xWfkn1BAYxI8VMYjQEBMMkRh0YBbQIzAAKPDWkpA74A\u002fYLq\u002fYECfIYWU3bNSQLx\u002fZZdBOEZAqFJNKaZBV0D7yt74BkZIQK3QGPZfQkZA\u002feTrB2nITkCpN5EbLDdJQFqkf0DYQFBAzlvtRFTnPEAAAAAAAAAkQOUp1KfKSlJAnh\u002fw6LtDQkAOHSkwlL5WQKTUXtzEcFRAvmQAjg4aQ0A0MUSj8Sc6QJN1or5rZExA1PskDRB3TkBcVNVGL1RfQGDWVP1jq1NAxOmHKuo2V0AFVKX7Yl9QQM8lVvaTdFRAIIOqVvjiUEAu6Oe+WFVRQLyxvzzPJEZASH6pc5frN0DsnkoXH7FRQAYkZkyhQlhANr+K1rLPQ0Apg3HuIpNNQHaDzje8a1ZA64RhN+FKUECVUMQF4B9OQLDeN7yO1FhAAAAAAAAAJEAfU61xftVZQBazcWm2Kk1A1NlwpYdvUUDc2y8zqDlIQMoy\u002fO2iXlBA7kb8yoZVQEAlxvJRZ4tEQLkYSDr7eFJAVI1umU\u002fZSkBItg25Z+lRQP3Ce5sFjFZAMqfTPgAxVUCOAbH7ONFUQEL12b95uDxAwIJTSlfYQEC4p7Ih38ZSQLPoo0lIbFJAbnF7INDoQkDusGtB1to1QEYXJDaTtldAL5U0WBNbTUDQkQKyyiNZQJdzqk+CyFBA9aow8ZMeRkCghJ9buFBUQIj+zDtJbDtA+nF8gzWXU0D8EUaSVnhbQPkKbAdOflVA8GEAp4G\u002fQkAzynw5kI5VQLGFYU2jj1BAAk0lW7iDSkAHmlr2kJVUQC5BYvHl31ZAp52N6mslUUDQUue46FA2QKqCHncHQFFAFjLZSJlNWUCEtwmw+HNEQJwcK4QPZlJAiiRc\u002fk\u002fkT0DTmk01dPJEQGUT6kRR0FVAqnUNtJDhREBMzaRFRcI8QJhVwXDzrlBAp\u002fo0IrQaTUCNLVoHPFJVQFIgv7aOJUJAn1W0emTyUUDhCZcPWI9XQM8+xq7f9E9AVomw7vNSTEC13O79EFJOQNzfTaZJ205AcpAxkVUvW0AebUYh5ZFNQPaLPD8rGkZA\u002fbV5YtQ\u002fSUCf3RlHh7lQQOHVxyuZQ1NAlEUBBnz1RkBYP8UYHCZSQJeaiQCAwlRAatH6QeyIP0Dvd+VJBrRcQJdZ0TJXn1VAbV5ZIa\u002fuT0DLitgYn2hQQAa8KqvPRVlAYdtFkVEDTUBhnyBUmDBVQKb2SrCE70JAz3Gm0TauU0C4y8Xei+5OQJB5LOXhAlZANl\u002fDAPYKVEDc+DqHTllWQFhMQVO07UBAsp4JA+WXUEBu6d2hi8lNQLMJL1i89FJAea\u002fCIrlwSUD17wmZNqJWQPdp3BJol1NA3dtpjYNMUkDwZpUM1QZWQHCIUQdkDURAMp3PbKJQYEDi7jr\u002frmZZQO\u002fXoI8D1k9ArcxUzFkaV0BZO7yyaAJAQM9x8XuiyEpAAO0SSn2NVUDicS5XIMBXQI4RjiHXjkhAPDm6K9HwSEAAAAAAAAAkQLpbclBO21VAtJVBYTHDUEC4jICefS5VQFY9WwgYMlJACxuTVgRxUUAobn\u002fh445bQDrU+O7tRkhA6Rqxv8\u002fZQkCp\u002fVdgZdBVQIlTA8nGT0VAn0qerZD7U0A6+vENrrNTQEjz9RQ+41NAAzRcwLTDSUDGvq8jQ+E5QN++mF\u002fEYUxAml3KxBdYUkCVoDkB1C5TQKq39Tuc0U5A4k5yFkuOWEBos3z5odNcQHh1nRx2BVpAv21XWMhfU0AWOYEmPYxSQLgoxSOp\u002fyhAMPhsFdAoVECbKOIirQVRQG10huKmdlxAojDETJwtSkAe22NUqYJZQEL9lrYjhFxAuSk72QXIWkBY4luPXJZVQO7UsOjI11JAyVFmK9vKTEAwPEBDwRxCQCSBI+HUFFpAM7gmv1GdTkAPZm6EViRUQCzinZWR2FVA1P8Gm1JKTkDI9a\u002fZTlxKQOv31ko1e01A2DZ5xFq6T0DL5vBd82hKQDApcw7aGUxA"},"type":"histogram","xaxis":"x3","yaxis":"y3"},{"legendgroup":"0","marker":{"color":"#2563eb"},"name":"Churn=0","opacity":0.7,"showlegend":false,"x":{"dtype":"i4","bdata":"AQAAAAIAAAACAAAAAAAAAAIAAAACAAAAAgAAAAAAAAACAAAAAAAAAAMAAAAEAAAABAAAAAMAAAADAAAAAgAAAAAAAAACAAAAAQAAAAEAAAABAAAAAgAAAAMAAAACAAAAAAAAAAIAAAAAAAAABAAAAAIAAAACAAAAAgAAAAIAAAACAAAAAQAAAAAAAAAAAAAAAwAAAAAAAAABAAAAAQAAAAIAAAACAAAAAgAAAAMAAAAAAAAAAwAAAAQAAAAFAAAAAQAAAAEAAAAEAAAAAQAAAAMAAAABAAAAAQAAAAQAAAAAAAAAAgAAAAQAAAACAAAAAQAAAAIAAAACAAAAAgAAAAEAAAAGAAAAAQAAAAIAAAACAAAAAgAAAAEAAAADAAAAAAAAAAIAAAACAAAAAQAAAAIAAAADAAAAAgAAAAAAAAADAAAAAgAAAAMAAAACAAAAAAAAAAIAAAABAAAAAQAAAAAAAAABAAAAAgAAAAUAAAADAAAAAgAAAAEAAAABAAAABAAAAAUAAAABAAAAAwAAAAEAAAACAAAAAQAAAAEAAAAAAAAAAgAAAAEAAAACAAAAAwAAAAAAAAAAAAAAAgAAAAEAAAADAAAAAgAAAAMAAAADAAAAAgAAAAAAAAACAAAAAgAAAAIAAAADAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAABAAAAAgAAAAAAAAAEAAAAAwAAAAIAAAACAAAAAwAAAAEAAAADAAAAAAAAAAQAAAACAAAAAAAAAAIAAAACAAAAAwAAAAAAAAABAAAAAwAAAAQAAAAAAAAAAwAAAAEAAAACAAAABQAAAAAAAAABAAAAAwAAAAMAAAAAAAAAAwAAAAMAAAAAAAAAAgAAAAQAAAAAAAAAAgAAAAEAAAABAAAAAQAAAAEAAAAFAAAAAgAAAAAAAAABAAAAAgAAAAAAAAADAAAAAAAAAAIAAAACAAAAAwAAAAEAAAABAAAAAwAAAAIAAAADAAAAAgAAAAMAAAABAAAABAAAAAMAAAABAAAAAQAAAAIAAAAEAAAAAgAAAAIAAAAEAAAABAAAAAEAAAADAAAAAAAAAAUAAAABAAAAAgAAAAAAAAADAAAAAQAAAAQAAAADAAAAAgAAAAAAAAABAAAAAQAAAAEAAAABAAAAAgAAAAIAAAABAAAAAAAAAAUAAAAAAAAAAAAAAAEAAAABAAAAAwAAAAAAAAACAAAAAAAAAAMAAAABAAAAAQAAAAAAAAABAAAAAAAAAAEAAAAEAAAAAQAAAAIAAAACAAAAAgAAAAIAAAADAAAAAwAAAAIAAAABAAAAAwAAAAAAAAABAAAAAgAAAAAAAAACAAAAAAAAAAIAAAABAAAAAgAAAAUAAAADAAAAAQAAAAMAAAAAAAAAAQAAAAEAAAACAAAABgAAAAEAAAABAAAAAwAAAAMAAAACAAAABAAAAAMAAAACAAAAAgAAAAEAAAADAAAAAAAAAAEAAAABAAAAAQAAAAMAAAACAAAAAwAAAAMAAAADAAAAAgAAAAMAAAACAAAAAgAAAAQAAAABAAAAAwAAAAIAAAAAAAAAAwAAAAIAAAADAAAAAgAAAAMAAAACAAAAAwAAAAIAAAAAAAAAAwAAAAIAAAACAAAAAAAAAAIAAAABAAAAAQAAAAEAAAACAAAAAgAAAAEAAAADAAAAAQAAAAEAAAAAAAAAAQAAAAEAAAABAAAAAQAAAAAAAAAAAAAAAwAAAAEAAAAGAAAAAQAAAAIAAAABAAAAAQAAAAQAAAABAAAAAgAAAAMAAAAAAAAAAQAAAAMAAAABAAAAAgAAAAEAAAACAAAAAwAAAAEAAAACAAAAAwAAAAIAAAAAAAAAAwAAAAIAAAACAAAAAAAAAAEAAAAAAAAAAQAAAAEAAAADAAAAAgAAAAIAAAAEAAAAAQAAAAMAAAADAAAAAgAAAAQAAAADAAAAAgAAAAMAAAACAAAAAgAAAAQAAAABAAAAAQAAAAAAAAABAAAABgAAAAEAAAABAAAAAwAAAAAAAAABAAAAAwAAAAEAAAADAAAAAAAAAAIAAAABAAAAAQAAAAIAAAACAAAAAAAAAAQAAAAAAAAAAwAAAAMAAAADAAAAAgAAAAAAAAACAAAAAQAAAAAAAAABAAAAAAAAAAIAAAABAAAAAQAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAwAAAAAAAAAAAAAAAwAAAAMAAAACAAAAAQAAAAQAAAACAAAAAQAAAAIAAAACAAAAAQAAAAAAAAADAAAABAAAAAYAAAAEAAAAAgAAAAEAAAACAAAAAgAAAAAAAAACAAAAAgAAAAIAAAADAAAAAgAAAAMAAAAFAAAAAwAAAAAAAAACAAAAAwAAAAIAAAADAAAAAgAAAAIAAAABAAAAAgAAAAIAAAAAAAAAAgAAAAAAAAABAAAAAgAAAAAAAAAEAAAAAgAAAAIAAAACAAAAAQAAAAEAAAACAAAAAgAAAAIAAAABAAAABAAAAAIAAAAEAAAAAgAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAAAAAAMAAAADAAAAAwAAAAIAAAAAAAAAAgAAAAIAAAACAAAAAwAAAAEAAAABAAAAAgAAAAAAAAABAAAAAQAAAAEAAAABAAAAAgAAAAAAAAABAAAAAgAAAAEAAAABAAAAAQAAAAMAAAADAAAAAgAAAAIAAAAEAAAAAQAAAAIAAAABAAAAAwAAAAQAAAABAAAAAQAAAAEAAAACAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAEAAAAAgAAAAIAAAACAAAABQAAAAMAAAAEAAAAAwAAAAIAAAADAAAAAQAAAAEAAAAAAAAAAgAAAAEAAAACAAAAAQAAAAIAAAABAAAAAgAAAAAAAAACAAAAAQAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAwAAAAIAAAABAAAAAQAAAAEAAAACAAAAAgAAAAMAAAABAAAAAgAAAAIAAAACAAAABAAAAAEAAAAAAAAAAQAAAAAAAAABAAAAAgAAAAIAAAADAAAAAAAAAAUAAAAFAAAAAQAAAAQAAAADAAAAAgAAAAIAAAACAAAAAAAAAAQAAAAAAAAAAgAAAAAAAAADAAAAAgAAAAEAAAAAAAAABAAAAAMAAAAFAAAAAwAAAAAAAAAAAAAAAgAAAAIAAAADAAAAAAAAAAAAAAADAAAAAgAAAAMAAAADAAAAAQAAAAMAAAAEAAAAAgAAAAEAAAABAAAAAwAAAAQAAAADAAAAAAAAAAIAAAACAAAAAQAAAAEAAAABAAAAAAAAAAAAAAACAAAAAQAAAAIAAAAEAAAABAAAAAIAAAABAAAAAQAAAAQAAAACAAAAAAAAAAMAAAABAAAAAgAAAAAAAAACAAAAAgAAAAMAAAAAAAAAAgAAAAEAAAADAAAAAgAAAAEAAAACAAAAAQAAAAIAAAADAAAABAAAAAIAAAAAAAAAAgAAAAEAAAACAAAAAwAAAAEAAAACAAAAAQAAAAIAAAABAAAAAQAAAAMAAAADAAAAAQAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAQAAAAIAAAABAAAAAAAAAAIAAAABAAAAAQAAAAMAAAABAAAAAwAAAAEAAAACAAAAAQAAAAEAAAACAAAAAAAAAAQAAAACAAAAAQAAAAEAAAABAAAAAgAAAAIAAAABAAAAAQAAAAEAAAAGAAAAAgAAAAEAAAABAAAAAwAAAAIAAAABAAAAAgAAAAEAAAACAAAABAAAAAAAAAADAAAAAwAAAAAAAAACAAAAAQAAAAAAAAADAAAAAQAAAAEAAAAEAAAAAwAAAAAAAAABAAAABAAAAAIAAAABAAAAAwAAAAMAAAABAAAAAQAAAAQAAAACAAAAAQAAAAIAAAACAAAAAQAAAAQAAAABAAAAAgAAAAIAAAAAAAAAAAAAAAIAAAABAAAABAAAAAQAAAACAAAAAQAAAAEAAAABAAAAAAAAAAEAAAADAAAAAgAAAAIAAAABAAAAAgAAAA=="},"type":"histogram","xaxis":"x4","yaxis":"y4"},{"legendgroup":"1","marker":{"color":"#dc2626"},"name":"Churn=1","opacity":0.7,"showlegend":false,"x":{"dtype":"i4","bdata":"AQAAAAEAAAADAAAAAgAAAAMAAAACAAAAAQAAAAQAAAAAAAAABAAAAAAAAAABAAAAAQAAAAEAAAACAAAAAAAAAAIAAAADAAAAAAAAAAMAAAACAAAAAgAAAAQAAAADAAAAAAAAAAMAAAAEAAAAAQAAAAQAAAABAAAAAwAAAAQAAAADAAAAAgAAAAIAAAACAAAAAgAAAAMAAAACAAAAAgAAAAMAAAAEAAAAAwAAAAMAAAAEAAAAAgAAAAIAAAADAAAAAQAAAAAAAAAAAAAAAgAAAAUAAAADAAAAAQAAAAAAAAACAAAABAAAAAMAAAADAAAAAwAAAAIAAAADAAAAAQAAAAIAAAACAAAABQAAAAMAAAABAAAAAQAAAAQAAAADAAAAAgAAAAMAAAAFAAAAAwAAAAMAAAADAAAABQAAAAMAAAABAAAAAAAAAAIAAAAEAAAAAgAAAAIAAAADAAAAAgAAAAUAAAAEAAAABQAAAAIAAAACAAAAAgAAAAIAAAABAAAAAQAAAAMAAAAAAAAAAgAAAAMAAAAFAAAAAQAAAAEAAAAEAAAAAQAAAAMAAAABAAAAAQAAAAMAAAACAAAAAwAAAAQAAAAEAAAAAwAAAAMAAAACAAAABQAAAAEAAAAFAAAAAwAAAAIAAAACAAAAAgAAAAAAAAADAAAABgAAAAQAAAACAAAABAAAAAMAAAADAAAAAgAAAAAAAAAEAAAAAAAAAAEAAAADAAAABAAAAAEAAAABAAAAAwAAAAAAAAAEAAAAAwAAAAEAAAAEAAAAAQAAAAMAAAACAAAAAgAAAAQAAAAEAAAAAwAAAAEAAAADAAAAAQAAAAEAAAAEAAAAAQAAAAMAAAAAAAAAAwAAAAQAAAADAAAAAAAAAAMAAAAAAAAAAwAAAAQAAAAFAAAAAwAAAAMAAAACAAAAAAAAAAIAAAACAAAAAwAAAAIAAAAEAAAAAQAAAAMAAAAAAAAAAgAAAAIAAAACAAAAAQAAAAMAAAAEAAAAAQAAAAEAAAADAAAABAAAAAMAAAABAAAAAwAAAAQAAAABAAAAAgAAAAUAAAAFAAAAAgAAAAEAAAADAAAAAwAAAAAAAAABAAAAAwAAAAQAAAABAAAAAQAAAAEAAAAAAAAAAwAAAAQAAAACAAAABQAAAAQAAAAEAAAAAwAAAAQAAAAEAAAAAQAAAAMAAAADAAAAAgAAAAEAAAAEAAAAAQAAAAIAAAABAAAABgAAAAMAAAADAAAAAgAAAAEAAAAFAAAABAAAAAgAAAADAAAAAQAAAAAAAAABAAAA"},"type":"histogram","xaxis":"x4","yaxis":"y4"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,0.45]},"yaxis":{"anchor":"x","domain":[0.625,1.0]},"xaxis2":{"anchor":"y2","domain":[0.55,1.0]},"yaxis2":{"anchor":"x2","domain":[0.625,1.0]},"xaxis3":{"anchor":"y3","domain":[0.0,0.45]},"yaxis3":{"anchor":"x3","domain":[0.0,0.375]},"xaxis4":{"anchor":"y4","domain":[0.55,1.0]},"yaxis4":{"anchor":"x4","domain":[0.0,0.375]},"annotations":[{"font":{"size":16},"showarrow":false,"text":"Age","x":0.225,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Tenure (Months)","x":0.775,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Monthly Spend ($)","x":0.225,"xanchor":"center","xref":"paper","y":0.375,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Support Calls","x":0.775,"xanchor":"center","xref":"paper","y":0.375,"yanchor":"bottom","yref":"paper"}],"title":{"text":"Feature Distributions by Churn Label"},"barmode":"overlay","height":500,"legend":{"title":{"text":"Churn"}}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('98c0dc87-cb2a-4c76-a041-2710d4a4b159');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+<p>Distribution of key features coloured by churn status</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="model-training-cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="model-training-cross-validation">2. Model Training &amp; Cross-Validation</h2>
+<p>We train all three classifiers using stratified 5-fold cross-validation to get reliable estimates.</p>
+<div id="model-training" class="cell" data-message="false" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model    <span class="im">import</span> LogisticRegression</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble        <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, cross_validate</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing   <span class="im">import</span> StandardScaler</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline        <span class="im">import</span> Pipeline</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> xgboost <span class="im">import</span> XGBClassifier</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    xgb_available <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    xgb_available <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'Age'</span>, <span class="st">'Tenure_Months'</span>, <span class="st">'Monthly_Spend'</span>, <span class="st">'Support_Calls'</span>]].values</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Churn'</span>].values</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Logistic Regression'</span>: Pipeline([</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'scaler'</span>, StandardScaler()),</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'clf'</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>))</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    ]),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Random Forest'</span>: RandomForestClassifier(</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">200</span>, max_depth<span class="op">=</span><span class="dv">6</span>, random_state<span class="op">=</span><span class="dv">42</span>, n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> xgb_available:</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    models[<span class="st">'XGBoost'</span>] <span class="op">=</span> XGBClassifier(</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">200</span>, max_depth<span class="op">=</span><span class="dv">4</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        use_label_encoder<span class="op">=</span><span class="va">False</span>, eval_metric<span class="op">=</span><span class="st">'logloss'</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span>, n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fallback: use a GradientBoostingClassifier</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingClassifier</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    models[<span class="st">'Gradient Boosting'</span>] <span class="op">=</span> GradientBoostingClassifier(</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">200</span>, max_depth<span class="op">=</span><span class="dv">4</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>scoring <span class="op">=</span> [<span class="st">'accuracy'</span>, <span class="st">'f1'</span>, <span class="st">'roc_auc'</span>]</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> cross_validate(model, X, y, cv<span class="op">=</span>cv, scoring<span class="op">=</span>scoring, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    results[name] <span class="op">=</span> {</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Accuracy'</span>:  scores[<span class="st">'test_accuracy'</span>].mean(),</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        <span class="st">'F1-Score'</span>:  scores[<span class="st">'test_f1'</span>].mean(),</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>        <span class="st">'ROC-AUC'</span>:   scores[<span class="st">'test_roc_auc'</span>].mean(),</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(results).T.<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Accuracy  F1-Score  ROC-AUC
+Logistic Regression     0.779    0.3491   0.7622
+Random Forest           0.768    0.3080   0.7352
+Gradient Boosting       0.744    0.3260   0.6952</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="interactive-performance-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-performance-comparison">3. Interactive Performance Comparison</h2>
+<div id="cell-performance-viz" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>results_long <span class="op">=</span> results_df.reset_index().melt(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">'index'</span>, var_name<span class="op">=</span><span class="st">'Metric'</span>, value_name<span class="op">=</span><span class="st">'Score'</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>results_long.columns <span class="op">=</span> [<span class="st">'Model'</span>, <span class="st">'Metric'</span>, <span class="st">'Score'</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Logistic Regression'</span>: <span class="st">'#64748b'</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Random Forest'</span>:       <span class="st">'#2563eb'</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'XGBoost'</span>:             <span class="st">'#16a34a'</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gradient Boosting'</span>:   <span class="st">'#16a34a'</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    results_long,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Metric'</span>, y<span class="op">=</span><span class="st">'Score'</span>, color<span class="op">=</span><span class="st">'Model'</span>, barmode<span class="op">=</span><span class="st">'group'</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Model Performance — 5-Fold Cross-Validation'</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    color_discrete_map<span class="op">=</span>color_map,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span><span class="st">'Score'</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>fig.update_traces(texttemplate<span class="op">=</span><span class="st">'%</span><span class="sc">{text:.3f}</span><span class="st">'</span>, textposition<span class="op">=</span><span class="st">'outside'</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>fig.update_layout(yaxis_range<span class="op">=</span>[<span class="fl">0.5</span>, <span class="fl">1.05</span>], uniformtext_minsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="performance-viz" class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="ff37fcc5-7efe-4c7a-8cf3-5a59235d8e6f" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("ff37fcc5-7efe-4c7a-8cf3-5a59235d8e6f")) {                    Plotly.newPlot(                        "ff37fcc5-7efe-4c7a-8cf3-5a59235d8e6f",                        [{"alignmentgroup":"True","hovertemplate":"Model=Logistic Regression\u003cbr\u003eMetric=%{x}\u003cbr\u003eScore=%{text}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Logistic Regression","marker":{"color":"#64748b","pattern":{"shape":""}},"name":"Logistic Regression","offsetgroup":"Logistic Regression","orientation":"v","showlegend":true,"text":{"dtype":"f8","bdata":"IbByaJHt6D+BJsKGp1fWP8BbIEHxY+g\u002f"},"textposition":"outside","x":["Accuracy","F1-Score","ROC-AUC"],"xaxis":"x","y":{"dtype":"f8","bdata":"IbByaJHt6D+BJsKGp1fWP8BbIEHxY+g\u002f"},"yaxis":"y","type":"bar","texttemplate":"%{text:.3f}"},{"alignmentgroup":"True","hovertemplate":"Model=Random Forest\u003cbr\u003eMetric=%{x}\u003cbr\u003eScore=%{text}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Random Forest","marker":{"color":"#2563eb","pattern":{"shape":""}},"name":"Random Forest","offsetgroup":"Random Forest","orientation":"v","showlegend":true,"text":{"dtype":"f8","bdata":"+n5qvHST6D+DwMqhRbbTP0mdgCbChuc\u002f"},"textposition":"outside","x":["Accuracy","F1-Score","ROC-AUC"],"xaxis":"x","y":{"dtype":"f8","bdata":"+n5qvHST6D+DwMqhRbbTP0mdgCbChuc\u002f"},"yaxis":"y","type":"bar","texttemplate":"%{text:.3f}"},{"alignmentgroup":"True","hovertemplate":"Model=Gradient Boosting\u003cbr\u003eMetric=%{x}\u003cbr\u003eScore=%{text}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Gradient Boosting","marker":{"color":"#16a34a","pattern":{"shape":""}},"name":"Gradient Boosting","offsetgroup":"Gradient Boosting","orientation":"v","showlegend":true,"text":{"dtype":"f8","bdata":"AiuHFtnO5z93vp8aL93UPwK8BRIUP+Y\u002f"},"textposition":"outside","x":["Accuracy","F1-Score","ROC-AUC"],"xaxis":"x","y":{"dtype":"f8","bdata":"AiuHFtnO5z93vp8aL93UPwK8BRIUP+Y\u002f"},"yaxis":"y","type":"bar","texttemplate":"%{text:.3f}"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Metric"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Score"},"range":[0.5,1.05]},"legend":{"title":{"text":"Model"},"tracegroupgap":0},"title":{"text":"Model Performance \u2014 5-Fold Cross-Validation"},"barmode":"group","uniformtext":{"minsize":8}},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('ff37fcc5-7efe-4c7a-8cf3-5a59235d8e6f');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+<p>Cross-validated performance metrics across all three classifiers</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="confusion-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="confusion-matrix">4. Confusion Matrix</h2>
+<p>We re-fit on a held-out test split to visualise the confusion matrix for each model.</p>
+<div id="cell-confusion-matrix" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics         <span class="im">import</span> confusion_matrix</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>y, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> make_subplots(rows<span class="op">=</span><span class="dv">1</span>, cols<span class="op">=</span><span class="bu">len</span>(models),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                    subplot_titles<span class="op">=</span><span class="bu">list</span>(models.keys()))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (name, model) <span class="kw">in</span> <span class="bu">enumerate</span>(models.items(), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    model.fit(X_train, y_train)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    fig.add_trace(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        go.Heatmap(z<span class="op">=</span>cm, x<span class="op">=</span>[<span class="st">'Pred 0'</span>,<span class="st">'Pred 1'</span>], y<span class="op">=</span>[<span class="st">'True 0'</span>,<span class="st">'True 1'</span>],</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                   colorscale<span class="op">=</span><span class="st">'Blues'</span>, showscale<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                   text<span class="op">=</span>cm, texttemplate<span class="op">=</span><span class="st">'%</span><span class="sc">{text}</span><span class="st">'</span>),</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        row<span class="op">=</span><span class="dv">1</span>, col<span class="op">=</span>i</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>fig.update_layout(height<span class="op">=</span><span class="dv">350</span>, title_text<span class="op">=</span><span class="st">'Confusion Matrices (Test Set)'</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="confusion-matrix" class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="a64d55a6-415e-40d1-a1c5-f5301d8314cb" class="plotly-graph-div" style="height:350px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("a64d55a6-415e-40d1-a1c5-f5301d8314cb")) {                    Plotly.newPlot(                        "a64d55a6-415e-40d1-a1c5-f5301d8314cb",                        [{"colorscale":[[0.0,"rgb(247,251,255)"],[0.125,"rgb(222,235,247)"],[0.25,"rgb(198,219,239)"],[0.375,"rgb(158,202,225)"],[0.5,"rgb(107,174,214)"],[0.625,"rgb(66,146,198)"],[0.75,"rgb(33,113,181)"],[0.875,"rgb(8,81,156)"],[1.0,"rgb(8,48,107)"]],"showscale":false,"text":{"dtype":"i2","bdata":"jwAIACQADQA=","shape":"2, 2"},"texttemplate":"%{text}","x":["Pred 0","Pred 1"],"y":["True 0","True 1"],"z":{"dtype":"i2","bdata":"jwAIACQADQA=","shape":"2, 2"},"type":"heatmap","xaxis":"x","yaxis":"y"},{"colorscale":[[0.0,"rgb(247,251,255)"],[0.125,"rgb(222,235,247)"],[0.25,"rgb(198,219,239)"],[0.375,"rgb(158,202,225)"],[0.5,"rgb(107,174,214)"],[0.625,"rgb(66,146,198)"],[0.75,"rgb(33,113,181)"],[0.875,"rgb(8,81,156)"],[1.0,"rgb(8,48,107)"]],"showscale":false,"text":{"dtype":"i2","bdata":"jAALACYACwA=","shape":"2, 2"},"texttemplate":"%{text}","x":["Pred 0","Pred 1"],"y":["True 0","True 1"],"z":{"dtype":"i2","bdata":"jAALACYACwA=","shape":"2, 2"},"type":"heatmap","xaxis":"x2","yaxis":"y2"},{"colorscale":[[0.0,"rgb(247,251,255)"],[0.125,"rgb(222,235,247)"],[0.25,"rgb(198,219,239)"],[0.375,"rgb(158,202,225)"],[0.5,"rgb(107,174,214)"],[0.625,"rgb(66,146,198)"],[0.75,"rgb(33,113,181)"],[0.875,"rgb(8,81,156)"],[1.0,"rgb(8,48,107)"]],"showscale":false,"text":{"dtype":"i2","bdata":"igANACYACwA=","shape":"2, 2"},"texttemplate":"%{text}","x":["Pred 0","Pred 1"],"y":["True 0","True 1"],"z":{"dtype":"i2","bdata":"igANACYACwA=","shape":"2, 2"},"type":"heatmap","xaxis":"x3","yaxis":"y3"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,0.2888888888888889]},"yaxis":{"anchor":"x","domain":[0.0,1.0]},"xaxis2":{"anchor":"y2","domain":[0.35555555555555557,0.6444444444444445]},"yaxis2":{"anchor":"x2","domain":[0.0,1.0]},"xaxis3":{"anchor":"y3","domain":[0.7111111111111111,1.0]},"yaxis3":{"anchor":"x3","domain":[0.0,1.0]},"annotations":[{"font":{"size":16},"showarrow":false,"text":"Logistic Regression","x":0.14444444444444446,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Random Forest","x":0.5,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{"size":16},"showarrow":false,"text":"Gradient Boosting","x":0.8555555555555556,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"title":{"text":"Confusion Matrices (Test Set)"},"height":350},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('a64d55a6-415e-40d1-a1c5-f5301d8314cb');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+<p>Confusion matrices on the 20% held-out test set</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="feature-importance-random-forest" class="level2">
+<h2 class="anchored" data-anchor-id="feature-importance-random-forest">5. Feature Importance (Random Forest)</h2>
+<div id="cell-feature-importance" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rf_model <span class="op">=</span> models[<span class="st">'Random Forest'</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> rf_model.named_steps[<span class="st">'clf'</span>].feature_importances_ <span class="cf">if</span> <span class="bu">hasattr</span>(rf_model, <span class="st">'named_steps'</span>) <span class="cf">else</span> rf_model.feature_importances_</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>feat_names <span class="op">=</span> [<span class="st">'Age'</span>, <span class="st">'Tenure_Months'</span>, <span class="st">'Monthly_Spend'</span>, <span class="st">'Support_Calls'</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>imp_df <span class="op">=</span> pd.DataFrame({<span class="st">'Feature'</span>: feat_names, <span class="st">'Importance'</span>: importances})</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>imp_df <span class="op">=</span> imp_df.sort_values(<span class="st">'Importance'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    imp_df, x<span class="op">=</span><span class="st">'Importance'</span>, y<span class="op">=</span><span class="st">'Feature'</span>, orientation<span class="op">=</span><span class="st">'h'</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Random Forest — Feature Importances'</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Importance'</span>, color_continuous_scale<span class="op">=</span><span class="st">'Blues'</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>fig.update_layout(coloraxis_showscale<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="feature-importance" class="cell-output cell-output-display">
+<div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.5.0.min.js" integrity="sha256-fHbNLP+GlIXN+efbQec78UkemUz3NJp7UmfGxC1tNxs=" crossorigin="anonymous"></script>                <div id="208699dc-a39f-4aa8-b989-b1b69057a0cb" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("208699dc-a39f-4aa8-b989-b1b69057a0cb")) {                    Plotly.newPlot(                        "208699dc-a39f-4aa8-b989-b1b69057a0cb",                        [{"hovertemplate":"Importance=%{marker.color}\u003cbr\u003eFeature=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":{"dtype":"f8","bdata":"9aI8IDJ4xD+6cB9QUwTHP\u002f8GH53XPM0\u002fp3JCeVGj2z8="},"coloraxis":"coloraxis","pattern":{"shape":""}},"name":"","orientation":"h","showlegend":false,"textposition":"auto","x":{"dtype":"f8","bdata":"9aI8IDJ4xD+6cB9QUwTHP\u002f8GH53XPM0\u002fp3JCeVGj2z8="},"xaxis":"x","y":["Support_Calls","Monthly_Spend","Age","Tenure_Months"],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"},"margin":{"b":0,"l":0,"r":0,"t":30}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Importance"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Feature"}},"coloraxis":{"colorbar":{"title":{"text":"Importance"}},"colorscale":[[0.0,"rgb(247,251,255)"],[0.125,"rgb(222,235,247)"],[0.25,"rgb(198,219,239)"],[0.375,"rgb(158,202,225)"],[0.5,"rgb(107,174,214)"],[0.625,"rgb(66,146,198)"],[0.75,"rgb(33,113,181)"],[0.875,"rgb(8,81,156)"],[1.0,"rgb(8,48,107)"]],"showscale":false},"legend":{"tracegroupgap":0},"title":{"text":"Random Forest \u2014 Feature Importances"},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('208699dc-a39f-4aa8-b989-b1b69057a0cb');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+<p>Gini-based feature importances from the trained Random Forest</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<div class="callout callout-style-default callout-tip callout-titled" title="Key Takeaway">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Key Takeaway
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For tabular classification tasks, <strong>ensemble methods</strong> (Random Forest, XGBoost / Gradient Boosting) consistently outperform a linear baseline on non-linearly-separable data. However, <strong>Logistic Regression</strong> remains competitive when features are well-engineered and serves as an indispensable interpretable benchmark.</p>
+</div>
+</div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Factor</th>
+<th>Best Model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accuracy</td>
+<td>Random Forest / Gradient Boosting</td>
+</tr>
+<tr class="even">
+<td>Interpretability</td>
+<td>Logistic Regression</td>
+</tr>
+<tr class="odd">
+<td>Training Speed</td>
+<td>Logistic Regression</td>
+</tr>
+<tr class="even">
+<td>Robustness to Noise</td>
+<td>Random Forest</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation:</strong> Deploy Gradient Boosting or Random Forest for maximum predictive power; use Logistic Regression as an explainable reference model for stakeholder reporting.</p>
+<blockquote class="blockquote">
+<p><strong>Data source:</strong> Synthetic dataset generated for demonstration. All metrics are based on cross-validated estimates.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</blockquote>
+
+
+<!-- -->
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>scikit-learn documentation: https://scikit-learn.org/stable/modules/cross_validation.html<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Scikit-Learn Model Showdown"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "A hands-on comparison of classical machine learning classifiers — Logistic Regression, Random Forest, and XGBoost — with interactive performance visualisations."</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Shiva"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-02-10"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> ["Machine Learning", "Scikit-Learn", "Classification"]</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> "../images/ml-cover.svg"</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Project Overview</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>Classical machine learning algorithms remain highly competitive — and often preferable — over deep learning when data is tabular and limited in size.</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>In this project, we benchmark three popular classifiers:</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Logistic Regression** — the linear baseline</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Random Forest** — an ensemble of decision trees</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**XGBoost** — gradient-boosted trees, often the Kaggle champion</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>We evaluate on a synthetic dataset representative of binary customer-churn classification, simulating a real business use-case.</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Reproducibility"}</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>All results are generated from a fixed random seed (<span class="in">`42`</span>) and are fully reproducible within this Quarto document.</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. Data Generation &amp; Exploration</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>We generate a realistic synthetic dataset with class imbalance to reflect real-world conditions.</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: data-setup</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Feature correlation heatmap"</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotly.subplots <span class="im">import</span> make_subplots</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate features</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>age          <span class="op">=</span> np.random.normal(<span class="dv">40</span>, <span class="dv">12</span>, n_samples).clip(<span class="dv">18</span>, <span class="dv">75</span>)</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>tenure       <span class="op">=</span> np.random.exponential(scale<span class="op">=</span><span class="dv">24</span>, size<span class="op">=</span>n_samples).clip(<span class="dv">0</span>, <span class="dv">72</span>)</span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>monthly_spend<span class="op">=</span> np.random.normal(<span class="dv">65</span>, <span class="dv">25</span>, n_samples).clip(<span class="dv">10</span>, <span class="dv">200</span>)</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>support_calls<span class="op">=</span> np.random.poisson(lam<span class="op">=</span><span class="dv">2</span>, size<span class="op">=</span>n_samples)</span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Churn probability (logistic)</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>log_odds <span class="op">=</span> <span class="op">-</span><span class="dv">3</span> <span class="op">+</span> <span class="fl">0.03</span><span class="op">*</span>age <span class="op">-</span> <span class="fl">0.05</span><span class="op">*</span>tenure <span class="op">+</span> <span class="fl">0.01</span><span class="op">*</span>monthly_spend <span class="op">+</span> <span class="fl">0.4</span><span class="op">*</span>support_calls</span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>prob_churn <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>log_odds))</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>churn <span class="op">=</span> (np.random.rand(n_samples) <span class="op">&lt;</span> prob_churn).astype(<span class="bu">int</span>)</span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Age'</span>: age,</span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Tenure_Months'</span>: tenure,</span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Monthly_Spend'</span>: monthly_spend,</span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Support_Calls'</span>: support_calls,</span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Churn'</span>: churn</span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dataset shape: </span><span class="sc">{</span>df<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Churn rate: </span><span class="sc">{</span>df[<span class="st">'Churn'</span>]<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a>df.describe().<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Feature Distributions</span></span>
+<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: feature-dist</span></span>
+<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Distribution of key features coloured by churn status"</span></span>
+<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> make_subplots(rows<span class="op">=</span><span class="dv">2</span>, cols<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>                    subplot_titles<span class="op">=</span>[<span class="st">'Age'</span>, <span class="st">'Tenure (Months)'</span>, <span class="st">'Monthly Spend ($)'</span>, <span class="st">'Support Calls'</span>])</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'Age'</span>, <span class="st">'Tenure_Months'</span>, <span class="st">'Monthly_Spend'</span>, <span class="st">'Support_Calls'</span>]</span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>positions <span class="op">=</span> [(<span class="dv">1</span>,<span class="dv">1</span>),(<span class="dv">1</span>,<span class="dv">2</span>),(<span class="dv">2</span>,<span class="dv">1</span>),(<span class="dv">2</span>,<span class="dv">2</span>)]</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>colors    <span class="op">=</span> {<span class="st">'0'</span>: <span class="st">'#2563eb'</span>, <span class="st">'1'</span>: <span class="st">'#dc2626'</span>}</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> feat, (r, c) <span class="kw">in</span> <span class="bu">zip</span>(features, positions):</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> label, color <span class="kw">in</span> colors.items():</span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>        subset <span class="op">=</span> df[df[<span class="st">'Churn'</span>] <span class="op">==</span> <span class="bu">int</span>(label)][feat]</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>        fig.add_trace(</span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>            go.Histogram(x<span class="op">=</span>subset, name<span class="op">=</span><span class="ss">f'Churn=</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">'</span>,</span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>                         marker_color<span class="op">=</span>color, opacity<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>                         legendgroup<span class="op">=</span>label, showlegend<span class="op">=</span>(r<span class="op">==</span><span class="dv">1</span> <span class="kw">and</span> c<span class="op">==</span><span class="dv">1</span>)),</span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>            row<span class="op">=</span>r, col<span class="op">=</span>c</span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>fig.update_layout(barmode<span class="op">=</span><span class="st">'overlay'</span>, height<span class="op">=</span><span class="dv">500</span>,</span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>                  title_text<span class="op">=</span><span class="st">'Feature Distributions by Churn Label'</span>,</span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a>                  legend_title<span class="op">=</span><span class="st">'Churn'</span>)</span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. Model Training &amp; Cross-Validation</span></span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a>We train all three classifiers using stratified 5-fold cross-validation to get reliable estimates.</span>
+<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: model-training</span></span>
+<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model    <span class="im">import</span> LogisticRegression</span>
+<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble        <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> StratifiedKFold, cross_validate</span>
+<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing   <span class="im">import</span> StandardScaler</span>
+<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline        <span class="im">import</span> Pipeline</span>
+<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> xgboost <span class="im">import</span> XGBClassifier</span>
+<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a>    xgb_available <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ImportError</span>:</span>
+<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a>    xgb_available <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'Age'</span>, <span class="st">'Tenure_Months'</span>, <span class="st">'Monthly_Spend'</span>, <span class="st">'Support_Calls'</span>]].values</span>
+<span id="cb9-132"><a href="#cb9-132" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Churn'</span>].values</span>
+<span id="cb9-133"><a href="#cb9-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-134"><a href="#cb9-134" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
+<span id="cb9-135"><a href="#cb9-135" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Logistic Regression'</span>: Pipeline([</span>
+<span id="cb9-136"><a href="#cb9-136" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'scaler'</span>, StandardScaler()),</span>
+<span id="cb9-137"><a href="#cb9-137" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'clf'</span>, LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>, random_state<span class="op">=</span><span class="dv">42</span>))</span>
+<span id="cb9-138"><a href="#cb9-138" aria-hidden="true" tabindex="-1"></a>    ]),</span>
+<span id="cb9-139"><a href="#cb9-139" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Random Forest'</span>: RandomForestClassifier(</span>
+<span id="cb9-140"><a href="#cb9-140" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">200</span>, max_depth<span class="op">=</span><span class="dv">6</span>, random_state<span class="op">=</span><span class="dv">42</span>, n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb9-141"><a href="#cb9-141" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-142"><a href="#cb9-142" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-143"><a href="#cb9-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-144"><a href="#cb9-144" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> xgb_available:</span>
+<span id="cb9-145"><a href="#cb9-145" aria-hidden="true" tabindex="-1"></a>    models[<span class="st">'XGBoost'</span>] <span class="op">=</span> XGBClassifier(</span>
+<span id="cb9-146"><a href="#cb9-146" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">200</span>, max_depth<span class="op">=</span><span class="dv">4</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb9-147"><a href="#cb9-147" aria-hidden="true" tabindex="-1"></a>        use_label_encoder<span class="op">=</span><span class="va">False</span>, eval_metric<span class="op">=</span><span class="st">'logloss'</span>,</span>
+<span id="cb9-148"><a href="#cb9-148" aria-hidden="true" tabindex="-1"></a>        random_state<span class="op">=</span><span class="dv">42</span>, n_jobs<span class="op">=-</span><span class="dv">1</span></span>
+<span id="cb9-149"><a href="#cb9-149" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-150"><a href="#cb9-150" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb9-151"><a href="#cb9-151" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fallback: use a GradientBoostingClassifier</span></span>
+<span id="cb9-152"><a href="#cb9-152" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> sklearn.ensemble <span class="im">import</span> GradientBoostingClassifier</span>
+<span id="cb9-153"><a href="#cb9-153" aria-hidden="true" tabindex="-1"></a>    models[<span class="st">'Gradient Boosting'</span>] <span class="op">=</span> GradientBoostingClassifier(</span>
+<span id="cb9-154"><a href="#cb9-154" aria-hidden="true" tabindex="-1"></a>        n_estimators<span class="op">=</span><span class="dv">200</span>, max_depth<span class="op">=</span><span class="dv">4</span>, learning_rate<span class="op">=</span><span class="fl">0.05</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb9-155"><a href="#cb9-155" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-156"><a href="#cb9-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-157"><a href="#cb9-157" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> StratifiedKFold(n_splits<span class="op">=</span><span class="dv">5</span>, shuffle<span class="op">=</span><span class="va">True</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb9-158"><a href="#cb9-158" aria-hidden="true" tabindex="-1"></a>scoring <span class="op">=</span> [<span class="st">'accuracy'</span>, <span class="st">'f1'</span>, <span class="st">'roc_auc'</span>]</span>
+<span id="cb9-159"><a href="#cb9-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-160"><a href="#cb9-160" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> {}</span>
+<span id="cb9-161"><a href="#cb9-161" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
+<span id="cb9-162"><a href="#cb9-162" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> cross_validate(model, X, y, cv<span class="op">=</span>cv, scoring<span class="op">=</span>scoring, n_jobs<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb9-163"><a href="#cb9-163" aria-hidden="true" tabindex="-1"></a>    results[name] <span class="op">=</span> {</span>
+<span id="cb9-164"><a href="#cb9-164" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Accuracy'</span>:  scores[<span class="st">'test_accuracy'</span>].mean(),</span>
+<span id="cb9-165"><a href="#cb9-165" aria-hidden="true" tabindex="-1"></a>        <span class="st">'F1-Score'</span>:  scores[<span class="st">'test_f1'</span>].mean(),</span>
+<span id="cb9-166"><a href="#cb9-166" aria-hidden="true" tabindex="-1"></a>        <span class="st">'ROC-AUC'</span>:   scores[<span class="st">'test_roc_auc'</span>].mean(),</span>
+<span id="cb9-167"><a href="#cb9-167" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-168"><a href="#cb9-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-169"><a href="#cb9-169" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> pd.DataFrame(results).T.<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb9-170"><a href="#cb9-170" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_df)</span>
+<span id="cb9-171"><a href="#cb9-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-172"><a href="#cb9-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-173"><a href="#cb9-173" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-174"><a href="#cb9-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-175"><a href="#cb9-175" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. Interactive Performance Comparison</span></span>
+<span id="cb9-176"><a href="#cb9-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-179"><a href="#cb9-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-180"><a href="#cb9-180" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: performance-viz</span></span>
+<span id="cb9-181"><a href="#cb9-181" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Cross-validated performance metrics across all three classifiers"</span></span>
+<span id="cb9-182"><a href="#cb9-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-183"><a href="#cb9-183" aria-hidden="true" tabindex="-1"></a>results_long <span class="op">=</span> results_df.reset_index().melt(</span>
+<span id="cb9-184"><a href="#cb9-184" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span><span class="st">'index'</span>, var_name<span class="op">=</span><span class="st">'Metric'</span>, value_name<span class="op">=</span><span class="st">'Score'</span></span>
+<span id="cb9-185"><a href="#cb9-185" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-186"><a href="#cb9-186" aria-hidden="true" tabindex="-1"></a>results_long.columns <span class="op">=</span> [<span class="st">'Model'</span>, <span class="st">'Metric'</span>, <span class="st">'Score'</span>]</span>
+<span id="cb9-187"><a href="#cb9-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-188"><a href="#cb9-188" aria-hidden="true" tabindex="-1"></a>color_map <span class="op">=</span> {</span>
+<span id="cb9-189"><a href="#cb9-189" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Logistic Regression'</span>: <span class="st">'#64748b'</span>,</span>
+<span id="cb9-190"><a href="#cb9-190" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Random Forest'</span>:       <span class="st">'#2563eb'</span>,</span>
+<span id="cb9-191"><a href="#cb9-191" aria-hidden="true" tabindex="-1"></a>    <span class="st">'XGBoost'</span>:             <span class="st">'#16a34a'</span>,</span>
+<span id="cb9-192"><a href="#cb9-192" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Gradient Boosting'</span>:   <span class="st">'#16a34a'</span>,</span>
+<span id="cb9-193"><a href="#cb9-193" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-194"><a href="#cb9-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-195"><a href="#cb9-195" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb9-196"><a href="#cb9-196" aria-hidden="true" tabindex="-1"></a>    results_long,</span>
+<span id="cb9-197"><a href="#cb9-197" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'Metric'</span>, y<span class="op">=</span><span class="st">'Score'</span>, color<span class="op">=</span><span class="st">'Model'</span>, barmode<span class="op">=</span><span class="st">'group'</span>,</span>
+<span id="cb9-198"><a href="#cb9-198" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Model Performance — 5-Fold Cross-Validation'</span>,</span>
+<span id="cb9-199"><a href="#cb9-199" aria-hidden="true" tabindex="-1"></a>    color_discrete_map<span class="op">=</span>color_map,</span>
+<span id="cb9-200"><a href="#cb9-200" aria-hidden="true" tabindex="-1"></a>    text<span class="op">=</span><span class="st">'Score'</span></span>
+<span id="cb9-201"><a href="#cb9-201" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-202"><a href="#cb9-202" aria-hidden="true" tabindex="-1"></a>fig.update_traces(texttemplate<span class="op">=</span><span class="st">'%</span><span class="sc">{text:.3f}</span><span class="st">'</span>, textposition<span class="op">=</span><span class="st">'outside'</span>)</span>
+<span id="cb9-203"><a href="#cb9-203" aria-hidden="true" tabindex="-1"></a>fig.update_layout(yaxis_range<span class="op">=</span>[<span class="fl">0.5</span>, <span class="fl">1.05</span>], uniformtext_minsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb9-204"><a href="#cb9-204" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb9-205"><a href="#cb9-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-206"><a href="#cb9-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-207"><a href="#cb9-207" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-208"><a href="#cb9-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-209"><a href="#cb9-209" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. Confusion Matrix</span></span>
+<span id="cb9-210"><a href="#cb9-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-211"><a href="#cb9-211" aria-hidden="true" tabindex="-1"></a>We re-fit on a held-out test split to visualise the confusion matrix for each model.</span>
+<span id="cb9-212"><a href="#cb9-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-215"><a href="#cb9-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-216"><a href="#cb9-216" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: confusion-matrix</span></span>
+<span id="cb9-217"><a href="#cb9-217" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Confusion matrices on the 20% held-out test set"</span></span>
+<span id="cb9-218"><a href="#cb9-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-219"><a href="#cb9-219" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb9-220"><a href="#cb9-220" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics         <span class="im">import</span> confusion_matrix</span>
+<span id="cb9-221"><a href="#cb9-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-222"><a href="#cb9-222" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb9-223"><a href="#cb9-223" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>y, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb9-224"><a href="#cb9-224" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-225"><a href="#cb9-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-226"><a href="#cb9-226" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> make_subplots(rows<span class="op">=</span><span class="dv">1</span>, cols<span class="op">=</span><span class="bu">len</span>(models),</span>
+<span id="cb9-227"><a href="#cb9-227" aria-hidden="true" tabindex="-1"></a>                    subplot_titles<span class="op">=</span><span class="bu">list</span>(models.keys()))</span>
+<span id="cb9-228"><a href="#cb9-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-229"><a href="#cb9-229" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (name, model) <span class="kw">in</span> <span class="bu">enumerate</span>(models.items(), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb9-230"><a href="#cb9-230" aria-hidden="true" tabindex="-1"></a>    model.fit(X_train, y_train)</span>
+<span id="cb9-231"><a href="#cb9-231" aria-hidden="true" tabindex="-1"></a>    y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb9-232"><a href="#cb9-232" aria-hidden="true" tabindex="-1"></a>    cm <span class="op">=</span> confusion_matrix(y_test, y_pred)</span>
+<span id="cb9-233"><a href="#cb9-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-234"><a href="#cb9-234" aria-hidden="true" tabindex="-1"></a>    fig.add_trace(</span>
+<span id="cb9-235"><a href="#cb9-235" aria-hidden="true" tabindex="-1"></a>        go.Heatmap(z<span class="op">=</span>cm, x<span class="op">=</span>[<span class="st">'Pred 0'</span>,<span class="st">'Pred 1'</span>], y<span class="op">=</span>[<span class="st">'True 0'</span>,<span class="st">'True 1'</span>],</span>
+<span id="cb9-236"><a href="#cb9-236" aria-hidden="true" tabindex="-1"></a>                   colorscale<span class="op">=</span><span class="st">'Blues'</span>, showscale<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb9-237"><a href="#cb9-237" aria-hidden="true" tabindex="-1"></a>                   text<span class="op">=</span>cm, texttemplate<span class="op">=</span><span class="st">'%</span><span class="sc">{text}</span><span class="st">'</span>),</span>
+<span id="cb9-238"><a href="#cb9-238" aria-hidden="true" tabindex="-1"></a>        row<span class="op">=</span><span class="dv">1</span>, col<span class="op">=</span>i</span>
+<span id="cb9-239"><a href="#cb9-239" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-240"><a href="#cb9-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-241"><a href="#cb9-241" aria-hidden="true" tabindex="-1"></a>fig.update_layout(height<span class="op">=</span><span class="dv">350</span>, title_text<span class="op">=</span><span class="st">'Confusion Matrices (Test Set)'</span>)</span>
+<span id="cb9-242"><a href="#cb9-242" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb9-243"><a href="#cb9-243" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-244"><a href="#cb9-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-247"><a href="#cb9-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. Feature Importance (Random Forest)</span></span>
+<span id="cb9-248"><a href="#cb9-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-251"><a href="#cb9-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb9-252"><a href="#cb9-252" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: feature-importance</span></span>
+<span id="cb9-253"><a href="#cb9-253" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Gini-based feature importances from the trained Random Forest"</span></span>
+<span id="cb9-254"><a href="#cb9-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-255"><a href="#cb9-255" aria-hidden="true" tabindex="-1"></a>rf_model <span class="op">=</span> models[<span class="st">'Random Forest'</span>]</span>
+<span id="cb9-256"><a href="#cb9-256" aria-hidden="true" tabindex="-1"></a>importances <span class="op">=</span> rf_model.named_steps[<span class="st">'clf'</span>].feature_importances_ <span class="cf">if</span> <span class="bu">hasattr</span>(rf_model, <span class="st">'named_steps'</span>) <span class="cf">else</span> rf_model.feature_importances_</span>
+<span id="cb9-257"><a href="#cb9-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-258"><a href="#cb9-258" aria-hidden="true" tabindex="-1"></a>feat_names <span class="op">=</span> [<span class="st">'Age'</span>, <span class="st">'Tenure_Months'</span>, <span class="st">'Monthly_Spend'</span>, <span class="st">'Support_Calls'</span>]</span>
+<span id="cb9-259"><a href="#cb9-259" aria-hidden="true" tabindex="-1"></a>imp_df <span class="op">=</span> pd.DataFrame({<span class="st">'Feature'</span>: feat_names, <span class="st">'Importance'</span>: importances})</span>
+<span id="cb9-260"><a href="#cb9-260" aria-hidden="true" tabindex="-1"></a>imp_df <span class="op">=</span> imp_df.sort_values(<span class="st">'Importance'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-261"><a href="#cb9-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-262"><a href="#cb9-262" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.bar(</span>
+<span id="cb9-263"><a href="#cb9-263" aria-hidden="true" tabindex="-1"></a>    imp_df, x<span class="op">=</span><span class="st">'Importance'</span>, y<span class="op">=</span><span class="st">'Feature'</span>, orientation<span class="op">=</span><span class="st">'h'</span>,</span>
+<span id="cb9-264"><a href="#cb9-264" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Random Forest — Feature Importances'</span>,</span>
+<span id="cb9-265"><a href="#cb9-265" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'Importance'</span>, color_continuous_scale<span class="op">=</span><span class="st">'Blues'</span></span>
+<span id="cb9-266"><a href="#cb9-266" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-267"><a href="#cb9-267" aria-hidden="true" tabindex="-1"></a>fig.update_layout(coloraxis_showscale<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-268"><a href="#cb9-268" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb9-269"><a href="#cb9-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-270"><a href="#cb9-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-271"><a href="#cb9-271" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb9-272"><a href="#cb9-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-273"><a href="#cb9-273" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
+<span id="cb9-274"><a href="#cb9-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-275"><a href="#cb9-275" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip title="Key Takeaway"}</span>
+<span id="cb9-276"><a href="#cb9-276" aria-hidden="true" tabindex="-1"></a>For tabular classification tasks, **ensemble methods** (Random Forest, XGBoost / Gradient Boosting) consistently outperform a linear baseline on non-linearly-separable data. However, **Logistic Regression** remains competitive when features are well-engineered and serves as an indispensable interpretable benchmark.</span>
+<span id="cb9-277"><a href="#cb9-277" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-278"><a href="#cb9-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-279"><a href="#cb9-279" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Factor <span class="pp">|</span> Best Model <span class="pp">|</span></span>
+<span id="cb9-280"><a href="#cb9-280" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb9-281"><a href="#cb9-281" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Accuracy <span class="pp">|</span> Random Forest / Gradient Boosting <span class="pp">|</span></span>
+<span id="cb9-282"><a href="#cb9-282" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Interpretability <span class="pp">|</span> Logistic Regression <span class="pp">|</span></span>
+<span id="cb9-283"><a href="#cb9-283" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Training Speed <span class="pp">|</span> Logistic Regression <span class="pp">|</span></span>
+<span id="cb9-284"><a href="#cb9-284" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Robustness to Noise <span class="pp">|</span> Random Forest <span class="pp">|</span></span>
+<span id="cb9-285"><a href="#cb9-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-286"><a href="#cb9-286" aria-hidden="true" tabindex="-1"></a>**Recommendation:** Deploy Gradient Boosting or Random Forest for maximum predictive power; use Logistic Regression as an explainable reference model for stakeholder reporting.</span>
+<span id="cb9-287"><a href="#cb9-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-288"><a href="#cb9-288" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Data source:** Synthetic dataset generated for demonstration. All metrics are based on cross-validated estimates.^</span><span class="co">[</span><span class="ot">scikit-learn documentation: https://scikit-learn.org/stable/modules/cross_validation.html</span><span class="co">]</span></span>
+</code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 Shiva. All rights reserved.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

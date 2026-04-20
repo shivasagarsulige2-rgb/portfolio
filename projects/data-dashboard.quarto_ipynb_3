@@ -1,0 +1,178 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Interactive E-Commerce Dashboard\"\n",
+        "description: \"End-to-end data pipeline and interactive visualisations for e-commerce sales analysis.\"\n",
+        "author: \"Shiva\"\n",
+        "date: \"2025-03-22\"\n",
+        "categories: [\"Data Analysis\", \"Plotly\", \"ETL\"]\n",
+        "image: \"../images/dashboard-cover.svg\"\n",
+        "format:\n",
+        "  html:\n",
+        "    toc: true\n",
+        "    code-fold: true\n",
+        "    code-tools: true\n",
+        "---\n",
+        "\n",
+        "## Overview\n",
+        "\n",
+        "This project demonstrates the creation of an interactive data dashboard for an e-commerce platform. We simulate processing a large transactional dataset, perform exploratory data analysis (EDA), and create interactive plots using `Plotly` directly within Quarto to provide actionable insights for stakeholders.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## 1. Data Processing and Cleaning\n",
+        "\n",
+        "First, we set up our environment and generate some realistic e-commerce data to work with."
+      ],
+      "id": "b3e999d2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "message": false
+      },
+      "source": [
+        "#| label: data-setup\n",
+        "\n",
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "import plotly.express as px\n",
+        "from datetime import datetime, timedelta\n",
+        "\n",
+        "# Set seed for reproducibility\n",
+        "np.random.seed(101)\n",
+        "\n",
+        "# Generate 12 months of daily sales data\n",
+        "dates = [datetime(2024, 1, 1) + timedelta(days=i) for i in range(365)]\n",
+        "base_sales = np.sin(np.linspace(0, 3.14, 365)) * 5000 + 10000\n",
+        "noise = np.random.normal(0, 800, 365)\n",
+        "daily_sales = base_sales + noise\n",
+        "\n",
+        "# Add seasonal spikes (e.g., Black Friday, Holidays)\n",
+        "daily_sales[320:330] += np.random.normal(8000, 1000, 10)  # Late Nov\n",
+        "daily_sales[345:355] += np.random.normal(6000, 800, 10)   # Pre-Xmas\n",
+        "\n",
+        "df = pd.DataFrame({\n",
+        "    'Date': dates,\n",
+        "    'Revenue': daily_sales\n",
+        "})\n",
+        "\n",
+        "df['Month'] = df['Date'].dt.month_name()\n",
+        "df['Day_of_Week'] = df['Date'].dt.day_name()"
+      ],
+      "id": "data-setup",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 2. Revenue Trends Over Time\n",
+        "\n",
+        "Let's look at the overall revenue trajectory across the year. The interactive features allow stakeholders to zoom into specific date ranges."
+      ],
+      "id": "66dc4c9f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: revenue-trend\n",
+        "#| fig-cap: Daily Revenue Trend (Interactive)\n",
+        "\n",
+        "fig = px.line(\n",
+        "    df, \n",
+        "    x='Date', \n",
+        "    y='Revenue',\n",
+        "    title='2024 Daily Revenue Forecast',\n",
+        "    line_shape='spline',\n",
+        "    render_mode='svg'\n",
+        ")\n",
+        "\n",
+        "fig.update_traces(line_color='#0891b2', line_width=2)\n",
+        "fig.update_layout(\n",
+        "    xaxis_title=\"\",\n",
+        "    yaxis_title=\"Revenue ($)\",\n",
+        "    hovermode=\"x unified\"\n",
+        ")\n",
+        "\n",
+        "fig.show()"
+      ],
+      "id": "revenue-trend",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 3. Weekly Seasonality\n",
+        "\n",
+        "Understanding which days drive the most sales helps optimise marketing spend. Here, we calculate average revenue by day of the week."
+      ],
+      "id": "6aa4d2d0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: weekly-seasonality\n",
+        "#| fig-cap: Average Revenue by Day of Week\n",
+        "\n",
+        "# Aggregate data\n",
+        "weekly_avg = df.groupby('Day_of_Week')['Revenue'].mean().reset_index()\n",
+        "\n",
+        "# Sort days logically\n",
+        "day_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']\n",
+        "weekly_avg['Day_of_Week'] = pd.Categorical(weekly_avg['Day_of_Week'], categories=day_order, ordered=True)\n",
+        "weekly_avg = weekly_avg.sort_values('Day_of_Week')\n",
+        "\n",
+        "fig = px.bar(\n",
+        "    weekly_avg,\n",
+        "    x='Day_of_Week',\n",
+        "    y='Revenue',\n",
+        "    title='Average Revenue vs Day of the Week',\n",
+        "    color='Revenue',\n",
+        "    color_continuous_scale='Teal'\n",
+        ")\n",
+        "\n",
+        "fig.update_layout(\n",
+        "    xaxis_title=\"\",\n",
+        "    yaxis_title=\"Avg Revenue ($)\",\n",
+        "    coloraxis_showscale=False\n",
+        ")\n",
+        "\n",
+        "fig.show()"
+      ],
+      "id": "weekly-seasonality",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Insights & Recommendations\n",
+        "\n",
+        "1. **Holiday Spikes:** As clearly visible in the trend plot, the late November period (around Black Friday) accounts for the highest single-day revenue peaks, followed by mid-December. *Recommendation: Allocate the largest marketing and operational budgets to these two windows.*\n",
+        "2. **Weekend Lift:** Revenue shows a consistent dip mid-week and rises towards the weekend. *Recommendation: Schedule promotional email campaigns for Thursday evenings to capture the weekend purchasing momentum.* "
+      ],
+      "id": "d0a78a20"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\shiva\\AppData\\Roaming\\Python\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

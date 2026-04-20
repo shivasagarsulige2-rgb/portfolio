@@ -1,0 +1,20 @@
+---
+title: "Projects"
+subtitle: "Reproducible research with live, executable Python code"
+listing:
+  contents: projects.yml
+  sort: "date desc"
+  type: grid
+  grid-columns: 2
+  image-height: 220px
+  categories: true
+  sort-ui: true
+  filter-ui: true
+  fields: [image, date, title, description, categories]
+format:
+  html:
+    toc: false
+page-layout: full
+---
+
+Welcome to my projects portfolio. Each project below contains **fully executable Python code**, interactive visualisations, and reproducible results. Use the category filter to browse by topic.

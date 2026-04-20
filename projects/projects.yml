@@ -1,0 +1,23 @@
+- path: sentiment-analysis.qmd
+  title: "BERT vs T5 Sentiment Analysis"
+  description: "A comparative study of discriminative vs generative transformer models on the Amazon Polarity dataset, evaluating accuracy, F1-score, latency, and hallucination risks."
+  author: "Shiva"
+  date: "2025-04-18"
+  image: "../images/sentiment-cover.svg"
+  categories: ["NLP", "Deep Learning", "Transformers"]
+
+- path: data-dashboard.qmd
+  title: "Interactive E-Commerce Dashboard"
+  description: "End-to-end data pipeline and interactive visualisations for e-commerce sales analysis, featuring seasonal decomposition and weekly revenue patterns."
+  author: "Shiva"
+  date: "2025-03-22"
+  image: "../images/dashboard-cover.svg"
+  categories: ["Data Analysis", "Plotly", "ETL"]
+
+- path: ml-classification.qmd
+  title: "Scikit-Learn Model Showdown"
+  description: "Hands-on comparison of Logistic Regression, Random Forest, and Gradient Boosting classifiers on a simulated customer-churn dataset, with confusion matrices and feature importance plots."
+  author: "Shiva"
+  date: "2025-02-10"
+  image: "../images/ml-cover.svg"
+  categories: ["Machine Learning", "Scikit-Learn", "Classification"]

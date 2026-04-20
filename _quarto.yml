@@ -1,0 +1,69 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "projects/*.qmd"
+    - "CV/*.qmd"
+    - "!eportfolio/**"
+    - "!eportfolio/"
+
+website:
+  title: "Shiva | Portfolio"
+  favicon: images/favicon.svg
+
+  navbar:
+    background: primary
+    foreground: light
+    logo: images/logo.svg
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: other-experiences.qmd
+        text: Other Experiences
+      - href: projects/index.qmd
+        text: Projects
+      - href: CV/cv.pdf
+        text: CV
+        target: _blank
+      - href: reflection.qmd
+        text: Reflection
+      - href: contact.qmd
+        text: Contact
+    right:
+      - icon: github
+        href: ""
+        target: _blank
+
+  page-footer:
+    left: "&copy; 2025 Shiva. All rights reserved."
+    right: "Built with [Quarto](https://quarto.org)"
+
+  sidebar: false
+
+format:
+  html:
+    theme:
+      - cosmo
+      - styles.scss
+    code-fold: true
+    code-tools: true
+    code-copy: true
+    highlight-style: github
+    toc: true
+    toc-depth: 3
+    smooth-scroll: true
+    anchor-sections: true
+    link-external-icon: true
+    link-external-newwindow: true
+
+filters:
+  - quarto-ext/fontawesome
+
+execute:
+  freeze: auto
+  echo: true
+  warning: false
+  message: false

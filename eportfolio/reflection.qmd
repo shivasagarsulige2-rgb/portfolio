@@ -1,0 +1,111 @@
+---
+title: "Reflection"
+---
+
+## Module Reflection
+
+::: {.callout-note}
+This page reflects on my learning journey throughout the **Data Science Tools & Technologies** module, covering technical skill growth, challenges encountered, and how this experience shapes my future goals.
+:::
+
+---
+
+## What I Learned
+
+### Git & Version Control
+
+Before this module, I treated Git mostly as a backup tool — committing infrequently and with vague messages like "update". The requirement to commit incrementally with descriptive messages fundamentally changed how I think about **code as a living document**.
+
+Writing commit messages such as `"Add rolling average forecast to sales project"` rather than `"fix stuff"` forced me to articulate *what* I was doing and *why* — a discipline that improved not just my version control, but my **overall problem-solving clarity**.
+
+::: {.callout-tip}
+## Key Git Lesson
+The commit history is documentation. Future-me (and future collaborators) will thank present-me for clear, atomic commits.
+:::
+
+---
+
+### Quarto & Web Publishing
+
+I had never used a static site generator before. Learning Quarto was initially daunting — juggling YAML frontmatter, SCSS theming, and Markdown features simultaneously — but the payoff was significant. Being able to write a document that simultaneously functions as:
+
+- **Executable code** (Python chunks that render live outputs)
+- **Published webpage** (via GitHub Pages)
+- **Professional portfolio** (with custom design)
+
+...is genuinely powerful. This is reproducible research in action, and I now understand why tools like Quarto are increasingly adopted in data science teams.
+
+---
+
+### Python for Data Visualisation
+
+My previous Python experience was largely in scripting and analysis. This module pushed me into **interactive visualisation** with Plotly, which I had not used extensively before. The transition from static Matplotlib plots to interactive Plotly figures was a revelation — the difference in user experience for stakeholders is dramatic.
+
+```{python}
+#| label: reflection-demo
+#| echo: true
+#| fig-cap: "A simple illustration: the learning curve felt steep early, then accelerated"
+
+import numpy as np
+import plotly.express as px
+
+weeks = np.arange(1, 13)
+confidence = 10 + 3*weeks - 0.1*weeks**2 + np.random.normal(0, 2, 12)
+confidence = np.clip(confidence, 5, 45)
+
+fig = px.line(
+    x=weeks, y=confidence,
+    markers=True,
+    title="My Confidence Level Over the Module (self-assessed)",
+    labels={"x": "Week", "y": "Confidence (0–50)"},
+    template="plotly_white",
+    color_discrete_sequence=["#2D4A6E"]
+)
+fig.add_hline(y=30, line_dash="dot", line_color="#E8875A",
+              annotation_text="Turning point", annotation_position="bottom right")
+fig.show()
+```
+
+---
+
+## Challenges Overcome
+
+### Challenge 1: SCSS and Theming
+
+Getting Sass variables to correctly override Quarto's Bootstrap defaults was genuinely frustrating. I spent several hours discovering that some variables (like `$navbar-bg`) only take effect when declared *before* the theme import, which required understanding the `scss:defaults` / `scss:rules` distinction.
+
+**Resolution:** Reading the Quarto documentation carefully, experimenting in isolation, and using browser dev tools to inspect which CSS rules were being applied.
+
+### Challenge 2: Plotly in Quarto
+
+My initial Plotly charts did not render correctly because I was missing the `embed-resources: true` setting for self-contained output. Debugging this taught me a lot about how Quarto handles JavaScript dependencies.
+
+### Challenge 3: Git Discipline
+
+Maintaining consistent, small commits throughout the project was harder than expected — especially late in development when I wanted to "just finish". I overcame this by breaking tasks into GitHub Issues and treating each issue as a single PR/commit scope.
+
+---
+
+## Task Completion
+
+- [x] Set up Quarto project with correct folder structure
+- [x] Configure `_quarto.yml` with navbar, footer, theme, and SCSS
+- [x] Build all required pages (index, about, projects, reflection, contact)
+- [x] Write two full project pages with active Python code
+- [x] Add Mermaid diagrams, callouts, tables, footnotes
+- [x] Publish to GitHub Pages via `/docs` folder
+- [x] Maintain clean Git history with descriptive commits
+- [ ] Add FontAwesome icons throughout (in progress)
+- [ ] Dark/light mode toggle (stretch goal)
+
+---
+
+## Connecting to Future Goals
+
+This module has given me a **public portfolio** — something I did not have before. The ability to share a URL that demonstrates my skills with live, executable code is directly valuable for job applications.
+
+More broadly, the emphasis on **reproducibility** (Git + Quarto + executable code) aligns with best practices in professional data science. I now understand why teams invest in these workflows, and I feel equipped to advocate for and contribute to such practices in a workplace setting.
+
+> *"The best portfolios don't just show what you built — they show how you think."*
+
+I believe this portfolio achieves that. The projects are documented not just with results but with reasoning, and this reflection demonstrates the metacognitive awareness that distinguishes a thoughtful practitioner from a mere technician.

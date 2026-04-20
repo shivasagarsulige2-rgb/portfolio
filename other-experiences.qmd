@@ -1,0 +1,88 @@
+---
+title: "Other Experiences"
+subtitle: "Organizations, Activities, and Community Involvement"
+format:
+  html:
+    toc: true
+    toc-title: "Page Sections"
+---
+
+## Overview
+
+This page focuses on experiences beyond coursework, including student organizations, activity-based learning, leadership roles, and service.
+
+---
+
+## Organizations and Activities
+
+::: {.experience-card .theme-ocean}
+### Science Club, Keuka College
+- **Role:** President (2024-Present) | VP (2023-2024) | Social Media Manager (2023-Present)
+- **Duration:** 2021 - Present
+- **Focus:** Student-led science initiatives and engagement on campus.
+:::
+
+::: {.experience-card .theme-sunset}
+### Disability, Accessibility, Community, and Engagement (DACE)
+- **Role:** Treasurer & Establishing Member
+- **Duration:** 2023 - Present
+- **Focus:** Promoting accessibility and engagement at Keuka College.
+:::
+
+::: {.experience-card .theme-aurora}
+### Campus Activities Board, Keuka College
+- **Role:** President (2022) | Interfaith and Intercultural Community Coordinator (2022)
+- **Duration:** 2021 - Present
+- **Focus:** Event planning and managing campus-wide engagement.
+:::
+
+---
+
+## Timeline Highlights
+
+- **2023 - Present** Field Period and ePortfolio Demonstrator/Instructor
+- **2021 - 2022** Cheerleading, Keuka College
+- **2021 - 2022** Nursing Club (Student Senate Representative)
+
+---
+
+## Leadership Roles
+
+| Year | Position | Organization |
+|---|---|---|
+| 2024-Present | President | Science Club, Keuka College |
+| 2023-Present | Treasurer & Establishing Member | DACE @ Keuka College |
+| 2022 | President | Campus Activities Board, Keuka College |
+| 2023-2024 | Vice President | Science Club, Keuka College |
+| 2023-Present | Social Media Manager | Science Club, Keuka College |
+| 2022 | Interfaith Community Coord. | Campus Activities Board, Keuka College |
+| 2021-2022 | Student Senate Rep. | Nursing Club, Keuka College |
+
+---
+
+## Clubs and Sports Gallery
+
+![Activity image placeholder](images/club-1.svg)
+*Caption: [Add event name, place, and date.]*
+
+![Activity image placeholder](images/club-2.svg)
+*Caption: [Add event name, place, and date.]*
+
+---
+
+## Recent Volunteer and Service Work
+
+- **Everybunny Counts Rabbit Rescue** - Volunteer
+- **H.O.R.S.E. of Connecticut** - Volunteer
+- **American Red Cross** - Blood Drive Volunteer
+- **Jim Casey Foundation** - Youth Leadership Institute Participant
+- **CT DCF** - Youth Advisory Board Member
+- **Faith Living Church** - Nursery/Childcare Volunteer
+
+---
+
+## Reflection
+
+:::: {.callout-note title="Growth Through Participation"}
+[Write a short reflection on communication, leadership, teamwork, and service values developed through these experiences.]
+::::
